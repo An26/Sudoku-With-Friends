@@ -20,7 +20,7 @@ module.exports = (
     	<Route path="playGame" component={PlayGame} />
     	<Route path="userBoard" component={UserBoard} />
 
-    	<IndexRoute component={Login} />
+    	<IndexRoute path='login' component={Login} />
     </Route>
   </Router>
 );

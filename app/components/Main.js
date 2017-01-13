@@ -11,7 +11,10 @@ var Main = React.createClass({
 						<h1>Sudoku with Friends</h1>
 					</div>
 					<div className="row">
-						<a href="#/userBoard">
+						<a href="#/login">
+						<button className="btn btn-default">Login/Logout</button>
+						</a>
+						<a href="#/gameLobby">
 						<button className="btn btn-default">Game Lobby</button>
 						</a>
 			            <a href="#/playGame">
