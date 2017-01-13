@@ -17,11 +17,10 @@ Depending on the size of the project, if it is small and simple enough the refer
 Describe and show how to run the tests with code examples.
 
 ##Contributers
-### Stella Wu
-### Jessica Loch
-### Nishtha Arora
-### An Huynh
+#### An Huynh
+#### Jessica Loch
+#### Nishtha Arora
+#### Stella Wu
 
-
-###License:
+##License:
 Copywrited by the Wu-Tang Girls
