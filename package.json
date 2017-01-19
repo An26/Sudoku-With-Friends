@@ -1,29 +1,42 @@
+
 {
-  "name": "sudokuwfriends",
+  "name": "sudoku",
   "version": "1.0.0",
-  "description": "last project",
-  "main": "index.js",
+  "description": "",
+  "main": "./public/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/An26/Sudoku-With-Friends.git"
+    "start": "webpack",
+    "dev": "webpack -w && nodemon server.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/An26/Sudoku-With-Friends/issues"
+  "devDependencies": {
+    "babel-core": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.16.0",
+    "webpack": "^1.13.1"
   },
-  "homepage": "https://github.com/An26/Sudoku-With-Friends#readme",
   "dependencies": {
-    "babel-core": "^6.21.0",
-    "babel-loader": "^6.2.10",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-router": "^3.0.1"
+    "axios": "^0.15.3",
+    "material-ui": "^0.16.6",
+    "react-grid-system": "git+https://github.com/zoover/react-grid-system.git",
+    "react-redux": "^5.0.2",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
+    "redux-promise-middleware": "^4.2.0",
+    "redux-thunk": "^2.1.0",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "4.4.8",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-intl": "^2.2.2",
+    "react-router": "^3.0.0"
   }
 }
