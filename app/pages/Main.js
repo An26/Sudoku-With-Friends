@@ -63,7 +63,7 @@ var Main = React.createClass({
 				        </li>
 					</ul>
 				</div>
-
+				</div>
 				<div className="content">
 					{this.props.children}
 				</div>
