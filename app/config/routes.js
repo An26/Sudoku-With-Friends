@@ -10,7 +10,6 @@ var UserBoard = require('../pages/UserBoard');
 module.exports = (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
-    	<Route path="login" component={Login} />
     	<Route path="gameLobby" component={GameLobby} />
     	<Route path="playGame" component={PlayGame} />
     	<Route path="userBoard" component={UserBoard} />
