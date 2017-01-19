@@ -1,15 +1,13 @@
-var React = require('react');
+import React from 'react';
+import Header from './Header/Header';
+
 
 var Main = React.createClass({
 	render: function(){
 		return(
 			<div className="container">
-				// jumbotron here
 				<div className="row">
-					<div className="jumbotron">
-						<h4>Welcome to...</h4>
-						<h1>Sudoku with Friends</h1>
-					</div>
+					<Header />
 					<div className="row">
 						<a href="#/login">
 						<button className="btn btn-default">Login/Logout</button>

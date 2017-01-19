@@ -1,26 +1,21 @@
-var React = require('react');
-var router = require('react-router');
-var Route = router.Route;
-var Router = router.Router;
+import React from 'react';
+import { Route, Router, browserHistory, IndexRoute } from 'react-router';
+import Main from '../pages/Main';
 
-var hashHistory = router.hashHistory;
-var IndexRoute = router.IndexRoute;
-
-var Main = require('../components/Main');
-var Login = require('../components/Login');
-var GameLobby = require('../components/GameLobby');
-var PlayGame = require('../components/PlayGame');
-var UserBoard = require('../components/UserBoard');
+var Login = require('../pages/Login');
+var GameLobby = require('../pages/GameLobby');
+var PlayGame = require('../pages/PlayGame');
+var UserBoard = require('../pages/UserBoard');
 
 module.exports = (
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={Main}>
     	<Route path="login" component={Login} />
     	<Route path="gameLobby" component={GameLobby} />
     	<Route path="playGame" component={PlayGame} />
     	<Route path="userBoard" component={UserBoard} />
 
-    	<IndexRoute path='login' component={Login} />
+    	<IndexRoute component={Login} />
     </Route>
   </Router>
 );
