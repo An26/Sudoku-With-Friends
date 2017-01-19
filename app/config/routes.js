@@ -15,12 +15,12 @@ var UserBoard = require('../components/UserBoard');
 module.exports = (
   <Router history={hashHistory}>
     <Route path="/" component={Main}>
-    	<Route path="login" component={Login} />
+    	//<Route path="login" component={Login} />
     	<Route path="gameLobby" component={GameLobby} />
     	<Route path="playGame" component={PlayGame} />
     	<Route path="userBoard" component={UserBoard} />
 
-    	<IndexRoute path='login' component={Login} />
+    	<IndexRoute component={Login} />
     </Route>
   </Router>
 );

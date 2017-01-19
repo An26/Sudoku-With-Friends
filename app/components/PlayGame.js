@@ -8,111 +8,108 @@ var PlayGame = React.createClass({
 				</p>
 
 				<table>
-  <tr>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-  </tr>
-  <tr>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-  </tr>
-  <tr>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-  </tr>
-  <tr>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-  </tr>
-  <tr>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-  </tr>
-  <tr>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-  </tr>
-  <tr>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-  </tr>
-  <tr>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-  </tr>
-  <tr>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-    <td> x </td>
-  </tr>
-</table>
-
-
-
-
-
+					<tbody>
+					  <tr>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					  </tr>
+					  <tr>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					  </tr>
+					  <tr>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					  </tr>
+					  <tr>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					  </tr>
+					  <tr>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					  </tr>
+					  <tr>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					  </tr>
+					  <tr>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					  </tr>
+					  <tr>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					  </tr>
+					  <tr>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					    <td> x </td>
+					  </tr>
+				  </tbody>
+				</table>
 			</div>
 			)
 	}
