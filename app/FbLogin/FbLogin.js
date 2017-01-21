@@ -1,15 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fbLogIn, fbLogOut } from '../actions/fbLoginActions';
 import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
 import cookie from 'react-cookie';
 
-export default class Login extends React.Component {
-    
+@connect((store) => {
+   return {
+     logIn: store.fbLog.logIn
+   }; 
+})
+
+export default class Login extends React.Component {   
     constructor (props, context) {
     super(props, context);
-    this.state = {
-        loggedIn: cookie.load('username') ? true : false
-    };
+    // this.state = {
+    //     loggedIn: cookie.load('username') ? true : false
+    // };
 }
   responseFacebook (response) {  
       console.log('res', response); 
@@ -17,27 +24,27 @@ export default class Login extends React.Component {
         // post the res to database
   }
 
-  onLogin(res) {
-    cookie.save('userId', res.id);
-    cookie.save('username', res.first_name);
-    this.setState({
-        loggedIn: true
-    });
+componentWillMount() {
+    this.props.dispatch(fbLogIn(cookie.load('username')));
+}
+
+  onLogin(fbData) {
+    cookie.save('userId', fbData.id);
+    cookie.save('username', fbData.first_name);
+    this.props.dispatch(fbLogIn(cookie.load('username')));
   }
 
 onLogout() {
     cookie.remove('userId');
     cookie.remove('username');
-    this.setState({
-        loggedIn: false
-    });
+    this.props.dispatch(fbLogOut());
   }
 
 
   render () {
     return (
       <div>
-        {!this.state.loggedIn ?
+            {!this.props.logIn ?
             <FacebookLogin appId="1409495172429100"
                 language="en_US"
                 scope="public_profile,email"
@@ -50,7 +57,7 @@ onLogout() {
             /> 
             :
             <button onClick={this.onLogout.bind(this)} type="button">logout</button>
-        }
+            }
       </div>
     );
   }
