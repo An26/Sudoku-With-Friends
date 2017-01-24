@@ -1,5 +1,5 @@
 var React = require('react');
-import Chat from '../Chat/Chat';
+var Chat = require('../Chat/Chat');
 
 var Login = React.createClass({
 	render: function(){
