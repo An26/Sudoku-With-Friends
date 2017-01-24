@@ -13,8 +13,18 @@
   },
   "author": "",
   "license": "ISC",
+<<<<<<< Updated upstream
   "bugs": {
     "url": "https://github.com/An26/Sudoku-With-Friends/issues"
+=======
+  "devDependencies": {
+    "babel-core": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.16.0"
+>>>>>>> Stashed changes
   },
   "homepage": "https://github.com/An26/Sudoku-With-Friends#readme",
   "dependencies": {

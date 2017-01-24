@@ -1,4 +1,8 @@
 var React = require('react');
+<<<<<<< Updated upstream:app/components/Login.js
+=======
+
+>>>>>>> Stashed changes:app/pages/Login.js
 
 var Login = React.createClass({
 	render: function(){
@@ -25,6 +29,11 @@ var Login = React.createClass({
 						</a>
 					</div>
 				</form>
+<<<<<<< Updated upstream:app/components/Login.js
+=======
+				
+
+>>>>>>> Stashed changes:app/pages/Login.js
 			</div>
 		)
 	}
