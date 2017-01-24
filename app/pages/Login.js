@@ -1,4 +1,5 @@
 var React = require('react');
+import Chat from '../Chat/Chat';
 
 var Login = React.createClass({
 	render: function(){
@@ -25,6 +26,8 @@ var Login = React.createClass({
 						</a>
 					</div>
 				</form>
+				<hr />
+				<Chat />
 			</div>
 		)
 	}

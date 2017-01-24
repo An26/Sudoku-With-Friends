@@ -6,7 +6,6 @@ import Login from '../pages/Login';
 import GameLobby from '../pages/GameLobby';
 import PlayGame from '../pages/PlayGame';
 import UserBoard from '../pages/UserBoard';
-import Chat from '../Chat/Chat';
 
 module.exports = (
   <Router history={browserHistory}>
@@ -14,7 +13,6 @@ module.exports = (
     	<Route path="gameLobby" component={GameLobby} />
     	<Route path="playGame" component={PlayGame} />
     	<Route path="userBoard" component={UserBoard} />
-      <Route path="chat" component={Chat} />
     	<IndexRoute component={Login} />
     </Route>
   </Router>

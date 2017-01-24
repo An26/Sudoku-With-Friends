@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
@@ -10,7 +11,6 @@ const config = require('./server/config/config.js')
 
 
 // Express
-const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
@@ -53,6 +53,6 @@ io.on('connection', function(socket){
 // })
 
 // connection to the port
-app.listen(config.port, () => {
+http.listen(config.port, () => {
 	console.log('server started on port: ', config.port);
 });
