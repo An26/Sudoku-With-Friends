@@ -1,7 +1,7 @@
-var React = require('react');
+import React from 'react';
 
-var PlayGame = React.createClass({
-	render: function(){
+export default class PlayGame extends React.Component {
+	render() {
 		return(
 			<div>
 				<p>This is the place where users actually play sudoku either by themselves or with someone they know...
@@ -113,6 +113,5 @@ var PlayGame = React.createClass({
 			</div>
 			)
 	}
-});
+};
 
-module.exports = PlayGame;
