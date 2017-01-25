@@ -1,5 +1,5 @@
 var React = require('react');
-var Chat = require('../Chat/Chat');
+var Chat = require('../Chat/Chat').default;
 
 var Login = React.createClass({
 	render: function(){
@@ -21,7 +21,7 @@ var Login = React.createClass({
 						<button type="submit" className="btn btn-default loginBtn">Login</button>
 						<br />
 						<br />
-						<a href="#" className="signupLink">
+						<a href="" className="signupLink">
 							<span className="network-name">Sign up for an account</span>
 						</a>
 					</div>
