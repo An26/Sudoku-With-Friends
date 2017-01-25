@@ -1,18 +1,9 @@
-var React = require('react');
+import React from 'react';
 
-var Game = React.createClass({
-
-	
-	render: function (){
+export default class Game extends React.Component {
+	render() {
 		return (
-
-
-
-<div id='sudoku-app'></div>
-
-
-			)
-	}
-});
-
-module.exports = Game;
+			<div id='sudoku-app'></div>
+		)
+	}	
+}

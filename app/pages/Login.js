@@ -1,12 +1,11 @@
-var React = require('react');
-var Chat = require('../Chat/Chat').default;
+import React from 'react';
+import  Chat  from '../Chat/Chat';
 
-var Login = React.createClass({
-	render: function(){
+export default class Login extends React.Component {
+	render() {
 		return (
 			<div>
 				<h1>Login to play with a friend</h1>
-
 				<form action="" method="POST">
 					<div className="row">
 						<div>
@@ -30,7 +29,5 @@ var Login = React.createClass({
 				<Chat />
 			</div>
 		)
-	}
-});
-
-module.exports = Login;
+	} 
+}

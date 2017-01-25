@@ -5,12 +5,14 @@ import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
 import cookie from 'react-cookie';
 
+// import connect
 @connect((store) => {
    return {
      logIn: store.fbLog.logIn
    }; 
 })
 
+// facebook login logic
 export default class Login extends React.Component {   
     constructor (props, context) {
     super(props, context);

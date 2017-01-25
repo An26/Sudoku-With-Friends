@@ -1,16 +1,13 @@
-var React = require('react');
+import React from 'react'
 
-var UserBoard = React.createClass({
-	render: function (){
+export default class UserBoard extends React.Component {
+	render() {
 		return (
-			<div>
-			
+			<div>		
 				<p>This is what the user sees when they login.</p>
 				<p>Displays user information and stats.</p>
 				<p>Has links to connect the user to play with a friend or play by themselves.</p>
 			</div>
-			)
+		)
 	}
-});
-
-module.exports = UserBoard;
+}
