@@ -34,12 +34,14 @@ componentWillMount() {
     cookie.save('userId', fbData.id);
     cookie.save('username', fbData.first_name);
     this.props.dispatch(fbLogIn(cookie.load('username')));
+    browserHistory.push('/userBoard');
   }
 
 onLogout() {
     cookie.remove('userId');
     cookie.remove('username');
     this.props.dispatch(fbLogOut());
+    browserHistory.push('/');
   }
 
 
