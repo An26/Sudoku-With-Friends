@@ -1,5 +1,5 @@
 import React from 'react';
-import  Chat  from '../Chat/Chat';
+
 
 export default class Login extends React.Component {
 	render() {
@@ -25,8 +25,7 @@ export default class Login extends React.Component {
 						</a>
 					</div>
 				</form>
-				<hr />
-				<Chat />
+
 			</div>
 		)
 	} 
