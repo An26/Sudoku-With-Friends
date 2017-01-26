@@ -47,7 +47,7 @@ onLogout() {
     return (
       <div>
             {!this.props.logIn ?
-            <FacebookLogin appId="1409495172429100"
+            <FacebookLogin appId="1085165664944887"
                 language="en_US"
                 scope="public_profile,email"
                 fields="first_name,last_name,picture,gender,email"
