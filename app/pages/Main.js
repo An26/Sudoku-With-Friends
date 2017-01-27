@@ -15,9 +15,6 @@ export default class Main extends React.Component {
 
 		this.setState({activeTab: event.target.id});
 		console.log(event.target.id)
-
-		//console.log("username: " + cookie.load('username'));
-		
 	}
 
 	render () {
@@ -26,6 +23,7 @@ export default class Main extends React.Component {
 
 		if (isLoggedIn) {
 			tabs = 				
+								<div>
 									<li role="presentation" className={(this.state.activeTab === "gameLobby") ? "active" : ""}>
 										<Link to="/gameLobby">
 										<button className="btn btn-default naviTabi" id="gameLobby" onClick={this.appendClass.bind(this)}>Game Lobby</button>
@@ -36,6 +34,7 @@ export default class Main extends React.Component {
 										<button className="btn btn-default naviTabi" id="userBoard" onClick={this.appendClass.bind(this)}>User Board</button>
 										</Link>
 									</li>
+									</div>
 								
 		} else {
  			tabs =  			<li role="presentation" className={(this.state.activeTab === "login") ? "active" : ""}>
