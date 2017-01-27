@@ -40,6 +40,7 @@ onLogout() {
     cookie.remove('userId');
     cookie.remove('username');
     this.props.dispatch(fbLogOut());
+    browserHistory.push('/');
   }
 
 
