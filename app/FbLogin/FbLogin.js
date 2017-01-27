@@ -4,6 +4,7 @@ import { fbLogIn, fbLogOut } from '../actions/fbLoginActions';
 import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
 import cookie from 'react-cookie';
+import { browserHistory } from 'react-router';
 
 // import connect
 @connect((store) => {
@@ -34,6 +35,7 @@ componentWillMount() {
     cookie.save('userId', fbData.id);
     cookie.save('username', fbData.first_name);
     this.props.dispatch(fbLogIn(cookie.load('username')));
+    browserHistory.push('/userBoard');
   }
 
 onLogout() {
@@ -48,7 +50,7 @@ onLogout() {
     return (
       <div>
             {!this.props.logIn ?
-            <FacebookLogin appId="1085165664944887"
+            <FacebookLogin appId="1409495172429100"
                 language="en_US"
                 scope="public_profile,email"
                 fields="first_name,last_name,picture,gender,email"
