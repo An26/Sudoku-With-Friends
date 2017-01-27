@@ -12,6 +12,7 @@ export default class Main extends React.Component {
 	}
 
 	appendClass(event) {
+
 		this.setState({activeTab: event.target.id});
 		console.log(event.target.id)
 
@@ -43,7 +44,6 @@ export default class Main extends React.Component {
 									</Link>
 								</li>;
 		}
-
 
 
 		return(

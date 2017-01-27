@@ -5,6 +5,7 @@ export default class UserBoard extends React.Component {
 		return (
 			<div>		
 				<p>This is what the user sees when they login.</p>
+
 				<p>Scores</p>
 				<p>number of games played</p>
 				<p>average time</p>
