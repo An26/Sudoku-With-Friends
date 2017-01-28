@@ -1,7 +1,7 @@
 table {
   margin:1em auto;
 }
-td {
+td{
   height:30px;
   width:30px;
   border:1px solid;
@@ -18,4 +18,14 @@ tr:first-child {
 }
 tr:nth-child(3n) td {
   border-bottom:solid ;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.cell {
+  height:30px;
+  width:30px;
+  text-align:center;
 }
