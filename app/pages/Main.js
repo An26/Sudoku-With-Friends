@@ -12,12 +12,6 @@ export default class Main extends React.Component {
 		}
 	}
 
-<<<<<<< HEAD
-	appendClass(event) {
-
-		this.setState({activeTab: event.target.id});
-		console.log(event.target.id)
-=======
 	toggleBtn() {
 		console.log("state: " + this.state.isTabOpen)
 		this.setState({isTabOpen: !this.state.isTabOpen})
@@ -29,7 +23,6 @@ export default class Main extends React.Component {
 		} else {
 			return '0px';
 		}
->>>>>>> styling
 	}
 
 	render () {
@@ -38,21 +31,6 @@ export default class Main extends React.Component {
 		console.log("username: "+ cookie.load('username'))
 
 		if (isLoggedIn) {
-<<<<<<< HEAD
-			tabs = 				
-								<div>
-									<li role="presentation" className={(this.state.activeTab === "gameLobby") ? "active" : ""}>
-										<Link to="/gameLobby">
-										<button className="btn btn-default naviTabi" id="gameLobby" onClick={this.appendClass.bind(this)}>Game Lobby</button>
-										</Link>
-									</li>
-									<li role="presentation" className={(this.state.activeTab === "userBoard") ? "active" : ""}>
-										<Link to="/userBoard">
-										<button className="btn btn-default naviTabi" id="userBoard" onClick={this.appendClass.bind(this)}>User Board</button>
-										</Link>
-									</li>
-									</div>
-=======
 			tabs = 	<div>
 						<Link to="/userBoard">User Board/Stats</Link>
 						<br />
@@ -62,7 +40,6 @@ export default class Main extends React.Component {
 						<br />
 						<Link to="/">Logout</Link>
 					</div>;
->>>>>>> styling
 								
 		} else {
  			tabs = 	<div>
