@@ -4,72 +4,65 @@ import {Link} from 'react-router';
 import cookie from 'react-cookie';
 
 export default class Main extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			activeTab: ""
+	constructor(props) {
+		super(props);
+		this.state = { 
+			//width: '250px',
+			isTabOpen: 'true'
 		}
 	}
 
-	appendClass(event) {
+	toggleBtn() {
+		console.log("state: " + this.state.isTabOpen)
+		this.setState({isTabOpen: !this.state.isTabOpen})
+	}
 
-		this.setState({activeTab: event.target.id});
-		console.log(event.target.id)
-
-		//console.log("username: " + cookie.load('username'));
-		
+	getNewWidth() {
+		if (this.state.isTabOpen) {
+			return '250px';
+		} else {
+			return '0px';
+		}
 	}
 
 	render () {
 		let tabs;
 		const isLoggedIn = cookie.load('username');
+		console.log("username: "+ cookie.load('username'))
 
 		if (isLoggedIn) {
-			tabs = 				
-									<li role="presentation" className={(this.state.activeTab === "gameLobby") ? "active" : ""}>
-										<Link to="/gameLobby">
-										<button className="btn btn-default naviTabi" id="gameLobby" onClick={this.appendClass.bind(this)}>Game Lobby</button>
-										</Link>
-									</li>
-									<li role="presentation" className={(this.state.activeTab === "userBoard") ? "active" : ""}>
-										<Link to="/userBoard">
-										<button className="btn btn-default naviTabi" id="userBoard" onClick={this.appendClass.bind(this)}>User Board</button>
-										</Link>
-									</li>
+			tabs = 	<div>
+						<Link to="/userBoard">User Board/Stats</Link>
+						<br />
+						<Link to="/game">Play Sudoku</Link>
+						<br />
+						<Link to="/gameLobby">Game Lobby: Play w/ Friends</Link>
+						<br />
+						<Link to="/">Logout</Link>
+					</div>;
 								
 		} else {
- 			tabs =  			<li role="presentation" className={(this.state.activeTab === "login") ? "active" : ""}>
-									<Link to="/">
-									<button className="btn btn-default naviTabi1" id="login" onClick={this.appendClass.bind(this)}>Login/Logout</button>
-									</Link>
-								</li>;
+ 			tabs = 	<div>
+			 			<Link to="/">Login to Play with friends</Link>
+						 <br />
+						<Link to="/game">Play Sudoku</Link>
+					</div>;
 		}
-
 
 		return(
 			<div className="container">
 				<div className="row">
-					<Header />
-					<div className="row">
-
-						{isLoggedIn ? (
-							<h1>Hello {cookie.load('username')}! </h1> 
-							) : (
-							<h1>Welcome, Login to play with friends!</h1>)
-						}
-
-						<ul className="nav nav-tabs">
+					<Header style={{marginLeft: this.getNewWidth()}} //give it a property 
+					/>
+					<div>
+						
+						<div className ="mySidenav" style={{width : this.getNewWidth()}} >
 							{tabs}
-
-							<li role="presentation" className={(this.state.activeTab === "Game") ? "active" : ""}>
-								<Link to="/game">
-								<button className="btn btn-default naviTabi" id="game" onClick={this.appendClass.bind(this)}>Game</button>
-								</Link>
-							</li>
-						</ul>
+						</div>
 					</div>
 				</div>
-				<div className="content">
+				<div className="main" style={{marginLeft : this.getNewWidth()}}>
+					<button onClick={this.toggleBtn.bind(this)}>open/close menue</button>
 					{this.props.children}
 				</div>
 
