@@ -20,7 +20,6 @@ function printcode(n) {
 	if (n == null) {
 		return '';
 	}
-
 	return n + 1 + '';
 }
 
@@ -33,8 +32,8 @@ var data       = {puzzle:puzzle, solution:solution};
 //console.log(JSON.stringify(data));
 //console.log('PUZZLE:');
 //console.log(printboard(puzzle));
-//console.log('SOLUTION:');
-//console.log(printboard(solution));
+console.log('SOLUTION:');
+console.log(printboard(solution));
 //console.log('RATING:', difficulty);
 
 
@@ -51,7 +50,8 @@ export default class Game extends React.Component {
 		super(props, context);
 		// console.log('props', props);
 		this.state = {
-			puzzle: printboard(puzzle)
+			puzzle: printboard(puzzle),
+			solution: printboard(solution)
 		}
 	}
 
@@ -77,22 +77,16 @@ export default class Game extends React.Component {
 
 	handleInput(event) {
         let newValue = event.target.value;
-        if (newValue===1 || newValue===2 ||newValue===3 ||newValue===4
-        	||newValue===5 || newValue===6 ||newValue===7 ||newValue===8
-        	||newValue===9) {
-	        let cellIndex = event.target.id;
-	        let copy = this.state.puzzle;
-	        copy[cellIndex] = newValue;
-	        this.setState({puzzle: copy});
-    	} else {
-    		event.preventDefault();
-    	}
+	    let cellIndex = event.target.id;
+        let copy = this.state.puzzle;
+        copy[cellIndex] = newValue;
+        this.setState({puzzle: copy});
     }
 
     generateCells(rowNumber) {
     	var rows = [];
     	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
-    		if(this.state.puzzle[i]==="") {
+    		if(printboard(puzzle)[i]==="") {
     			rows.push(<td key={i}><input id={i} onChange={this.handleInput.bind(this)} value={this.state.puzzle[i]} placeholder="_" className="cell" type="integer" maxLength="1" min="1" max="9"/></td>)
     		} else {
     		rows.push(<td key={i} id={i}>{this.state.puzzle[i]}</td>)
@@ -110,6 +104,15 @@ export default class Game extends React.Component {
     	}
     	return board;
     }
+
+    checkResult() {
+    	for (var i = 0; i < this.state.puzzle.length; i++) {
+				if(this.state.puzzle[i]!= this.state.solution[i]) {
+						return false;
+				} 
+    	}
+    	return true;
+	}
 
 	render (){
 		return (
@@ -136,4 +139,17 @@ export default class Game extends React.Component {
 		</div>
 		)
 	}
+
+	componentDidUpdate() {
+		if(this.state.puzzle.indexOf("")===-1) {
+			if(this.checkResult()) {
+				window.alert("You won!");
+			} else {
+				window.alert("Check again...");
+			}
+		}
+	}
+
+
 }
+
