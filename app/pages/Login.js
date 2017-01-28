@@ -1,4 +1,5 @@
 import React from 'react';
+import FacebookLogin from '../FbLogin/FbLogin';
 
 export default class Login extends React.Component {
 	render() {
@@ -23,6 +24,7 @@ export default class Login extends React.Component {
 							<span className="network-name">Sign up for an account</span>
 						</a>
 					</div>
+					<FacebookLogin />
 				</form>
 			</div>
 		)
