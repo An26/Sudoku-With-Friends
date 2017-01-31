@@ -24,8 +24,8 @@ export default class Login extends React.Component {
 							<span className="network-name">Sign up for an account</span>
 						</a>
 					</div>
-					<FacebookLogin />
 				</form>
+				<FacebookLogin />
 			</div>
 		)
 	} 
