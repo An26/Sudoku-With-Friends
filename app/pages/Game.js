@@ -40,11 +40,13 @@ function printcode(n) {
 	return n + 1 + '';
 }
 
+
 var puzzle     = sudoku.makepuzzle();
 var solution   = sudoku.solvepuzzle(puzzle);
 var difficulty = sudoku.ratepuzzle(puzzle, 4);
 console.log('difficulty', difficulty);
 var data       = {puzzle:puzzle, solution:solution};
+var copyBoard=[];
 
 //console.log('DATA:');
 //console.log(JSON.stringify(data));
@@ -166,7 +168,10 @@ export default class Game extends React.Component {
     	for (var i = 0; i < 9; i++) {
     		board.push(<tr key={i}>
     			{this.generateCells(i)}
-    		</tr>)
+    		</tr>);
+    		copyBoard.push(<tr key={i}>
+    			{this.generateCells(i)}
+    		</tr>);
     	}
     	return board;
     }
@@ -217,6 +222,11 @@ export default class Game extends React.Component {
 				<table>
 				<tbody>
 					{this.generateGame()}
+				</tbody>
+				</table>
+				<table>
+				<tbody>
+					{copyBoard}
 				</tbody>
 				</table>
 				<div>
