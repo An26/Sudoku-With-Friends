@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom';
 import { gameRunning, timeRemaining } from '../actions/gameStatusActions';
 import { connect } from 'react-redux';
 import  Chat  from '../Chat/Chat';
+import cookie from 'react-cookie';
+
+
+// console.log(cookie.load('username'));
 
 // styling
 	var buttonStyle = {
@@ -89,18 +93,15 @@ export default class Game extends React.Component {
 				console.log(counter);
 				this.props.dispatch(gameRunning(true));
 				this.props.dispatch(timeRemaining(counter));
-				// console.log( this.props.gameRunning );
 			} else {
 				this.props.dispatch(gameRunning(false));
 				clearInterval(interval);
-				// console.log( this.props.gameRunning );
 			  }
 		}.bind(this), 1000);
 		return;
 	}
 
 	handleClick(event) {
-		// this.state.buttonIsActive = true;
 		this.setState({selectedCell: event.target.id});		
 	}
 
@@ -110,28 +111,10 @@ export default class Game extends React.Component {
 		copy[this.state.selectedCell] = newValue;
 		this.setState({puzzle: copy});
 		this.state.wrongGuesses += 1;
-		// console.log('state', this.state.numberOfGuesses)
-		// this.redBoxForWrongAns();
 		return;
 	}
 
-	// redBoxForWrongAns() {
-	// 	debugger;
-	// 		// console.log(this.state.solution)
-	// 	if(this.state.puzzle[this.state.selectedCell] === this.state.solution[this.state.selectedCell]) {
-	// 		console.log('true')
-	// 		return;
-	// 	}
-	// 	this.state.wrongGuesses += 1;
-	// 	console.log('state', this.state.wrongGuesses)
-	// 	console.log('refs', this.refs.input);
-	// 	console.log('wrong ans');
-	// 	ReactDOM.findDOMNode()
-	// 	return false;
-	// }
-
 	getCellColor(i) {
-		// debugger;
 		if (this.state.puzzle[i] === this.state.solution[i]) {
 			return 'green';
 		} else {
@@ -221,16 +204,30 @@ export default class Game extends React.Component {
 				<div>
 				<table>
 				<tbody>
-					{this.generateGame()}
+				{this.props.gameRunning ?
+					this.generateGame()
+					:
+					<h4>Press Start to start the game</h4>
+				}
 				</tbody>
 				</table>
 				<table>
 				<tbody>
-					{copyBoard}
+					{(cookie.load('username') === undefined)?
+						<span />
+						:
+						<span>{copyBoard}
+							{this.createNumButtons()}
+						</span>
+					}
 				</tbody>
 				</table>
 				<div>
-				{this.createNumButtons()}
+				{this.props.gameRunning ?
+					this.createNumButtons()
+					:
+					<div />
+				}
 				</div>
 			</div>
 		</div>

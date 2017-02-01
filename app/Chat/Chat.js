@@ -1,4 +1,5 @@
 import React from 'react';
+import cookie from 'react-cookie';
 
 export default class Chat extends React.Component {
     constructor() {
@@ -7,7 +8,7 @@ export default class Chat extends React.Component {
             newMessage: '',
             messages: [],
             socket: window.io('http://localhost:3000'),
-            user: undefined
+            user: cookie.load('username')
         }
     }
 
@@ -37,9 +38,9 @@ export default class Chat extends React.Component {
 
 }
 
-    handleChangeUser(event) {
-        this.setState({user: event.target.value})
-    }
+    // handleChangeUser(event) {
+    //     this.setState({user: event.target.value})
+    // }
 
 
     render() {
@@ -50,7 +51,6 @@ export default class Chat extends React.Component {
                 </ul>
                 
                 <form onSubmit = {this.handleSubmit.bind(this)} action="">
-                    <input onChange={this.handleChangeUser.bind(this)} id="username" type="text" placeholder="username" />
                     <input onChange={this.handleChange.bind(this)} id="m" autoComplete="off" placeholder="type a message" />
                     <button>Send</button>
                 </form>
