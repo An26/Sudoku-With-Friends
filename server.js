@@ -5,7 +5,8 @@ const morgan = require('morgan');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
+// const playerId = 0;
+// const players = {};
 
 const config = require('./server/config/config.js')
 
@@ -41,16 +42,15 @@ db.once("open", function() {
 
 // socket.io for chat
 io.on('connection', function(socket){
-  console.log('a user connected');
+    // socket.on('new-player', function(player) {
+    //   console.log(player);
+    // });
+  // console.log('a user connected');
   socket.on('new-message', function(msg){
     console.log(msg);
     io.emit('receive-message', msg);
   })
 });
-
-// socket.on('test', function(){
-//   console.log('mounted');
-// })
 
 // connection to the port
 http.listen(config.port, () => {
