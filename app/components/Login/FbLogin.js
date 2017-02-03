@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fbLogIn, fbLogOut } from '../actions/fbLoginActions';
+import { logIn, logOut } from '../actions/loginActions';
 import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
 import cookie from 'react-cookie';
@@ -8,8 +8,9 @@ import { browserHistory } from 'react-router';
 
 // import connect
 @connect((store) => {
+  console.log(store);
    return {
-     logIn: store.fbLog.logIn
+     logIn: store.logInStatus.loggedIn
    }; 
 })
 
@@ -17,33 +18,46 @@ import { browserHistory } from 'react-router';
 export default class Login extends React.Component {   
     constructor (props, context) {
     super(props, context);
-    // this.state = {
-    //     loggedIn: cookie.load('username') ? true : false
-    // };
 }
-  responseFacebook (response) {  
-      console.log('res', response); 
+
+responseFacebook (response) {  
         this.onLogin(response)
         // post the res to database
   }
 
-componentWillMount() {
-    this.props.dispatch(fbLogIn(cookie.load('username')));
+componentDidMount() {
+    this.props.dispatch(logIn(cookie.load('username')));
 }
 
-  onLogin(fbData) {
+// shouldComponentUpdate() {
+//   if(this.isLoggedIn) {
+//     return true;
+//   }
+//   return false
+// }
+
+// isLoggedIn() {
+//   return this.props.logIn
+// }
+
+onLogin(fbData) {
     cookie.save('userId', fbData.id);
     cookie.save('username', fbData.first_name);
-    this.props.dispatch(fbLogIn(cookie.load('username')));
+    this.props.dispatch(logIn(cookie.load('username')));
     browserHistory.push('/userBoard');
+    
   }
 
 onLogout() {
     cookie.remove('userId');
     cookie.remove('username');
-    this.props.dispatch(fbLogOut());
+    this.props.dispatch(logOut());
     browserHistory.push('/');
   }
+
+  // componentDidUpdate() {
+  //   console.log('logged', this.props.logIn);
+  // }
 
 
   render () {

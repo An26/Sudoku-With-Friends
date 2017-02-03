@@ -5,9 +5,15 @@ export function gameRunning(isGameRunning) {
     }
 }
 
-export function timeRemaining(remainingTime) {
+export function timeInterval(timeInterval) {
     return {
         type: 'TIME',
-        payload: remainingTime
+        payload: timeInterval
+    }
+}
+
+export function stopTimeInterval() {
+    return {
+        type: 'CLEAR_INTERVAL'
     }
 }
