@@ -31,24 +31,12 @@ export default class Main extends React.Component {
 		}
 	}
 
-	toggleBtnImg() {
-		if(isTabOpen){
-			
-			var src = "./images/menu.png";
-			return src;
-
-			} else {
-			
-			var src = "./images/cross.png";
-			return src;
-		}
-	}
-
-
 	render () {
 		let tabs;
 		const isLoggedIn = cookie.load('username');
 		console.log("username: "+ cookie.load('username'));	
+
+		var btnImg = this.state.isTabOpen ? "./images/cross.png" : "./images/menu.png";
 
 		if (isLoggedIn) {
 			tabs = 	<div>
@@ -76,7 +64,7 @@ export default class Main extends React.Component {
 			<div className="container">
 				<div className="openMySideNavBar">
 					<div className="openSideNavBarBtn">
-						<a href="#" onClick={this.toggleBtn.bind(this)}><img className="menuBtn" src={this.toggleBtnImg.bind(this)} alt="menu btn"  width="30px" height="auto"/></a>
+						<a href="#" onClick={this.toggleBtn.bind(this)}><img className="menuBtn" src={btnImg} alt="menu btn"  width="30px" height="auto"/></a>
 					</div>
 				</div>
 				<div className ="mySidenav" style={{width : this.getNewWidth()}} >
