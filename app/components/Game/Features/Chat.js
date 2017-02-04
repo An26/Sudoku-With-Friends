@@ -12,11 +12,9 @@ export default class Chat extends React.Component {
         }
     }
 
-
     componentDidMount() {
         var self = this;
         this.state.socket.on("receive-message", (msg) => {
-            console.log('msg', msg)
             var messages = self.state.messages;
                 messages.push(msg);
             self.setState({messages: messages})
@@ -36,12 +34,7 @@ export default class Chat extends React.Component {
         event.preventDefault();
         this.state.socket.emit("new-message", this.state.newMessage);
 
-}
-
-    // handleChangeUser(event) {
-    //     this.setState({user: event.target.value})
-    // }
-
+    }
 
     render() {
         return (

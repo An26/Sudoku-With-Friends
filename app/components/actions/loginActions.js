@@ -1,20 +1,20 @@
-export function fbLogIn(username) {
+export function logIn(username) {
     if(username) {
         return {
-            type: 'FB_LOG_IN',
+            type: 'LOG_IN',
             payload: true
         } 
     } else {
         return {
-            type: "FB_LOG_IN",
+            type: "LOG_IN",
             payload: false
         }
     }
 }
 
-export function fbLogOut() {
+export function logOut() {
     return{
-        type: 'FB_LOG_OUT',
+        type: 'LOG_OUT',
         payload: false
     }
 }

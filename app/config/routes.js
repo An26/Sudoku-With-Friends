@@ -1,12 +1,12 @@
 // importing all the files
 import React from 'react';
 import { Route, Router, browserHistory, IndexRoute } from 'react-router';
-import Main from '../pages/Main';
-import Login from '../pages/Login';
-import GameLobby from '../pages/GameLobby';
-import PlayGame from '../pages/PlayGame';
-import UserBoard from '../pages/UserBoard';
-import Game from '../pages/Game';
+import Main from '../components/Main';
+import Login from '../components/Login/Login';
+import GameLobby from '../components/Game/Pages/GameLobby';
+import PlayGame from '../components/Game/Pages/PlayGame';
+import UserBoard from '../components/Game/Pages/UserBoard';
+import Game from '../components/Game/Game';
 
 // all the routes on the page
 module.exports = (
