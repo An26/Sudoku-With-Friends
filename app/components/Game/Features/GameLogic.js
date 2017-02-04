@@ -9,7 +9,8 @@ console.log(store);
      initialPuzzle: store.gameLogic.initialPuzzle,
 	 solution: store.gameLogic.solution,
      selectedCell: store.gameLogic.selectedCell,
-	 wrongGuesses: store.gameLogic.wrongGuesses
+	 wrongGuesses: store.gameLogic.wrongGuesses,
+	 gameRunning: store.timeCount.gameRunning
    };
 })
 
@@ -24,7 +25,7 @@ export default class GameLogic extends React.Component {
 			if(this.checkResult()) {
 				window.alert("You won!");
 			} else {
-				window.alert("Check again...");
+				// window.alert("Check again...");
 			}
 		}
 	}
@@ -45,25 +46,27 @@ export default class GameLogic extends React.Component {
 	}
 
     getCellColor(i) {
-		if( this.props.initialPuzzle[i] === "") {
+		if( this.props.initialPuzzle[i] === "" || this.props.initialPuzzle[i] === null ) {
 			return "grey";
 		}
-		else if(this.isGuessRight(i)) {
-			return 'yellow';
-		} else {
-			return 'red';
-		}
+		else if( this.props.gameRunning ) {
+			if(this.isGuessRight(i)) {
+				return 'yellow';
+			} else {
+				return 'red';
+			}
+		} 
 	}
 
     generateCells(rowNumber) {
     	var rows = [];
     	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
-    		if(gameGen.printboard(gameGen.puzzle)[i]==="") {
+    		if(gameGen.printboard(gameGen.puzzle)[i]==="" || gameGen.puzzle[i] === null) {
     			rows.push(
 					<td key={i}>
 					<input id={i}
 						onClick = {this.handleClick.bind(this)}
-						value={this.props.initialPuzzle[i]} 
+						value={this.props.initialPuzzle[i] || ""} 
 						style={{background: this.getCellColor(i)}}
 						placeholder="_" 
 						className="cell"
@@ -80,7 +83,6 @@ export default class GameLogic extends React.Component {
     }
 
 	generateGame() {
-		console.log('init', this.props.initialPuzzle);
     	var board=[];
     	for (var i = 0; i < 9; i++) {
     		board.push(<tr key={i}>

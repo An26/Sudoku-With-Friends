@@ -34,7 +34,6 @@ export default class TimeInterval extends React.Component {
 
     componentWillUnmount() {
         this.stopGame();
-        this.props.dispatch(newPuzzle());
 
     }
 
@@ -42,6 +41,8 @@ export default class TimeInterval extends React.Component {
         this.props.dispatch(gameRunning(false));
 		clearInterval(interval);
         this.props.dispatch(stopTimeInterval())
+        this.props.dispatch(newPuzzle());
+
     }
 
     render() {

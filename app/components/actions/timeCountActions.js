@@ -5,10 +5,9 @@ export function gameRunning(isGameRunning) {
     }
 }
 
-export function timeInterval(timeInterval) {
+export function timeInterval() {
     return {
-        type: 'TIME',
-        payload: timeInterval
+        type: 'TIME'
     }
 }
 

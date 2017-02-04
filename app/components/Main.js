@@ -1,13 +1,12 @@
 import React from 'react';
 import Header from './Header/Header';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import cookie from 'react-cookie';
 
 export default class Main extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
-			//width: '250px',
 			isTabOpen: 'true'
 		}
 	}
@@ -24,10 +23,32 @@ export default class Main extends React.Component {
 		}
 	}
 
+	getNewLeftMargin() {
+		if (this.state.isTabOpen) {
+			return '400px';
+		} else {
+			return '100px';
+		}
+	}
+
+	toggleBtnImg() {
+		if(isTabOpen){
+			
+			var src = "./images/menu.png";
+			return src;
+
+			} else {
+			
+			var src = "./images/cross.png";
+			return src;
+		}
+	}
+
+
 	render () {
 		let tabs;
 		const isLoggedIn = cookie.load('username');
-		console.log("username: "+ cookie.load('username'))
+		console.log("username: "+ cookie.load('username'));	
 
 		if (isLoggedIn) {
 			tabs = 	<div>
@@ -39,6 +60,7 @@ export default class Main extends React.Component {
 						<br />
 						<Link to="/">Logout</Link>
 					</div>;
+
 								
 		} else {
  			tabs = 	<div>
@@ -46,25 +68,26 @@ export default class Main extends React.Component {
 						 <br />
 						<Link to="/game">Play Sudoku</Link>
 					</div>;
+
 		}
+
 
 		return(
 			<div className="container">
-				<div className="row">
-					<Header style={{marginLeft: this.getNewWidth()}} //give it a property 
-					/>
-					<div>
-						
-						<div className ="mySidenav" style={{width : this.getNewWidth()}} >
-							{tabs}
-						</div>
+				<div className="openMySideNavBar">
+					<div className="openSideNavBarBtn">
+						<a href="#" onClick={this.toggleBtn.bind(this)}><img className="menuBtn" src={this.toggleBtnImg.bind(this)} alt="menu btn"  width="30px" height="auto"/></a>
 					</div>
 				</div>
-				<div className="main" style={{marginLeft : this.getNewWidth()}}>
-					<button onClick={this.toggleBtn.bind(this)}>open/close menue</button>
-					{this.props.children}
+				<div className ="mySidenav" style={{width : this.getNewWidth()}} >
+					{tabs}
 				</div>
-
+				<div className="content">
+					<Header style={{marginLeft: this.getNewLeftMargin()}}/>
+					<div className="main" style={{marginLeft : this.getNewLeftMargin()}}>
+						{this.props.children}
+					</div>
+				</div>
 			</div> 
 			)
 	}

@@ -55,8 +55,9 @@ export default class GameInputBtn extends React.Component {
 		margin: "5px",
 		height: "30px",
 		width: "30px",
-		background: "purple",
-		color: "white"	
+		background: "#fafafa",
+		color: "#333333",
+		fontFamily: "'Quicksand', sans-serif"
 
 	}
 
@@ -65,6 +66,4 @@ export default class GameInputBtn extends React.Component {
 	}
 
 // end of styling
-
-
 

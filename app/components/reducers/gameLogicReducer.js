@@ -1,4 +1,5 @@
 import gameGen from '../Game/Js/gameGenerator';
+
 export default function reducer(state={
     initialPuzzle: gameGen.printboard(gameGen.puzzle),
     solution: gameGen.printboard(gameGen.solution),
@@ -22,7 +23,11 @@ export default function reducer(state={
         case 'SELECTED_CELL':
             return {...state, selectedCell: action.payload}
         case 'NEW_PUZZLE':
-            return {...state, initialPuzzle: gameGen.newBoard(), solution:gameGen.solution}
+            return {...state, 
+                initialPuzzle: gameGen.newBoard(), 
+                solution:gameGen.solution,
+                wrongGuesses: 0
+            }
         default:
             return state;
     }

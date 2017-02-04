@@ -2,17 +2,66 @@ import React from 'react'
 
 export default class UserBoard extends React.Component {
 	render() {
+		const userStyle = {
+			border: '3px #282828 solid',
+			padding: '15px',
+			backgroundColor: '#fff'
+		}
 		return (
-			<div>		
-				<p>This is what the user sees when they login.</p>
+			<div className="userContent" style={userStyle}>
+				<div>UserName: _____ </div>
+				<div>ID Numer</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"># of Games You've Played</h3>
+					</div>
+					<div class="panel-body">
+						# of games pulled dynamically from database
+					</div>
+				</div>
 
-				<p>Scores</p>
-				<p>number of games played</p>
-				<p>average time</p>
-				<p>ranking with all the users in the database</p>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Your Times</h3>
+					</div>
+					<div class="panel-body">
+						Times of the games you won.
+					</div>
+				</div>
 
-				<p>Displays user information and stats.</p>
-				<p>Has links to connect the user to play with a friend or play by themselves.</p>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"># of Games You've Won</h3>
+					</div>
+					<div class="panel-body">
+						# of wins pulled dynamically from database
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Player Stats</h3>
+					</div>
+					<div class="panel-body">
+						Average time of won games for level 1
+					</div>
+					<div class="panel-body">
+						Average time of won games for level 2
+					</div>
+					<div class="panel-body">
+						Average time of won games for level 3
+					</div>
+					<div class="panel-body">
+						Average time of won games for level 4
+					</div>
+					<div class="panel-body">
+						Average time of won games for  level 5
+					</div>
+				</div>
+
+				<p>Your best game!</p>
+
+				<p>ranking with all the users in the database?? Chart here...</p>
+
 			</div>
 		)
 	}
