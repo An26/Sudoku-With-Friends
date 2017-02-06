@@ -27,7 +27,7 @@ exports.create = (req,res) => {
         name: name,
     });
 
-    newUser.save( (err, gallery) => {
+    newUser.save( (err, user) => {
         if(err) {
             res.status('500').json({ status: 'error', message: 'Cannot save new user.'});
         } else {
