@@ -2,6 +2,17 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+const Player = new Schema({
+    playerId: {
+        type: Schema.Types.ObjectId,
+    },
+    gameBoard: {
+        type: Array,
+    },
+});
+
+//const Players = mongoose.model('Player', PlayersSchema);
+
 const GamesSchema = new Schema({
     initialBoard: {
         type: Array,
@@ -11,22 +22,7 @@ const GamesSchema = new Schema({
         type: Array,
         required: true,
     },
-    player1: {
-        playerId: {
-            type: Schema.Types.ObjectId,
-        },
-        gameBoard: {
-            type: Array,
-        },
-    },
-    player2: {
-        playerId: {
-            type: Schema.Types.ObjectId,
-        },
-        gameBoard: {
-            type: Array,
-        },
-    },
+    players: [Player],
 });
 
 const Games = mongoose.model('Game', GamesSchema);
