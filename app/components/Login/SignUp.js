@@ -14,6 +14,7 @@ export default class SignUp extends React.Component {
 						<div>
 							Password: <input type="password" name='password' className='form-control' placeholder="Password" />
 						</div>
+						<button>Sign Up</button>
 					</div>
 				</form>
 			</div>
