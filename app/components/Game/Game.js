@@ -1,10 +1,10 @@
 import React from 'react';
-import  Chat  from './Features/Chat';
 import GameInputBtn from './Features/GameInputBtn';
 import TimeInterval from './Features/TimeCount';
 import GameLogic from './Features/GameLogic';
 import { connect } from 'react-redux';
 import { gameRunning, gameStop } from '../actions/timeCountActions';
+
 
 // below are the game features imported from features folder inside Game folder
 
@@ -22,8 +22,6 @@ export default class Game extends React.Component {
 			<TimeInterval />
 			{this.props.gameRunning ?
 				<div>
-					<Chat />
-					<br />
 					<GameLogic />
 					<GameInputBtn />
 				</div>

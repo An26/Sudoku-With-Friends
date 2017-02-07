@@ -1,3 +1,4 @@
+
 import React from 'react';
 import axios from 'axios';
 import cookie from 'react-cookie';
@@ -18,6 +19,7 @@ export default class UserBoard extends React.Component {
 		});
 	}
 	
+
 
 	render() {
 		const userStyle = {
