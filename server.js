@@ -29,7 +29,7 @@ app.get(`*`, function(req, res) {
 
 // Mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect( config.database );
+mongoose.connect('mongodb://heroku_zxq08pw0:7giela1ls1ohb8ns67t7du9gmd@ds145639.mlab.com:45639/heroku_zxq08pw0');
 const db = mongoose.connection;
 db.on("error", function(error) {
    console.log("Mongoose Error: ", error);
