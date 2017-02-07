@@ -1,12 +1,11 @@
 import React from 'react';
-import FacebookLogin from './FbLogin';
-import { Link } from 'react-router';
 
-export default class Login extends React.Component {
+
+export default class SignUp extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Login to play with a friend</h1>
+				<h1>Sign Up to play with all your friends!</h1>
 				<form action="" method="POST">
 					<div className="row">
 						<div>
@@ -16,15 +15,7 @@ export default class Login extends React.Component {
 							Password: <input type="password" name='password' className='form-control' placeholder="Password" />
 						</div>
 					</div>
-
-					<div className="list-inline row">
-						<button type="submit" className="btn btn-default loginBtn">Login</button>
-						<br />
-						<br />
-						<Link to="signUp" className="signupLink">Sign up for an account</Link>
-					</div>
 				</form>
-				<FacebookLogin />
 			</div>
 		)
 	} 

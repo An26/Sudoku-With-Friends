@@ -20,33 +20,32 @@ export default class PlayGame extends React.Component {
 			margin: '10px'
 		}
 		return(
-			<div>
+			<div className="mainContainer">
 				<p>This is the place where users actually play sudoku with a friend</p>
+				<div>game level/difficulty here??</div>
+				
+				<div className="row">
+					<div className="col-md-5 col-sm-12 activeGame" style={divStyle}>
+						<TimeInterval />
+							{this.props.gameRunning ?
+								<div>
+									<GameLogic />
+									<GameInputBtn />
+								</div>
+							:
+							null
+							}
+					</div>
+
+					<div className="col-md-5 col-sm-12 OpponentGame" style={divStyle}>
+						<div className="opponentName">Opponent Name</div>
+						<div className="opponentBoard">Opponent's game board</div>
+					</div>
+				</div>
+
 				<div className="chatBox" style={divStyle}>
 					<Chat />
 				</div>
-
-				<div>game level/difficulty here??</div>
-
-				<div className="activeGame" style={divStyle}>
-					<TimeInterval />
-						{this.props.gameRunning ?
-							<div>
-								<GameLogic />
-								<GameInputBtn />
-							</div>
-						:
-						null
-						}
-				</div>
-
-				<div className="OpponentGame">
-					<div className="opponentName"></div>
-					<div className="opponentBoard"></div>
-				</div>
-
-					
-
 			</div>
 			)
 	}

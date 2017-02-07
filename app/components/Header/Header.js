@@ -15,10 +15,11 @@ export default class Header extends React.Component {
         return (
             <div className="mainHeaderDiv" style={headerStyle}>
                 <div className="headerDiv" style={this.props.style}>
-                    <span className="headerTitle"> Sudoku with Friends</span>
-                    <div className="welcomeUser">
+                    <div className="welcomeHeader">Sudoku with Friends</div>
+
+                    <div>
                         {isLoggedIn ? (
-                            <h1>Welcome {cookie.load('username')}! </h1> 
+                            <h1  className="welcomeUser">Welcome {cookie.load('username')}! </h1> 
                             ) : (
                             <h1>Welcome!</h1>)
                         }
