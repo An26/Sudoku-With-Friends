@@ -6,7 +6,7 @@ export default class PlayGame extends React.Component {
 			<div>
 				<p>This is the place where users actually play sudoku either by themselves or with someone they know...
 				</p>
-				<div>chat box here on the side</div>
+				<div className="chatBox">chat box here on the side</div>
 				<div>game level/difficulty</div>
 				<div>timer</div>
 				<div>main gaame board</div>
