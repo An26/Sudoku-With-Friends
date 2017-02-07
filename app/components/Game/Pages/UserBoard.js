@@ -1,6 +1,16 @@
 import React from 'react'
+import axios from 'axios';
+import cookie from 'react-cookie';
+
 
 export default class UserBoard extends React.Component {
+	constructor () {
+			super();
+		}
+		componentDidMount() {
+			console.log("this one!" , cookie.load('userId'));
+		}
+
 	render() {
 		const userStyle = {
 			border: '3px #282828 solid',
