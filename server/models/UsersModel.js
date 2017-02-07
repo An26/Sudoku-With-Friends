@@ -10,6 +10,9 @@ const UsersSchema = new Schema({
     name: {
         type: String,
     },
+    FBId: {
+    	type: String,
+    }
 });
 
 const Users = mongoose.model('User', UsersSchema);

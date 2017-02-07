@@ -1,6 +1,24 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
+import cookie from 'react-cookie';
+var data = {};
 
 export default class UserBoard extends React.Component {
+
+	constructor () {
+		super();
+		this.state = {userData:{}};
+	}
+	componentDidMount() {
+		var userId = cookie.load('userId');
+		axios.get('/user/'+userId).then(function(res){
+			console.log('resssss', res.data.userData);
+			data = res.data.userData[0];
+			console.log('data',data);
+		});
+	}
+	
+
 	render() {
 		const userStyle = {
 			border: '3px #282828 solid',
@@ -9,8 +27,8 @@ export default class UserBoard extends React.Component {
 		}
 		return (
 			<div className="userContent" style={userStyle}>
-				<div>UserName: _____ </div>
-				<div>ID Numer</div>
+				<div>UserName: {data.username} </div>
+				<div>ID Numer: {data._id} </div>
 				<div className="panel panel-default">
 					<div className="panel-heading">
 						<h3 className="panel-title"># of Games You've Played</h3>

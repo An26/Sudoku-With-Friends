@@ -2,8 +2,8 @@ table {
   margin:1em auto;
 }
 td{
-  height:30px;
-  width:30px;
+  height:40px;
+  width:40px;
   border:1px solid;
   text-align:center;
 }
@@ -25,7 +25,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 .cell {
-  height:30px;
-  width:30px;
+  height:55px;
+  width:45px;
   text-align:center;
 }
