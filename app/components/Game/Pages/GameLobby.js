@@ -38,12 +38,14 @@ export default class GameLobby extends React.Component {
 	postGameDetails() {	
 				// console.log(this.props.gameRunning);
 			// console.log(this.props.logIn);
-		if(this.props.logIn) {
+	
 			console.log('1',this.props.logIn);
 			console.log('2',this.props.newRoomId);
 			console.log('3',this.props.initialPuzzle);
 			console.log('4',this.props.solution);
 			console.log('5',cookie.load('username'))
+		if(this.props.logIn) {
+			
 			axios.post('api/game', 
 			{
 				roomId: this.props.newRoomId, 

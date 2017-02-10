@@ -71,29 +71,26 @@ exports.update = (req, res) => {
 exports.create = (req,res) => {
     // gameId is coming from GameLobby File
     const roomId = req.body.roomId
-    console.log('room', roomId)
-    // initial board and solution is coming from TimeCount.js file
     const initialBoard = req.body.initialBoard;
-    console.log('int', initialBoard)
     const solution = req.body.solution;
-    console.log('sol', solution)
-    // username is coming from 
     const player = req.body.username;
-    console.log('play',player)
-    // const newGame = new Game({
-    //     initialBoard: initialBoard,
-    //     solution: solution,
-    // });
+    // console.log('play',player)
+    const newGame = new Game({
+        initialBoard: initialBoard,
+        solution: solution,
+        roomId: roomId
+    });
 
-    // newGame.players.push({ gameBoard: initialBoard });
+    console.log(newGame);
+    newGame.players.push({ gameBoard: initialBoard });
 
-    // newGame.save( (err, game) => {
-    //     if(err) {
-    //         res.status('500').json({ status: 'error', message: 'Cannot save new game.'});
-    //     } else {
-    //         res.json({status: 'ok'});
-    //     }
-    // });
+    newGame.save( (err, game) => {
+        if(err) {
+            res.status('500').json({ status: 'error', message: 'Cannot save new game.'});
+        } else {
+            res.json({status: 'ok'});
+        }
+    });
 };
 
 
