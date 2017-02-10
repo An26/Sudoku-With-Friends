@@ -27,25 +27,17 @@ export default class GameLobby extends React.Component {
 		this.props.dispatch(createRoom());
 	}
 
-	// getRoomList() {
-	// 	console.log('this is a room list')
-	// 	// with this room get all the rooms list and attach a join button on click on which reroute to playgame
-	// 	// app.get('/api/game', games.list);
-	// 	browserHistory.push('/playGame');
-	// }
+	getRoomList() {
+		
+		// with this room get all the rooms list and attach a join button on click on which reroute to playgame
+		axios.get('/api/game').then((err,res) =>{
+			console.log('res', res);
+		})
+	}
 
 	
 	postGameDetails() {	
-				// console.log(this.props.gameRunning);
-			// console.log(this.props.logIn);
-	
-			console.log('1',this.props.logIn);
-			console.log('2',this.props.newRoomId);
-			console.log('3',this.props.initialPuzzle);
-			console.log('4',this.props.solution);
-			console.log('5',cookie.load('username'))
-		if(this.props.logIn) {
-			
+		if(this.props.logIn) {		
 			axios.post('api/game', 
 			{
 				roomId: this.props.newRoomId, 
@@ -65,27 +57,16 @@ export default class GameLobby extends React.Component {
 		event.preventDefault();
 		let room = document.getElementById('roomName').value;
 		this.props.dispatch(roomName(room))
-		// axios.post('/api/game', {id: this.props.newRoomId}, function(err, res) {
-		// 	console.log(res);
-		// })
 		this.postGameDetails();
 		browserHistory.push('/playGame');
-		
-		// getGameDetails();
 	}	
 
-
-	// getGameDetails() {
-	// 		console.log('init', this.props.initialPuzzle);
-	// 	console.log('sol', this.props.solution);
+	// componentDidUpdate() {
+	// 	console.log('iid', this.props.newRoomId)
+   	// 	// console.log('iid', this.props.newRoomId)
+	// 	//    axios.post roomid
+	// 	// app.get('/api/game/:id', games.get);
 	// }
-
-	componentDidUpdate() {
-		console.log('iid', this.props.newRoomId)
-   		// console.log('iid', this.props.newRoomId)
-		//    axios.post roomid
-		// app.get('/api/game/:id', games.get);
-	}
 
 
 	render (){
@@ -102,7 +83,7 @@ export default class GameLobby extends React.Component {
 						<button>Create Room</button>
 					</form>
 					<div>
-						{/*{this.getRoomList()}*/}
+						{this.getRoomList()}
 						<h4>Here we will have all room names listed</h4>
 					</div>
 				</div>
