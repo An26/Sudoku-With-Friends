@@ -44,7 +44,7 @@ app.get(`*`, function(req, res) {
 
 // Mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect( config.database );
+mongoose.connect(config.database);
 const db = mongoose.connection;
 db.on("error", function(error) {
    console.log("Mongoose Error: ", error);

@@ -22,9 +22,7 @@ export default class Login extends React.Component {
 
 responseFacebook (response) {  
         this.onLogin(response);
-        console.log('response: ', response);
-        // post the res to database
-
+       // post the res to database
         if(response) {
           axios.post('/user',response).then(function(err,res){
           if(err) throw err;
@@ -33,24 +31,12 @@ responseFacebook (response) {
         } else {
           console.log('not logged in!');
         }
-
   }
 
 componentDidMount() {
     this.props.dispatch(logIn(cookie.load('username')));
     
 }
-
-// shouldComponentUpdate() {
-//   if(this.isLoggedIn) {
-//     return true;
-//   }
-//   return false
-// }
-
-// isLoggedIn() {
-//   return this.props.logIn
-// }
 
 onLogin(fbData) {
     cookie.save('userId', fbData.id);
@@ -66,11 +52,6 @@ onLogout() {
     this.props.dispatch(logOut());
     browserHistory.push('/');
   }
-
-  // componentDidUpdate() {
-  //   console.log('logged', this.props.logIn);
-  // }
-
 
   render () {
     return (

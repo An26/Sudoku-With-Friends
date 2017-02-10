@@ -15,7 +15,6 @@ export default function reducer(state={
             if( newPuzzle[cell] !== state.solution[cell] ) {
                 wrongGuesses = wrongGuesses+ 1;
             }
-            console.log('guesses',wrongGuesses);
             return Object.assign({}, state, {
                 initialPuzzle: newPuzzle,
                 wrongGuesses: wrongGuesses
