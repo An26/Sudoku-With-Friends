@@ -21,13 +21,17 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "bcrypt": "^1.0.2",
     "bluebird": "^3.4.7",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "http": "0.0.0",
+    "jsonwebtoken": "^7.2.1",
     "material-ui": "^0.16.6",
     "mongoose": "4.4.8",
     "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "react": "^15.4.1",
     "react-cookie": "^1.0.4",
     "react-dom": "^15.4.1",
@@ -43,7 +47,7 @@
     "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.1.0",
     "socket.io": "^1.7.2",
-    "sudoku": "=0.0.2"
-
+    "sudoku": "=0.0.2",
+    "validator": "^6.2.1"
   }
 }

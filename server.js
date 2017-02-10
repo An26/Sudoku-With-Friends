@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const passport = require('passport');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -19,9 +20,23 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(morgan('combined'));
 
 
+// load passport strategies
+const localSignupStrategy = require('./server/passport/local-signup');
+const localLoginStrategy = require('./server/passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+
+// pass the authorization checker middleware
+//const authCheckMiddleware = require('./server/middleware/auth-check');
+//app.use('/api', authCheckMiddleware);
+
+
 // Express Routes
 app.use(express.static('public'));
 require('./server/routes/apiRoutes.js')(app);
+const authRoutes = require('./server/routes/auth.js');
+app.use('/auth', authRoutes);
 app.get(`*`, function(req, res) {
   res.sendFile('public/index.html', { root: __dirname });
 });
@@ -29,7 +44,7 @@ app.get(`*`, function(req, res) {
 
 // Mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://heroku_zxq08pw0:7giela1ls1ohb8ns67t7du9gmd@ds145639.mlab.com:45639/heroku_zxq08pw0');
+mongoose.connect( config.database );
 const db = mongoose.connection;
 db.on("error", function(error) {
    console.log("Mongoose Error: ", error);
