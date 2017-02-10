@@ -79,7 +79,7 @@ export default class GameLobby extends React.Component {
 						return (
 						<div key={i}>
 							{console.log('ele', ele)}
-							<p>id: {ele.id}</p>
+							{/*<p>id: {ele.id}</p>*/}
 							<p>Room Name: {ele.roomName}</p>
 							<p>players: {ele.players}</p>
 							{ ele.players === 2 ?
