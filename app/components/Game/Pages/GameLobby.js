@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { createRoom, roomName, gameRoomData } from '../../actions/multiplayerGameActions';
+import { createRoom, gameRoomData } from '../../actions/multiplayerGameActions';
 import cookie from 'react-cookie';
 import axios from 'axios';
 
 @connect((store)=> {
 	return {
 		createRoom: store.multiplayer.createRoom,
-		newRoomName: store.multiplayer.roomName,
 		initialPuzzle: store.gameLogic.initialPuzzle,
 	 	solution: store.gameLogic.solution,
 		gameRunning: store.timeCount.gameRunning,
@@ -35,13 +34,13 @@ export default class GameLobby extends React.Component {
 			self.props.dispatch(gameRoomData(res.data))
 		})
 	}
-	
 
-	postGameDetails() {	
+	postGameDetails(room) {	
+		console.log('login', this.props.logIn)	
 		if(this.props.logIn) {		
-			axios.post('api/game', 
+			axios.post('/api/game', 
 			{
-				roomName: this.props.newRoomName, 
+				roomName: room, 
 				initialBoard: this.props.initialPuzzle,
 				solution: this.props.solution,
 				username : cookie.load('username')				
@@ -56,8 +55,7 @@ export default class GameLobby extends React.Component {
 	getRoomName(event) {
 		event.preventDefault();
 		let room = document.getElementById('roomName').value;
-		this.props.dispatch(roomName(room))
-		this.postGameDetails();
+		this.postGameDetails(room);
 		browserHistory.push('/playGame');
 	}	
 
@@ -80,7 +78,9 @@ export default class GameLobby extends React.Component {
 					{this.props.gameRoomData.map((ele, i)=>{
 						return (
 						<div key={i}>
-							<p>id: {ele.id}</p>
+							{console.log('ele', ele)}
+							{/*<p>id: {ele.id}</p>*/}
+							<p>Room Name: {ele.roomName}</p>
 							<p>players: {ele.players}</p>
 							{ ele.players === 2 ?
 							null

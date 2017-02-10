@@ -5,13 +5,6 @@ export function createRoom() {
     }
 }
 
-export function roomName(roomName) {
-    return {
-        type: 'ROOM_NAME',
-        payload: roomName
-    }
-}
-
 export function gameRoomData(roomData) {
     return {
         type: 'GAME_ROOM_DATA',
