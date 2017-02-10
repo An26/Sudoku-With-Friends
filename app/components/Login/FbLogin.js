@@ -38,17 +38,6 @@ componentDidMount() {
     
 }
 
-// shouldComponentUpdate() {
-//   if(this.isLoggedIn) {
-//     return true;
-//   }
-//   return false
-// }
-
-// isLoggedIn() {
-//   return this.props.logIn
-// }
-
 onLogin(fbData) {
     cookie.save('userId', fbData.id);
     cookie.save('username', fbData.first_name);
@@ -63,11 +52,6 @@ onLogout() {
     this.props.dispatch(logOut());
     browserHistory.push('/');
   }
-
-  // componentDidUpdate() {
-  //   console.log('logged', this.props.logIn);
-  // }
-
 
   render () {
     return (

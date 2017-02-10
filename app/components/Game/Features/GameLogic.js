@@ -4,7 +4,6 @@ import { initialPuzzle, selectedCell } from '../../actions/gameLogicActions.js';
 import gameGen from '../Js/gameGenerator';
 
 @connect((store) => {
-console.log(store);
    return {
      initialPuzzle: store.gameLogic.initialPuzzle,
 	 solution: store.gameLogic.solution,
