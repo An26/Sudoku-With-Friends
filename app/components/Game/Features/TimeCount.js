@@ -3,12 +3,15 @@ import { gameRunning, timeInterval, stopTimeInterval } from '../../actions/timeC
 import { newPuzzle } from '../../actions/gameLogicActions.js';
 import { connect } from 'react-redux';
 import gameGen from '../Js/gameGenerator';
+import axios from 'axios'
 
 var interval;
 @connect((store) => {
    return {
      gameRunning: store.timeCount.gameRunning,
-	 timeInterval: store.timeCount.timeInterval
+	 timeInterval: store.timeCount.timeInterval,
+    //  initialPuzzle: store.gameLogic.initialPuzzle,
+	//  solution: store.gameLogic.solution,
    };
 })
 
@@ -25,11 +28,16 @@ export default class TimeInterval extends React.Component {
 				this.props.dispatch(gameRunning(true));
 				this.props.dispatch(timeInterval());
 			} 
+            
             else {
                 this.props.dispatch(gameRunning(false));
 			  }
 		}.bind(this), 1000);
-		return;
+		// posting initial board and solution to the database
+        // axios.post('api/game', {initialBoard: this.props.initialPuzzle, solution:this.props.solution})
+        // .then(function(err, res) {
+        //     console.log(res);
+        // })
 	}
 
     componentWillUnmount() {
@@ -40,9 +48,8 @@ export default class TimeInterval extends React.Component {
     stopGame(){
         this.props.dispatch(gameRunning(false));
 		clearInterval(interval);
-        this.props.dispatch(stopTimeInterval())
+        this.props.dispatch(stopTimeInterval()) 
         this.props.dispatch(newPuzzle());
-
     }
 
     render() {

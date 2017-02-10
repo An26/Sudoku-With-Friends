@@ -69,15 +69,19 @@ exports.update = (req, res) => {
 
 
 exports.create = (req,res) => {
+    // gameId is coming from GameLobby File
+    const roomId = req.body.roomId
     const initialBoard = req.body.initialBoard;
     const solution = req.body.solution;
     const player = req.body.username;
-
+    // console.log('play',player)
     const newGame = new Game({
         initialBoard: initialBoard,
         solution: solution,
+        roomId: roomId
     });
 
+    console.log(newGame);
     newGame.players.push({ gameBoard: initialBoard });
 
     newGame.save( (err, game) => {

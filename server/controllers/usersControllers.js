@@ -11,7 +11,6 @@ exports.get = (req,res) => {
     var userId = req.params.userid;
     User.find({'FBId':userId},function(err,user){
         res.send({'userData': user});
-        console.log('user',user);
     })
 };
 
@@ -22,11 +21,7 @@ exports.update = (req, res) => {
 
 
 exports.create = (req,res) => {
- //   const userId = req.params.userid;
-//    const name = req.body.name;
- //   const username = req.body.username;
     var response = req.body;
-    console.log('body',response);
 
     const newUser = new User({
         username: response.email,
