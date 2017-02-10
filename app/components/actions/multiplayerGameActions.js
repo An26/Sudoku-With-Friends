@@ -11,3 +11,10 @@ export function roomName(roomName) {
         payload: roomName
     }
 }
+
+export function gameRoomData(roomData) {
+    return {
+        type: 'GAME_ROOM_DATA',
+        payload: roomData
+    }
+}
