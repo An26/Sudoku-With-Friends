@@ -2,60 +2,52 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { createRoom, roomName, goToRoom } from '../../actions/multiplayerGameActions';
+import { createRoom, roomName, gameRoomData } from '../../actions/multiplayerGameActions';
 import cookie from 'react-cookie';
-
 import axios from 'axios';
 
 @connect((store)=> {
 	return {
 		createRoom: store.multiplayer.createRoom,
-		newRoomId: store.multiplayer.newRoomId,
+		newRoomName: store.multiplayer.roomName,
 		initialPuzzle: store.gameLogic.initialPuzzle,
 	 	solution: store.gameLogic.solution,
 		gameRunning: store.timeCount.gameRunning,
-		logIn: store.logInStatus.loggedIn
+		logIn: store.logInStatus.loggedIn,
+		gameRoomData: store.multiplayer.gameRoomData
 	}
 })
 export default class GameLobby extends React.Component {
 	constructor(props,context) {
 		super(props, context);
-	}
+}
 
 	handleClick(event) {
 		event.preventDefault();
 		this.props.dispatch(createRoom());
+		this.userData();
 	}
 
-	// getRoomList() {
-	// 	console.log('this is a room list')
-	// 	// with this room get all the rooms list and attach a join button on click on which reroute to playgame
-	// 	// app.get('/api/game', games.list);
-	// 	browserHistory.push('/playGame');
-	// }
+	userData() {
+		let self = this;
+		let roomData = []
+		axios.get('/api/game').then(function(res) {
+			self.props.dispatch(gameRoomData(res.data))
+		})
+	}
+	
 
-	
 	postGameDetails() {	
-				// console.log(this.props.gameRunning);
-			// console.log(this.props.logIn);
-	
-			console.log('1',this.props.logIn);
-			console.log('2',this.props.newRoomId);
-			console.log('3',this.props.initialPuzzle);
-			console.log('4',this.props.solution);
-			console.log('5',cookie.load('username'))
-		if(this.props.logIn) {
-			
+		if(this.props.logIn) {		
 			axios.post('api/game', 
 			{
-				roomId: this.props.newRoomId, 
+				roomName: this.props.newRoomName, 
 				initialBoard: this.props.initialPuzzle,
 				solution: this.props.solution,
 				username : cookie.load('username')				
 			}).then((err, res)=> {
 				if(err) throw err;
-				console.log(res);
-				
+				console.log(res);			
 			})
 		}
 	}
@@ -65,28 +57,9 @@ export default class GameLobby extends React.Component {
 		event.preventDefault();
 		let room = document.getElementById('roomName').value;
 		this.props.dispatch(roomName(room))
-		// axios.post('/api/game', {id: this.props.newRoomId}, function(err, res) {
-		// 	console.log(res);
-		// })
 		this.postGameDetails();
 		browserHistory.push('/playGame');
-		
-		// getGameDetails();
 	}	
-
-
-	// getGameDetails() {
-	// 		console.log('init', this.props.initialPuzzle);
-	// 	console.log('sol', this.props.solution);
-	// }
-
-	componentDidUpdate() {
-		console.log('iid', this.props.newRoomId)
-   		// console.log('iid', this.props.newRoomId)
-		//    axios.post roomid
-		// app.get('/api/game/:id', games.get);
-	}
-
 
 	render (){
 		return (
@@ -101,12 +74,24 @@ export default class GameLobby extends React.Component {
 						<input id="roomName" type="text" placeholder="enter your room name" />
 						<button>Create Room</button>
 					</form>
-					<div>
-						{/*{this.getRoomList()}*/}
-						<h4>Here we will have all room names listed</h4>
-					</div>
 				</div>
 				}
+				<div>	
+					{this.props.gameRoomData.map((ele, i)=>{
+						return (
+						<div key={i}>
+							<p>id: {ele.id}</p>
+							<p>players: {ele.players}</p>
+							{ ele.players === 2 ?
+							null
+							:
+							<button>Join</button>
+							}
+						</div>
+						)
+					})}		
+				</div>
+				
 			</div>
 		)
 	}

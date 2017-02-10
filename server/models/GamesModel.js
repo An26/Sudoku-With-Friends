@@ -23,7 +23,7 @@ const GamesSchema = new Schema({
         required: true,
     },
     players: [Player],
-    roomId: String
+    roomName: String
 });
 
 const Games = mongoose.model('Game', GamesSchema);
