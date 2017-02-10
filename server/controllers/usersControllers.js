@@ -27,6 +27,7 @@ exports.create = (req,res) => {
         username: response.email,
         name: response.first_name,
         FBId: response.id,
+        password: response.password,
     });
 
     newUser.save( (err, user) => {

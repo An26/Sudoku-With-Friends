@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 
 
 const Schema = mongoose.Schema;
@@ -28,10 +28,10 @@ UsersSchema.pre('save', function saveHook(next) {
   if (!user.isModified('password')) return next();
 
 
-  return bcrypt.genSalt((saltError, salt) => {
+  return bcrypt.genSalt(1000, (saltError, salt) => {
     if (saltError) { return next(saltError); }
 
-    return bcrypt.hash(user.password, salt, (hashError, hash) => {
+    return bcrypt.hash(user.password, salt, null, (hashError, hash) => {
       if (hashError) { return next(hashError); }
 
       // replace a password string with hash value
