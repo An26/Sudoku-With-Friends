@@ -24,17 +24,17 @@ export default class PlayGame extends React.Component {
     	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
     		if(this.props.opponentsGameBoard[i]==="" || this.props.opponentsGameBoard[i] === null) {
     			rows.push(
-					<td key={i}>
+					<td className="opTd" key={i}>
 					<input id={i}
 						placeholder="_" 
-						className="cell"
+						className="opCell"
 						type="integer" 
 						maxLength="1" 
 						min="1" 
 						max="9"/>
 					</td>)
     		} else {
-    		rows.push(<td key={i} id={i}>{this.props.opponentsGameBoard[i]}</td>)
+    		rows.push(<td className="opTd" key={i} id={i}>{this.props.opponentsGameBoard[i]}</td>)
     		}
     	}
     	return rows;
@@ -44,7 +44,7 @@ export default class PlayGame extends React.Component {
 		
     	var board=[];
     	for (var i = 0; i < 9; i++) {
-    		board.push(<tr key={i}>
+    		board.push(<tr className="opTr" key={i}>
     			{this.generateCells(i)}
     		</tr>);
     	}
@@ -78,8 +78,8 @@ export default class PlayGame extends React.Component {
 					</div>
 					<div className="col-md-3 OpponentGame" style={divStyle}>
 						{/*{this.props.opponentsGameBoard}*/}
+						<div className="opponentName">Opponent Game:</div>
 						{this.generateGame()}
-						<div className="opponentName">Opponent Name</div>
 						
 					</div>
 				</div>

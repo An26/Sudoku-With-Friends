@@ -140,7 +140,7 @@ export default class GameLobby extends React.Component {
 										<img className="card-img-top" src="./images/table.svg" alt="Card image cap" />
 										<p className="card-text">{ele.players} player is waiting</p>
 										{ ele.players === 2 ?
-										null
+											<p>Room is Full</p>
 										:
 											<button onClick={this.joinGameRoom.bind(this)} value={ele.id} className="joinRoom">Join</button>
 										}
