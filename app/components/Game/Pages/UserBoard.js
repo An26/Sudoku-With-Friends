@@ -9,17 +9,17 @@ export default class UserBoard extends React.Component {
 		super();
 		this.state = {userData:{}};
 	}
-	componentDidMount() {
-		var userId = cookie.load('userId');
-		var self = this;
-		axios.get('/user/'+userId).then(function(res){
-			// console.log('resssss', res.data.userData);
-			//var data = res.data.userData[0];
-			//console.log('data',data);
-			self.setState({userData:res.data.userData[0]});
-			console.log('state',self.state.userData);
-		})
-	}
+	// componentDidMount() {
+	// 	var userId = cookie.load('userId');
+	// 	var self = this;
+	// 	axios.get('/user/'+userId).then(function(res){
+	// 		console.log('resssss', res.data.userData);
+	// 		var data = res.data.userData[0];
+	// 		console.log('data',data);
+	// 		self.setState({userData:res.data.userData[0]});
+	// 		console.log('state',self.state.userData);
+	// 	})
+	// }
 	
 
 
@@ -34,7 +34,6 @@ export default class UserBoard extends React.Component {
 			{/*{console.log('newdata',data)}*/}
 				<div>UserName: {this.state.userData.username} John Wick</div>
 				<div>ID Numer: {this.state.userData._id} 3457zt7b</div>
-
 				<div className="panel panel-default">
 					<div className="panel-heading">
 						<h3 className="panel-title">Your Best Times</h3>

@@ -23,8 +23,8 @@ export default function reducer(state={
             return {...state, selectedCell: action.payload}
         case 'NEW_PUZZLE':
             return {...state, 
-                initialPuzzle: gameGen.newBoard(), 
-                solution:gameGen.solution,
+                initialPuzzle: gameGen.printboard(gameGen.newBoard()), 
+                solution:gameGen.printboard(gameGen.solution),
                 wrongGuesses: 0
             }
         default:

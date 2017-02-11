@@ -1,6 +1,9 @@
 export default function reducer(state={
     createRoom: false,
-    joinRoom: []
+    joinRoom: [],
+    roomDetails: '',
+    joinRoomId: '',
+    opponentsGameBoard: []
 }, action) {
     switch(action.type) {
         case 'CREATE_ROOM':
@@ -17,6 +20,12 @@ export default function reducer(state={
                 roomData.push(data);
             })
             return {...state, joinRoom: roomData}
+         case 'ROOM_DETAILS':
+            return {...state, roomDetails: action.payload}
+        case 'JOIN_ROOM_ID':
+            return {...state, joinRoomId: action.payload}
+        case 'OPPONENTS_GAME_BOARD':
+            return {...state, opponentsGameBoard: action.payload}
         default:
             return state;
     }
