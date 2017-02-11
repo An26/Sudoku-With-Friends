@@ -1,14 +1,9 @@
 table {
   margin:1em auto;
 }
-
-/*.opponentBoard table{
-  margin: 1rem auto;
-}*/
-
 td{
-  width:40px;
   height:40px;
+  width:40px;
   border:1px solid;
   text-align:center;
 }
@@ -30,15 +25,9 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 .cell {
-  height:35px;
-  width:40px;
+  height:55px;
+  width:45px;
   text-align:center;
-}
-
-.mainGame td{
-  /*height: 40px;
-  width: 40px;
-  /*background: red;*/
 }
 
 .opponentBoard table {
