@@ -10,8 +10,6 @@ var interval;
    return {
      gameRunning: store.timeCount.gameRunning,
 	 timeInterval: store.timeCount.timeInterval,
-    //  initialPuzzle: store.gameLogic.initialPuzzle,
-	//  solution: store.gameLogic.solution,
    };
 })
 
@@ -33,11 +31,6 @@ export default class TimeInterval extends React.Component {
                 this.props.dispatch(gameRunning(false));
 			  }
 		}.bind(this), 1000);
-		// posting initial board and solution to the database
-        // axios.post('api/game', {initialBoard: this.props.initialPuzzle, solution:this.props.solution})
-        // .then(function(err, res) {
-        //     console.log(res);
-        // })
 	}
 
     componentWillUnmount() {

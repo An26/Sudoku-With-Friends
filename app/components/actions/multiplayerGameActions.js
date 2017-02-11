@@ -5,9 +5,9 @@ export function createRoom() {
     }
 }
 
-export function gameRoomData(roomData) {
+export function joinRoom(roomData) {
     return {
-        type: 'GAME_ROOM_DATA',
+        type: 'JOIN_ROOM',
         payload: roomData
     }
 }

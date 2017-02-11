@@ -62,7 +62,7 @@ io.on('connection', function(socket){
     // });
   // console.log('a user connected');
   socket.on('new-message', function(msg){
-    console.log(msg);
+    // console.log(msg);
     io.emit('receive-message', msg);
   })
 });
