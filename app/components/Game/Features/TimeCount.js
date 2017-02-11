@@ -51,13 +51,13 @@ export default class TimeInterval extends React.Component {
                 {!this.props.gameRunning ?
 				<div>
 					<h1>Please press start to start the game</h1>
-					<button id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
+					<button  className="btn btn-default" id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
 				</div>
 			    :
                 <div>
 					Time: {this.props.timeInterval}
                     <br />
-                    <button id="stopGame" onClick={this.stopGame.bind(this)}>Stop Game</button>
+                    <button  className="btn btn-default" id="stopGame" onClick={this.stopGame.bind(this)}>Stop Game</button>
                 </div>
                 }
             </div>

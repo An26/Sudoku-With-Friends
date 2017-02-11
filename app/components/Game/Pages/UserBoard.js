@@ -32,32 +32,27 @@ export default class UserBoard extends React.Component {
 		return (
 			<div className="userContent" style={userStyle}>
 			{/*{console.log('newdata',data)}*/}
-				<div>UserName: {this.state.userData.username} </div>
-				<div>ID Numer: {this.state.userData._id} </div>
+				<div>UserName: {this.state.userData.username} John Wick</div>
+				<div>ID Numer: {this.state.userData._id} 3457zt7b</div>
+
 				<div className="panel panel-default">
 					<div className="panel-heading">
-						<h3 className="panel-title"># of Games You've Played</h3>
+						<h3 className="panel-title">Your Best Times</h3>
 					</div>
 					<div className="panel-body">
-						# of games pulled dynamically from database
+						Game #1: 25:43:05
+					</div>
+					<div className="panel-body">
+						Game #2: 30:45:01
 					</div>
 				</div>
 
 				<div className="panel panel-default">
 					<div className="panel-heading">
-						<h3 className="panel-title">Your Times</h3>
+						<h3 className="panel-title">Games You've Won</h3>
 					</div>
 					<div className="panel-body">
-						Times of the games you won.
-					</div>
-				</div>
-
-				<div className="panel panel-default">
-					<div className="panel-heading">
-						<h3 className="panel-title"># of Games You've Won</h3>
-					</div>
-					<div className="panel-body">
-						# of wins pulled dynamically from database
+						3
 					</div>
 				</div>
 				<div className="panel panel-default">
@@ -65,26 +60,12 @@ export default class UserBoard extends React.Component {
 						<h3 className="panel-title">Player Stats</h3>
 					</div>
 					<div className="panel-body">
-						Average time of won games for level 1
+						Average Time: 30:02 min
 					</div>
 					<div className="panel-body">
-						Average time of won games for level 2
-					</div>
-					<div className="panel-body">
-						Average time of won games for level 3
-					</div>
-					<div className="panel-body">
-						Average time of won games for level 4
-					</div>
-					<div className="panel-body">
-						Average time of won games for  level 5
+						Number of Games: 4
 					</div>
 				</div>
-
-				<p>Your best game!</p>
-
-				<p>ranking with all the users in the database?? Chart here...</p>
-
 			</div>
 		)
 	}

@@ -45,7 +45,7 @@ export default class Chat extends React.Component {
                 
                 <form onSubmit = {this.handleSubmit.bind(this)} action="">
                     <input onChange={this.handleChange.bind(this)} id="m" autoComplete="off" placeholder="type a message" />
-                    <button>Send</button>
+                    <button  className="btn btn-default">Send</button>
                 </form>
             </div>
         )

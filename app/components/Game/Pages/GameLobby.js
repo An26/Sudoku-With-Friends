@@ -84,12 +84,12 @@ export default class GameLobby extends React.Component {
 					<div>Here is a list of open rooms to join!</div>
 					{/*the button should ONLY create rooms, when you go to game lobby, all the open rooms are already provided...*/}
 				{!this.props.createRoom ?
-				<button onClick={this.handleClick.bind(this)}>Create Game</button>
+				<button className="btn btn-default" onClick={this.handleClick.bind(this)}>Create Game</button>
 				:
 				<div>
 					<form onSubmit={this.getRoomName.bind(this)} >
 						<input id="roomName" type="text" placeholder="enter your room name" required/>
-						<button>Create Room</button>
+						<button  className="btn btn-default">Create Room</button>
 					</form>
 				</div>
 				}
@@ -108,7 +108,7 @@ export default class GameLobby extends React.Component {
 										{ ele.players === 2 ?
 										null
 										:
-										<button onClick={this.joinGameRoom.bind(this)} className="joinRoom" id={ele.id}>Join</button>
+										<button onClick={this.joinGameRoom.bind(this)} className="joinRoom btn btn-default" id={ele.id}>Join</button>
 										}
 
 									</div>
