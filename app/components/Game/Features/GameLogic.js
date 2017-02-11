@@ -74,7 +74,6 @@ export default class GameLogic extends React.Component {
 						onClick = {this.handleClick.bind(this)}
 						value={this.props.initialPuzzle[i] || ""} 
 						style={{background: this.getCellColor(i)}}
-						placeholder="_" 
 						className="cell"
 						type="integer" 
 						maxLength="1" 
@@ -114,7 +113,7 @@ export default class GameLogic extends React.Component {
     render() {
 		
         return (
-            <div>
+            <div className="mainGame">
                 {this.generateGame()}
 				Wrong Guesses : {this.props.wrongGuesses}
             </div>

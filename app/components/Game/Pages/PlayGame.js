@@ -25,7 +25,7 @@ export default class PlayGame extends React.Component {
 				<div>game level/difficulty here??</div>
 				
 				<div className="row">
-					<div className="col-md-5 col-sm-12 activeGame" style={divStyle}>
+					<div className="col-md-8 col-sm-12 activeGame" style={divStyle}>
 						<TimeInterval />
 							{this.props.gameRunning ?
 								<div>
@@ -37,9 +37,110 @@ export default class PlayGame extends React.Component {
 							}
 					</div>
 
-					<div className="col-md-5 col-sm-12 OpponentGame" style={divStyle}>
+					<div className="col-md-3 OpponentGame" style={divStyle}>
 						<div className="opponentName">Opponent Name</div>
-						<div className="opponentBoard">Opponent's game board</div>
+						<div className="opponentBoard"><table className="oppTable"><tbody>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							</tr>
+
+						</tbody></table></div>
 					</div>
 				</div>
 
