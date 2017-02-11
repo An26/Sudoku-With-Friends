@@ -2,7 +2,6 @@
 import React from 'react';
 import axios from 'axios';
 import cookie from 'react-cookie';
-var data = {};
 
 export default class UserBoard extends React.Component {
 
@@ -15,12 +14,11 @@ export default class UserBoard extends React.Component {
 		var self = this;
 		axios.get('/user/'+userId).then(function(res){
 			// console.log('resssss', res.data.userData);
-			data = res.data.userData[0];
-			// console.log('data',data);
-			self.setState({userData:data});
+			//var data = res.data.userData[0];
+			//console.log('data',data);
+			self.setState({userData:res.data.userData[0]});
+			console.log('state',self.state.userData);
 		})
-		
-		// console.log('state',self.state.userData);
 	}
 	
 
