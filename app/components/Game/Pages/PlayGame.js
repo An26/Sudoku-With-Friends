@@ -15,8 +15,8 @@ import GameInputBtn from './../Features/GameInputBtn';
 export default class PlayGame extends React.Component {
 	render() {
 		const divStyle = {
-			padding: '15px',
-			border: '3px black solid',
+			padding: '10px',
+			// border: '3px black solid',
 			margin: '10px'
 		}
 		return(

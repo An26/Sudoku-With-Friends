@@ -46,7 +46,7 @@ export default class GameLogic extends React.Component {
 
     getCellColor(i) {
 		if( this.props.initialPuzzle[i] === "" || this.props.initialPuzzle[i] === null ) {
-			return "grey";
+			return "white";
 		}
 		else if( this.props.gameRunning ) {
 			if(this.isGuessRight(i)) {
