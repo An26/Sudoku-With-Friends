@@ -8,7 +8,7 @@ import { browserHistory } from 'react-router';
 
 // import connect
 @connect((store) => {
-  console.log(store);
+  // console.log(store);
    return {
      logIn: store.logInStatus.loggedIn
    }; 
@@ -26,10 +26,10 @@ responseFacebook (response) {
         if(response) {
           axios.post('/user',response).then(function(err,res){
           if(err) throw err;
-          console.log('login info put in database!');  
+          // console.log('login info put in database!');  
           })
         } else {
-          console.log('not logged in!');
+          // console.log('not logged in!');
         }
   }
 

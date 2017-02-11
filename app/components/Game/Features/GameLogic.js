@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { initialPuzzle, selectedCell } from '../../actions/gameLogicActions.js';
 import gameGen from '../Js/gameGenerator';
+// import axios from 'axios';
 
 @connect((store) => {
    return {
@@ -9,7 +10,8 @@ import gameGen from '../Js/gameGenerator';
 	 solution: store.gameLogic.solution,
      selectedCell: store.gameLogic.selectedCell,
 	 wrongGuesses: store.gameLogic.wrongGuesses,
-	 gameRunning: store.timeCount.gameRunning
+	 gameRunning: store.timeCount.gameRunning,
+	 joinRoom: store.multiplayer.joinRoom
    };
 })
 
@@ -20,6 +22,7 @@ export default class GameLogic extends React.Component {
     }
 
     componentDidUpdate() {
+		console.log('1', this.props.joinRoom)
 		if(this.props.initialPuzzle.indexOf("")===-1) {
 			if(this.checkResult()) {
 				window.alert("You won!");
@@ -30,6 +33,7 @@ export default class GameLogic extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps) {
+		console.log('2', this.props.joinRoom)
 		if( this.props.selectedCell !== nextProps.selectedCell) {
 			return false;
 		}
@@ -37,10 +41,12 @@ export default class GameLogic extends React.Component {
 	}
 
     handleClick(event) {
+		console.log('3', this.props.joinRoom)
 	    this.props.dispatch(selectedCell(event.target.id));	
 	}
 
 	isGuessRight(cell) {
+		// axios.post('/api/game/:id/update', body)
 		return this.props.initialPuzzle[cell] === this.props.solution[cell];
 	}
 
@@ -58,6 +64,7 @@ export default class GameLogic extends React.Component {
 	}
 
     generateCells(rowNumber) {
+		
     	var rows = [];
     	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
     		if(gameGen.printboard(gameGen.puzzle)[i]==="" || gameGen.puzzle[i] === null) {
@@ -82,6 +89,7 @@ export default class GameLogic extends React.Component {
     }
 
 	generateGame() {
+		
     	var board=[];
     	for (var i = 0; i < 9; i++) {
     		board.push(<tr key={i}>
@@ -104,6 +112,7 @@ export default class GameLogic extends React.Component {
 	}
 
     render() {
+		
         return (
             <div>
                 {this.generateGame()}

@@ -1,14 +1,14 @@
 export default function reducer(state={
     createRoom: false,
-    gameRoomData: []
+    joinRoom: []
 }, action) {
     switch(action.type) {
         case 'CREATE_ROOM':
             return {...state, createRoom: action.payload}
-        case 'GAME_ROOM_DATA':
+        case 'JOIN_ROOM':
             let roomData = [];
             action.payload.forEach(function(ele) {
-                console.log('le', ele)
+                // console.log('le', ele)
                 let data = {
                     id: ele._id,
                     players: ele.players.length,
@@ -16,7 +16,7 @@ export default function reducer(state={
                 }
                 roomData.push(data);
             })
-            return {...state, gameRoomData: roomData}
+            return {...state, joinRoom: roomData}
         default:
             return state;
     }

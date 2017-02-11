@@ -1,4 +1,5 @@
 export function initialPuzzle(currentPuzzle) {
+    console.log('currentpuzzle', currentPuzzle);
     return{
         type: 'PUZZLE',
         payload: currentPuzzle
