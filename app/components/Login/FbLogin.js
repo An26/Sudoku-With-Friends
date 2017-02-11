@@ -54,6 +54,10 @@ onLogout() {
   }
 
   render () {
+    const fbBtn = {
+      borderRadius:'15px',
+      background: '#3B5998'
+    }
     return (
       <div>
             {!this.props.logIn ?
@@ -65,6 +69,7 @@ onLogout() {
                 xfbml={true}
                 version="v2.5"
                 class="facebook-login"
+                cssClass="my-facebook-button-class btn btn-default loginBtn"
                 buttonText="Login With Facebook"
             /> 
             :

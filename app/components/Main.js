@@ -25,7 +25,7 @@ export default class Main extends React.Component {
 
 	getNewLeftMargin() {
 		if (this.state.isTabOpen) {
-			return '400px';
+			return '310px';
 		} else {
 			return '100px';
 		}

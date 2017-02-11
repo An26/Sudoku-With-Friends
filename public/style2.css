@@ -183,3 +183,10 @@ button {
     float: left;
 
 }
+
+.my-facebook-button-class {
+        /*border-radius: 15px;*/
+        color: white;
+        background: #3B5998;
+}
+
