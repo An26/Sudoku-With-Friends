@@ -10,7 +10,7 @@ export default class Header extends React.Component {
 		const isLoggedIn = cookie.load('username');
         const headerStyle = {  
         }
-		console.log("username: "+ cookie.load('username'));
+		// console.log("username: "+ cookie.load('username'));
 
         return (
             <div className="mainHeaderDiv" style={headerStyle}>

@@ -11,7 +11,7 @@ export default class Main extends React.Component {
 		}
 	}
 	toggleBtn() {
-		console.log("state: " + this.state.isTabOpen)
+		// console.log("state: " + this.state.isTabOpen)
 		this.setState({isTabOpen: !this.state.isTabOpen})
 	}
 
@@ -34,7 +34,7 @@ export default class Main extends React.Component {
 	render () {
 		let tabs;
 		const isLoggedIn = cookie.load('username');
-		console.log("username: "+ cookie.load('username'));	
+		// console.log("username: "+ cookie.load('username'));	
 
 		var btnImg = this.state.isTabOpen ? "./images/cross.png" : "./images/menu.png";
 

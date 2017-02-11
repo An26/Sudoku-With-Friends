@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { createRoom, gameRoomData } from '../../actions/multiplayerGameActions';
+import { createRoom, joinRoom } from '../../actions/multiplayerGameActions';
 import cookie from 'react-cookie';
 import axios from 'axios';
 
@@ -13,7 +13,7 @@ import axios from 'axios';
 	 	solution: store.gameLogic.solution,
 		gameRunning: store.timeCount.gameRunning,
 		logIn: store.logInStatus.loggedIn,
-		gameRoomData: store.multiplayer.gameRoomData
+		joinRoom: store.multiplayer.joinRoom
 	}
 })
 export default class GameLobby extends React.Component {
@@ -31,12 +31,12 @@ export default class GameLobby extends React.Component {
 		let self = this;
 		let roomData = []
 		axios.get('/api/game').then(function(res) {
-			self.props.dispatch(gameRoomData(res.data))
+			// console.log(res);
+			self.props.dispatch(joinRoom(res.data))
 		})
 	}
 
 	postGameDetails(room) {	
-		console.log('login', this.props.logIn)	
 		if(this.props.logIn) {		
 			axios.post('/api/game', 
 			{
@@ -46,7 +46,7 @@ export default class GameLobby extends React.Component {
 				username : cookie.load('username')				
 			}).then((err, res)=> {
 				if(err) throw err;
-				console.log(res);			
+				// console.log(res);			
 			})
 		}
 	}
@@ -55,9 +55,19 @@ export default class GameLobby extends React.Component {
 	getRoomName(event) {
 		event.preventDefault();
 		let room = document.getElementById('roomName').value;
+		// create room text box validation
+		if(room === "") {
+			return "this s a required field";
+		} 
 		this.postGameDetails(room);
 		browserHistory.push('/playGame');
 	}	
+
+	joinGameRoom() {
+		browserHistory.push('/playGame');
+		
+	}
+
 
 	render (){
 		return (
@@ -69,23 +79,22 @@ export default class GameLobby extends React.Component {
 				:
 				<div>
 					<form onSubmit={this.getRoomName.bind(this)} >
-						<input id="roomName" type="text" placeholder="enter your room name" />
+						<input id="roomName" type="text" placeholder="enter your room name" required/>
 						<button>Create Room</button>
 					</form>
 				</div>
 				}
 				<div>	
-					{this.props.gameRoomData.map((ele, i)=>{
+					{this.props.joinRoom.map((ele, i)=>{
 						return (
 						<div key={i}>
-							{console.log('ele', ele)}
-							{/*<p>id: {ele.id}</p>*/}
+							{/*<p>Roomid: {ele.id}</p>*/}
 							<p>Room Name: {ele.roomName}</p>
 							<p>players: {ele.players}</p>
 							{ ele.players === 2 ?
 							null
 							:
-							<button>Join</button>
+							<button onClick={this.joinGameRoom.bind(this)} className="joinRoom" id={ele.id}>Join</button>
 							}
 						</div>
 						)

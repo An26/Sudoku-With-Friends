@@ -29,6 +29,7 @@ exports.get = (req,res) => {
 
 
 exports.update = (req, res) => {
+    // gameId is a roomId
     const gameId = req.params.id;
     const player = req.body.player;
     const gameBoard = req.body.gameBoard;
