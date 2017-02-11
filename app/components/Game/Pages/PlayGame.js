@@ -78,7 +78,7 @@ export default class PlayGame extends React.Component {
 					</div>
 					<div className="col-md-3 OpponentGame" style={divStyle}>
 						{/*{this.props.opponentsGameBoard}*/}
-						<div className="opponentName">Opponent Game:</div>
+						<div className="opponentName">Opponent Game: </div>
 						{this.generateGame()}
 						
 					</div>
