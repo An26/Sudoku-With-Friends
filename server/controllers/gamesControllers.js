@@ -20,7 +20,8 @@ exports.get = (req,res) => {
 
     Game.findOne({_id: gameId}).exec( (err, data) => {
         if(data) {
-            res.json(data);
+            // console.log(data);
+            res.send(data);
         } else {
             res.status(404).json({message: 'not found'});
         }
@@ -32,7 +33,9 @@ exports.update = (req, res) => {
     // gameId is a roomId
     const gameId = req.params.id;
     const player = req.body.player;
-    const gameBoard = req.body.gameBoard;
+    const gameBoard = (req.body.gameBoard).toString();
+    const value = (req.body.value).toString();
+    console.log(gameId, player, gameBoard, value);
 
     // check for required variables
     if( !player || !gameBoard ) {
@@ -47,12 +50,19 @@ exports.update = (req, res) => {
              return;
          }
 
+        // if( game.players[0].playerName === player ) {
+        //     var cellUpdate = game.players[0].gameBoard;
+            
+        //     game.cellUpdate = value
+        
+        // }
+
         // I don't like this but it's quick and dirty
-        if( game.players[0].playerId === player ) {
-            game.players[0].gameBoard = gameBoard;
-        } else if ( game.players[1].playerId === player ) {
-            game.players[1].gameBoard = gameBoard;
-        } else {
+        if( game.players[0].playerName === player ) {
+            game.players[0].gameBoard.gameBoard = value
+        } else if ( game.players[1].playerName === player ) {
+            game.players[1].gameBoard.gameBoard = value;
+        }  else {
             res.status(404).json({ status: 'error', message: 'player not found' });
             return
         }
@@ -74,21 +84,25 @@ exports.create = (req,res) => {
     const initialBoard = req.body.initialBoard;
     const solution = req.body.solution;
     const player = req.body.username;
-
     const newGame = new Game({
         initialBoard: initialBoard,
         solution: solution,
         userRoomName: room
     });
-    newGame.players.push({ gameBoard: initialBoard });
 
+    newGame.players.push({ gameBoard: initialBoard, playerName: player });
+    
     newGame.save( (err, game) => {
         if(err) {
             res.status('500').json({ status: 'error', message: 'Cannot save new game.'});
         } else {
-            res.json({status: 'ok'});
+
+            Game.find({'userRoomName': room}).then(function(correctRoom) {
+            res.json({'id': correctRoom[0]._id});    
+        })
+            
         }
-    });
+    })
 };
 
 
@@ -124,7 +138,8 @@ exports.join = (req, res) => {
                 res.status(500).json({ status: 'error', message: 'problem joining game'});
                 return;
              }
-            res.json({status: 'ok'});
+            // res.send({'status': 'ok'});
          });
+         res.send({status: 'ok'});
      });
 };

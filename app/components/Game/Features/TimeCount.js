@@ -20,7 +20,8 @@ export default class TimeInterval extends React.Component {
 
 	startGame(event) {
         event.preventDefault();
-        this.props.dispatch(gameRunning(true));		
+        this.props.dispatch(gameRunning(true));	
+        	
 		interval = setInterval(function() {
 			if(this.props.gameRunning) {
 				this.props.dispatch(gameRunning(true));

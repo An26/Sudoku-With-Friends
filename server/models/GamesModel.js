@@ -9,6 +9,7 @@ const Player = new Schema({
     gameBoard: {
         type: Array,
     },
+    playerName: String,
 });
 
 //const Players = mongoose.model('Player', PlayersSchema);

@@ -22,7 +22,50 @@ module.exports = {
         return out;
     },
     newBoard: function() {
-        this.puzzle = sudoku.makepuzzle();
+    //     var newPuzz = []
+    //     var puzzle = sudoku.makepuzzle();
+    //     for(var i=0; i<puzzle.length; i++) {
+    //         if(puzzle[i] === 0) {
+    //             newPuzz.push(9);
+    //             // console.log(puzzle);
+    //         } else {
+    //             newPuzz.push(puzzle[i])
+    //         }
+    //     }
+        
+    //     this.puzzle = newPuzz;
+    //     // this.puzzle = sudoku.makepuzzle();
+    //     var newSol = []
+    //     var solution = sudoku.solvepuzzle(this.puzzle);
+    //     for(var i=0; i<solution.length; i++) {
+    //         if(solution[i] === 0) {
+    //             newSol.push(9);
+    //             // console.log(puzzle);
+    //         }
+    //         else {
+    //             newSol.push(solution[i]);
+    //         }
+    //     }
+
+    //     this.solution = newSol;
+    //     // this.solution = sudoku.solvepuzzle(this.puzzle);
+    //     this.data = {
+    //         puzzle: this.puzzle,
+    //         solution: this.solution
+    //     };
+    //     return this.puzzle;
+    // },
+
+    // printcode: printcode,
+    // puzzle     : puzzle,
+    // solution   : solution,
+    // difficulty : sudoku.ratepuzzle(puzzle, 4),
+    // data       : {puzzle:puzzle, solution:solution},
+    // copyBoard  : []
+
+
+
+    this.puzzle = sudoku.makepuzzle();
         this.solution = sudoku.solvepuzzle(this.puzzle);
         this.data = {
             puzzle: this.puzzle,

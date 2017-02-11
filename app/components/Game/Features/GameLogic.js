@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { initialPuzzle, selectedCell } from '../../actions/gameLogicActions.js';
 import gameGen from '../Js/gameGenerator';
-// import axios from 'axios';
+import cookie from 'react-cookie';
+import axios from 'axios';
 
 @connect((store) => {
    return {
@@ -11,7 +12,8 @@ import gameGen from '../Js/gameGenerator';
      selectedCell: store.gameLogic.selectedCell,
 	 wrongGuesses: store.gameLogic.wrongGuesses,
 	 gameRunning: store.timeCount.gameRunning,
-	 joinRoom: store.multiplayer.joinRoom
+	 roomId: store.multiplayer.roomDetails,
+	 joinRoomId: store.multiplayer.joinRoomId
    };
 })
 
@@ -22,7 +24,6 @@ export default class GameLogic extends React.Component {
     }
 
     componentDidUpdate() {
-		console.log('1', this.props.joinRoom)
 		if(this.props.initialPuzzle.indexOf("")===-1) {
 			if(this.checkResult()) {
 				window.alert("You won!");
@@ -33,7 +34,6 @@ export default class GameLogic extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps) {
-		console.log('2', this.props.joinRoom)
 		if( this.props.selectedCell !== nextProps.selectedCell) {
 			return false;
 		}
@@ -41,18 +41,30 @@ export default class GameLogic extends React.Component {
 	}
 
     handleClick(event) {
-		console.log('3', this.props.joinRoom)
 	    this.props.dispatch(selectedCell(event.target.id));	
 	}
 
 	isGuessRight(cell) {
-		// axios.post('/api/game/:id/update', body)
-		return this.props.initialPuzzle[cell] === this.props.solution[cell];
+		let currentRoomId = this.props.roomId || this.props.joinRoomId
+		if(this.props.initialPuzzle[cell] === this.props.solution[cell]) {
+			// console.log('value',this.props.initialPuzzle[cell]);
+			axios.put('/api/game/'+ currentRoomId +'/update', 
+			{
+				'player': cookie.load('username'), 
+				'gameBoard': cell,
+				 'value': this.props.solution[cell]
+			});
+			return true;
+		} else {
+			return false;
+		}
+	
+		// return this.props.initialPuzzle[cell] === this.props.solution[cell]
 	}
 
     getCellColor(i) {
 		if( this.props.initialPuzzle[i] === "" || this.props.initialPuzzle[i] === null ) {
-			return "white";
+			return "gray";
 		}
 		else if( this.props.gameRunning ) {
 			if(this.isGuessRight(i)) {
@@ -63,8 +75,7 @@ export default class GameLogic extends React.Component {
 		} 
 	}
 
-    generateCells(rowNumber) {
-		
+    generateCells(rowNumber) {		
     	var rows = [];
     	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
     		if(gameGen.printboard(gameGen.puzzle)[i]==="" || gameGen.puzzle[i] === null) {

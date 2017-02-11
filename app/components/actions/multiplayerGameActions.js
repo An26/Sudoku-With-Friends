@@ -11,3 +11,24 @@ export function joinRoom(roomData) {
         payload: roomData
     }
 }
+
+export function roomDetails(id) {
+    return {
+        type: 'ROOM_DETAILS',
+        payload: id
+    }
+}
+
+export function joinRoomId(id) {
+    return {
+        type: 'JOIN_ROOM_ID',
+        payload: id
+    }
+}
+
+export function opponentsGameBoard(gameBoard) {
+    return {
+        type: 'OPPONENTS_GAME_BOARD',
+        payload: gameBoard
+    }
+}
