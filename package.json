@@ -5,7 +5,7 @@
   "main": "./public/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "node node_modules/webpack/bin/webpack.js",
     "start": "node server",
     "dev": "webpack -w && nodemon server.js"
   },
