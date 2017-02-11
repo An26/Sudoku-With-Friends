@@ -19,10 +19,10 @@ export default class PlayGame extends React.Component {
 			super(context, props);
 		}
 	
-	 /*generateCells(rowNumber) {		
+	 generateCells(rowNumber) {		
     	var rows = [];
     	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
-    		if(this.props.opponentsGameBoard==="" || this.props.opponentsGameBoard === null) {
+    		if(this.props.opponentsGameBoard[i]==="" || this.props.opponentsGameBoard[i] === null) {
     			rows.push(
 					<td key={i}>
 					<input id={i}
@@ -34,7 +34,7 @@ export default class PlayGame extends React.Component {
 						max="9"/>
 					</td>)
     		} else {
-    		rows.push(<td key={i} id={i}>{this.props.opponentsGameBoard}</td>)
+    		rows.push(<td key={i} id={i}>{this.props.opponentsGameBoard[i]}</td>)
     		}
     	}
     	return rows;
@@ -49,7 +49,7 @@ export default class PlayGame extends React.Component {
     		</tr>);
     	}
     	return board;
-    }*/
+    }
 
 
 
@@ -61,9 +61,9 @@ export default class PlayGame extends React.Component {
 		}
 		return(
 			<div className="mainContainer">
-				<p>This is the place where users actually play sudoku with a friend</p>
+				{/*<p>This is the place where users actually play sudoku with a friend</p>
 				<div>game level/difficulty here??</div>
-				
+				*/}
 				<div className="row">
 					<div className="col-md-8 col-sm-12 activeGame" style={divStyle}>
 						<TimeInterval />
@@ -77,111 +77,10 @@ export default class PlayGame extends React.Component {
 							}
 					</div>
 					<div className="col-md-3 OpponentGame" style={divStyle}>
-						{this.props.opponentsGameBoard}
-						{/*{this.generateGame()}*/}
+						{/*{this.props.opponentsGameBoard}*/}
+						{this.generateGame()}
 						<div className="opponentName">Opponent Name</div>
-						<div className="opponentBoard"><table className="oppTable"><tbody>
-							<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-							<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-							<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-							<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-							<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-							<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-							<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-							<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-							<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							</tr>
-
-						</tbody></table></div>
+						
 					</div>
 				</div>
 

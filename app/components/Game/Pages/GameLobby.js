@@ -69,9 +69,9 @@ export default class GameLobby extends React.Component {
 		browserHistory.push('/playGame');
 	}	
 
-	joinGameRoom() {
+	joinGameRoom( evt ) {
 		let self = this;
-		let id = document.querySelector('.joinRoom').value
+		let id = evt.target.value;
 		this.props.dispatch(joinRoomId(id));
 		axios.put('/api/game/'+ id +'/join', {player: (cookie.load('username'))})
 		.then(function(res){
