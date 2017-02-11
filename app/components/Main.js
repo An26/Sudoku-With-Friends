@@ -36,7 +36,7 @@ export default class Main extends React.Component {
 		const isLoggedIn = cookie.load('username');
 		// console.log("username: "+ cookie.load('username'));	
 
-		var btnImg = this.state.isTabOpen ? "./images/cross.png" : "./images/menu.png";
+		var btnImg = this.state.isTabOpen ? "./images/cross.png" : "./images/menu.svg";
 
 		if (isLoggedIn) {
 			tabs = 	<div>

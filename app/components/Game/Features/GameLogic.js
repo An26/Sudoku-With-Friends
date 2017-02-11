@@ -56,9 +56,9 @@ export default class GameLogic extends React.Component {
 		}
 		else if( this.props.gameRunning ) {
 			if(this.isGuessRight(i)) {
-				return 'yellow';
+				return '#D6EB99';
 			} else {
-				return 'red';
+				return 'white';
 			}
 		} 
 	}
