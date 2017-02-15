@@ -2,73 +2,85 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+// import gameGen from '../Js/gameGenerator';
 import { createRoom, joinRoom, roomDetails, joinRoomId, opponentsGameBoard } from '../../actions/multiplayerGameActions';
 import cookie from 'react-cookie';
 var Promise = require("bluebird");
 import axios from 'axios';
+import Game from '../Game';
+import { gameType } from '../../actions/gameTypeActions';
 
 @connect((store)=> {
 	return {
-		createRoom: store.multiplayer.createRoom,
-		initialPuzzle: store.gameLogic.initialPuzzle,
+		// createRoom: store.multiplayer.createRoom,
+		playerBoard: store.gameLogic.playerBoard,
 	 	solution: store.gameLogic.solution,
-		gameRunning: store.timeCount.gameRunning,
 		logIn: store.logInStatus.loggedIn,
 		joinRoom: store.multiplayer.joinRoom,
-		roomId: store.multiplayer.roomDetails,
-	 	joinRoomId: store.multiplayer.joinRoomId
+		roomDetails: store.multiplayer.roomDetails,
+	 	joinRoomId: store.multiplayer.joinRoomId,
+		gameType: store.gameType.gameType
 	}
 })
 export default class GameLobby extends React.Component {
 	constructor(props,context) {
 		super(props, context);
+		this.state = {
+			message: "",
+		}
 }
 
-	handleClick(event) {
-		event.preventDefault();
-		this.props.dispatch(createRoom());
-		this.userData();	
-	}
-
-	userData() {
-		let self = this;
-		let roomData = []
-		axios.get('/api/game').then(function(res) {
-			// console.log(res);
-			self.props.dispatch(joinRoom(res.data))
-		})
-	}
-
+// create your own room starts here
+// user created the room by entering room name which gets posted to the database where we check
+// if the room already exist then user gets a  message back else room gets created and user is 
+// redirected to the new page
 	postGameDetails(room) {	
+		let self = this;
+
 		if(this.props.logIn) {		
 			axios.post('/api/game', 
 			{
 				roomName: room, 
-				initialBoard: this.props.initialPuzzle,
+				initialBoard: this.props.playerBoard,
 				solution: this.props.solution,
 				username : cookie.load('username')				
-			}).then((res)=> {	
-				// console.log(res.data.id);
-				this.props.dispatch(roomDetails(res.data.id))
-				// console.log('id', this.props.roomId);			
+			}).then((res)=> {
+				if(res.data.status === 'failure') {
+					self.setState({message: "Room Name Already Exist"});
+					return false;
+				} else {
+					self.props.dispatch(roomDetails({'id': res.data.id, 'roomLength': res.data.roomLength}))		
+					browserHistory.push('/playGame/'+ res.data.id);
+				}
 			}).catch(function(err){
 				console.log(err)
 			})
 		}
 	}
 
-		
+// getting the input value when user types room name
 	getRoomName(event) {
 		event.preventDefault();
 		let room = document.getElementById('roomName').value;
-		// create room text box validation
 		if(room === "") {
-			return "this s a required field";
+			return false;
 		} 
 		this.postGameDetails(room);
-		browserHistory.push('/playGame');
+		
 	}	
 
+// end of create your own room
+
+// join a room starts here
+// getting the data from an ajax call with all the room available and sending it to a reducer`
+	componentDidMount() {
+		var self = this;
+		axios.get('/api/game').then(function(res) {
+			self.props.dispatch(joinRoom(res.data))
+		})
+	}
+	
+// getting the join room id which is attached with join room button for each room
 	joinGameRoom( evt ) {
 		let self = this;
 		let id = evt.target.value;
@@ -77,8 +89,7 @@ export default class GameLobby extends React.Component {
 		.then(function(res){
 			const status = res.data;
 			if(res.data.status === "ok") {
-				self.getOpponentBoard(id)
-				browserHistory.push('/playGame');
+				browserHistory.push('/playGame/' + id);
 			} else {
 				console.log('room is not available');
 			}
@@ -87,19 +98,11 @@ export default class GameLobby extends React.Component {
 		})		
 	}
 
-	getOpponentBoard(id) {
-		let self = this;
-		axios.get('/api/game/' + id)
-		.then(function(response) {
-			const data = response.data
-			data.players.forEach((ele) => {
-				if(ele.playerName === cookie.load('username')){
-					self.props.dispatch(opponentsGameBoard( ele.gameBoard))
-				}
-			})
-		}).catch((err)=>{
-			if(err)throw err;
-		})
+// checking if the game is multiplayer and single player game. if the game is multiplayer
+//then display rooms available and the option to create your own room. else display start button to start 
+//the game
+	isMultiPlayer(event) {
+		this.props.dispatch(gameType(event.target.value))
 	}
 
 
@@ -109,54 +112,58 @@ export default class GameLobby extends React.Component {
 			width: '20rem',
 			margin: '10px',
 			display: 'inline-block',
-
 		}
-
 		return (
 			<div>
 				<h1>Game Lobby</h1>
-					<div>Here is a list of open rooms to join!</div>
-					{/*the button should ONLY create rooms, when you go to game lobby, all the open rooms are already provided...*/}
-				{!this.props.createRoom ?
-				<button className="btn btn-default" onClick={this.handleClick.bind(this)}>Create Game</button>
-				:
-				<div>
-					<form onSubmit={this.getRoomName.bind(this)} >
-						<input id="roomName" type="text" placeholder="enter your room name" required/>
-						<button  className="btn btn-default">Create Room</button>
-					</form>
-				</div>
-				}
-				<div className="room">	
-					{this.props.joinRoom.map((ele, i)=>{
-						return (
-						<div className="holdRooms">
-							<div key={i}>
-								{/*<p>Roomid: {ele.id}</p>*/}
-
-								<div className="roomCard" style={cardStyle}>
-									<div className="card-block">
-										<h4 className="card-title"> {ele.roomName} Room</h4>
-										<img className="card-img-top" src="./images/table.svg" alt="Card image cap" />
-										<p className="card-text">{ele.players} player is waiting</p>
-										{ ele.players === 2 ?
-										null
-										:
-											<button onClick={this.joinGameRoom.bind(this)} value={ele.id} className="joinRoom">Join</button>
-										}
-
-									</div>
-								</div>	
-
-								{/*<p>Room Name: {ele.roomName}</p>
-								<p>players: {ele.players}</p>*/}
-
-							</div> 
-						</div>
-						)
-					})}		
-				</div>
+				<hr />
 				
+				<h2>Select Single Player or Multiplayer</h2>
+					<form>
+						<input type="radio" name="chooseone" value ="single" onChange={this.isMultiPlayer.bind(this)} checked={this.props.gameType==="single"} />Single Player
+						<input type="radio" name="chooseone" value ="multi" onChange={this.isMultiPlayer.bind(this)} checked={this.props.gameType==="multi"} />Multi-Player
+					</form>
+				<hr />
+				{this.props.gameType === "single" ?
+					<Game />
+				:	
+				<div>
+					<h3>Create Your Own Room!</h3>
+					<div>
+						<form onSubmit={this.getRoomName.bind(this)} >
+							{this.state.message !== "" ?
+								<p style={{color: "red"}}>{this.state.message}</p>
+							:
+							null
+							}
+							<div>
+								<input id="roomName" type="text" placeholder="enter your room name" required/>
+								<button  className="btn btn-default">Create Room</button>
+							</div>
+						</form>
+					</div>
+					<hr />
+
+					<h3>Here is a list of open rooms to join!</h3>
+						{this.props.joinRoom.map((ele, i)=>{
+							return (
+								<div key={i}> 
+									{ele.players < 2 ?				
+										<div className="holdRooms roomCard card-block" style={cardStyle}>	
+											<h4 className="card-title"> {ele.roomName} Room</h4>
+											{/*<h4>Difficulty Level: {gameGen.difficulty}</h4>*/}
+											<img className="card-img-top" src="./images/table.svg" alt="Card image cap" />
+											<p className="card-text">{ele.players} player is waiting</p>
+											<button onClick={this.joinGameRoom.bind(this)} value={ele.id} className="joinRoom">Join</button>	
+										</div>
+									:
+									null	
+									}
+								</div>
+							)
+						})}	
+						</div>	
+					}
 			</div>
 		)
 	}

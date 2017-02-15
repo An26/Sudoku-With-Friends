@@ -15,7 +15,7 @@ module.exports = (
     <Route path="/" component={Main}>
     	<Route path="gameLobby" component={GameLobby} />
 			<Route path="signUp" component={SignUp} />
-    	<Route path="playGame" component={PlayGame} />
+    	<Route path="playGame/:id" component={PlayGame} />
     	<Route path="userBoard" component={UserBoard} />
     	<Route path="game" component={Game} />
     	<IndexRoute component={Login} />

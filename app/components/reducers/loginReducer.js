@@ -1,5 +1,7 @@
+import cookie from 'react-cookie';
+
 export default function reducer(state={
-    loggedIn: false
+    loggedIn: !!cookie.load('username')
 }, action) {
     switch(action.type) {
         case 'LOG_IN':           

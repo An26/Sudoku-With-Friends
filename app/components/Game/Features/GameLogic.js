@@ -1,19 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { initialPuzzle, selectedCell } from '../../actions/gameLogicActions.js';
+import { playerBoard, selectedCell, playerBoardUpdate } from '../../actions/gameLogicActions.js';
 import gameGen from '../Js/gameGenerator';
 import cookie from 'react-cookie';
 import axios from 'axios';
 
 @connect((store) => {
    return {
-     initialPuzzle: store.gameLogic.initialPuzzle,
+     playerBoard: store.gameLogic.playerBoard,
 	 solution: store.gameLogic.solution,
      selectedCell: store.gameLogic.selectedCell,
 	 wrongGuesses: store.gameLogic.wrongGuesses,
 	 gameRunning: store.timeCount.gameRunning,
 	 roomId: store.multiplayer.roomDetails,
-	 joinRoomId: store.multiplayer.joinRoomId
+	 joinRoomId: store.multiplayer.joinRoomId,
+	 playersGameBoard: store.multiplayer.playersGameBoard,
+	 playerBoardUpdate: store.gameLogic.playerBoardUpdate,
    };
 })
 
@@ -23,8 +25,23 @@ export default class GameLogic extends React.Component {
         this.getCellColor = this.getCellColor.bind(this);
     }
 
+	componentDidMount() {
+		this.getBoard();
+		// console.log('player', this.props.playerBoard); 
+	}
+
+	getBoard(){
+		let userName = cookie.load('username').toLowerCase();
+		this.props.playersGameBoard.forEach((ele)=>{
+			 if(ele.playerName === userName) {
+				this.props.dispatch(playerBoard(ele.gameBoard))
+			}
+		})
+	}
+
+
     componentDidUpdate() {
-		if(this.props.initialPuzzle.indexOf("")===-1) {
+		if(this.props.playerBoard.indexOf("")===-1) {
 			if(this.checkResult()) {
 				window.alert("You won!");
 			} else {
@@ -45,9 +62,11 @@ export default class GameLogic extends React.Component {
 	}
 
 	isGuessRight(cell) {
+		// console.log('i m right');
+		// console.log('check', this.props.playerBoard[cell] === this.props.solution[cell]	)
 		let currentRoomId = this.props.roomId || this.props.joinRoomId
-		if(this.props.initialPuzzle[cell] === this.props.solution[cell]) {
-			// console.log('value',this.props.initialPuzzle[cell]);
+		if(this.props.playerBoard[cell] === this.props.solution[cell]) {
+			console.log('value',this.props.playerBoard[cell]);
 			axios.put('/api/game/'+ currentRoomId +'/update', 
 			{
 				'player': cookie.load('username'), 
@@ -59,15 +78,16 @@ export default class GameLogic extends React.Component {
 			return false;
 		}
 	
-		// return this.props.initialPuzzle[cell] === this.props.solution[cell]
+		// return this.props.playerBoard[cell] === this.props.solution[cell]
 	}
 
     getCellColor(i) {
-		if( this.props.initialPuzzle[i] === "" || this.props.initialPuzzle[i] === null ) {
+		if( this.props.playerBoard[i] === "" || this.props.playerBoard[i] === null ) {
 			return "gray";
 		}
 		else if( this.props.gameRunning ) {
 			if(this.isGuessRight(i)) {
+				console.log('true', i);
 				return '#D6EB99';
 			} else {
 				return 'white';
@@ -75,15 +95,15 @@ export default class GameLogic extends React.Component {
 		} 
 	}
 
-    generateCells(rowNumber) {		
+    generateCells(rowNumber) {	
     	var rows = [];
     	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
-    		if(gameGen.printboard(gameGen.puzzle)[i]==="" || gameGen.puzzle[i] === null) {
+    		if(this.props.playerBoard[i]==="" || this.props.playerBoard === null) {
     			rows.push(
 					<td key={i}>
 					<input id={i}
 						onClick = {this.handleClick.bind(this)}
-						value={this.props.initialPuzzle[i] || ""} 
+						value={this.props.playerBoard[i] || ""} 
 						style={{background: this.getCellColor(i)}}
 						className="cell"
 						type="integer" 
@@ -92,14 +112,13 @@ export default class GameLogic extends React.Component {
 						max="9"/>
 					</td>)
     		} else {
-    		rows.push(<td key={i} id={i}>{this.props.initialPuzzle[i]}</td>)
+    		rows.push(<td key={i} id={i}>{this.props.playerBoard[i]}</td>)
     		}
     	}
     	return rows;
     }
 
 	generateGame() {
-		
     	var board=[];
     	for (var i = 0; i < 9; i++) {
     		board.push(<tr key={i}>
@@ -112,9 +131,10 @@ export default class GameLogic extends React.Component {
     	return board;
     }
 
+
     checkResult() {
-    	for (var i = 0; i < this.props.initialPuzzle.length; i++) {
-				if(this.props.initialPuzzle[i]!= this.props.solution[i]) {
+    	for (var i = 0; i < this.props.playerBoard.length; i++) {
+				if(this.props.playerBoard[i]!= this.props.solution[i]) {
 						return false;
 				}
     	}
@@ -122,12 +142,21 @@ export default class GameLogic extends React.Component {
 	}
 
     render() {
-		
-        return (
-            <div className="mainGame">
-                {this.generateGame()}
+        return (	
+			<div>
+				{this.props.gameRunning ? 
+				<span>
 				Wrong Guesses : {this.props.wrongGuesses}
-            </div>
+				<table>
+            		<tbody className="mainGame">
+					{this.generateGame()}
+            	</tbody>
+				</table>
+				</span>
+				:
+				null
+				}
+			</div>
         )
     }
 }

@@ -1,17 +1,16 @@
 export default function reducer(state={
-    createRoom: false,
+    // createRoom: false,
     joinRoom: [],
-    roomDetails: '',
+    roomDetails: {},
     joinRoomId: '',
-    opponentsGameBoard: []
+    playersGameBoard: []
 }, action) {
     switch(action.type) {
-        case 'CREATE_ROOM':
-            return {...state, createRoom: action.payload}
+        // case 'CREATE_ROOM':
+        //     return {...state, createRoom: action.payload}
         case 'JOIN_ROOM':
             let roomData = [];
             action.payload.forEach(function(ele) {
-                // console.log('le', ele)
                 let data = {
                     id: ele._id,
                     players: ele.players.length,
@@ -21,11 +20,17 @@ export default function reducer(state={
             })
             return {...state, joinRoom: roomData}
          case 'ROOM_DETAILS':
-            return {...state, roomDetails: action.payload}
+            let details = {
+                id: action.payload.id,
+                roomLength: action.payload.roomLength
+            }
+            // console.log(details);
+            return {...state, roomDetails: details}
         case 'JOIN_ROOM_ID':
             return {...state, joinRoomId: action.payload}
-        case 'OPPONENTS_GAME_BOARD':
-            return {...state, opponentsGameBoard: action.payload}
+        case 'PLAYERS_GAME_BOARD':
+            // console.log('playersdata', action.payload.players);
+            return {...state, playersGameBoard: action.payload.players}
         default:
             return state;
     }

@@ -1,7 +1,14 @@
-export function initialPuzzle(currentPuzzle) {
+export function playerBoard(currentPuzzle) {
     return{
-        type: 'PUZZLE',
+        type: 'PLAYER_BOARD',
         payload: currentPuzzle
+    }
+}
+
+export function playerBoardUpdate(updateValue) {
+    return{
+        type: 'UPDATE_BOARD',
+        payload: updateValue
     }
 }
 
@@ -15,5 +22,12 @@ export function selectedCell(selectedCell) {
 export function newPuzzle(selectedCell) {
     return{
         type: 'NEW_PUZZLE'
+    }
+}
+
+export function opponentBoard(puzzle) {
+    return{
+        type: 'OPPONENT_BOARD',
+        payload: puzzle
     }
 }

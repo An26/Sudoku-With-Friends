@@ -12,4 +12,5 @@ module.exports = (app) => {
     app.post('/api/game', games.create);
     app.put('/api/game/:id/join', games.join);
     app.put('/api/game/:id/update', games.update);
+    app.delete('/api/game/:id/delete', games.delete);
 };

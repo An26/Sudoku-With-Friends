@@ -1,3 +1,5 @@
+// single player game
+
 import React from 'react';
 import GameInputBtn from './Features/GameInputBtn';
 import TimeInterval from './Features/TimeCount';
@@ -21,10 +23,12 @@ export default class Game extends React.Component {
 		<div>
 			<TimeInterval />
 			{this.props.gameRunning ?
-				<div>
-					<GameLogic />
-					<GameInputBtn />
-				</div>
+				<table>
+					<tbody>
+						<GameLogic />
+						<GameInputBtn />
+					</tbody>
+				</table>
 			:
 			null
 			}

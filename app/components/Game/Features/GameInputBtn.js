@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { initialPuzzle, solution, selectedCell } from '../../actions/gameLogicActions.js';
+import { playerBoardUpdate, selectedCell } from '../../actions/gameLogicActions.js';
 
 @connect((store)=>{
 	return {
-     initialPuzzle: store.gameLogic.initialPuzzle,
-	 solution: store.gameLogic.solution,
+     playerBoardUpdate: store.gameLogic.playerBoardUpdate,
+	//  solution: store.gameLogic.solution,
      selectedCell: store.gameLogic.selectedCell
    };
 })
@@ -17,10 +17,14 @@ export default class GameInputBtn extends React.Component {
 
     handleInputBtn(event) {
         let newValue = event.target.value;
-		this.props.dispatch(initialPuzzle({
+		this.props.dispatch(playerBoardUpdate({
 			cell: this.props.selectedCell,
 			value: newValue
-		}));
+		}))
+		// this.props.dispatch(playerBoard({
+			// cell: this.props.selectedCell,
+			// value: newValue
+		// }));
 	}
     
     

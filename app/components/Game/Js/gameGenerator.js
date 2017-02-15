@@ -3,7 +3,6 @@ import sudoku from 'sudoku';
 
 var puzzle = sudoku.makepuzzle();
 var solution = sudoku.solvepuzzle(puzzle);
-console.log('old puzzle', puzzle);
 var printcode = function(n) {
         if (n == null) {
             return '';
@@ -24,7 +23,6 @@ module.exports = {
     },
     newBoard: function() {
     this.puzzle = sudoku.makepuzzle();
-    console.log( 'puzzle', this.puzzle);
         this.solution = sudoku.solvepuzzle(this.puzzle);
         this.data = {
             puzzle: this.puzzle,

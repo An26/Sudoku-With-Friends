@@ -1,9 +1,9 @@
-export function createRoom() {
-    return {
-        type: 'CREATE_ROOM',
-        payload: true
-    }
-}
+// export function createRoom() {
+//     return {
+//         type: 'CREATE_ROOM',
+//         payload: true
+//     }
+// }
 
 export function joinRoom(roomData) {
     return {
@@ -26,9 +26,9 @@ export function joinRoomId(id) {
     }
 }
 
-export function opponentsGameBoard(gameBoard) {
+export function playersGameBoard(gameBoard) {
     return {
-        type: 'OPPONENTS_GAME_BOARD',
+        type: 'PLAYERS_GAME_BOARD',
         payload: gameBoard
     }
 }
