@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-import { createRoom, joinRoom, roomDetails, joinRoomId, opponentsGameBoard } from '../../actions/multiplayerGameActions';
+import { createRoom, joinRoom } from '../../actions/multiplayerGameActions';
 import cookie from 'react-cookie';
-var Promise = require("bluebird");
 import axios from 'axios';
 
 @connect((store)=> {
@@ -14,9 +13,7 @@ import axios from 'axios';
 	 	solution: store.gameLogic.solution,
 		gameRunning: store.timeCount.gameRunning,
 		logIn: store.logInStatus.loggedIn,
-		joinRoom: store.multiplayer.joinRoom,
-		roomId: store.multiplayer.roomDetails,
-	 	joinRoomId: store.multiplayer.joinRoomId
+		joinRoom: store.multiplayer.joinRoom
 	}
 })
 export default class GameLobby extends React.Component {
@@ -47,12 +44,9 @@ export default class GameLobby extends React.Component {
 				initialBoard: this.props.initialPuzzle,
 				solution: this.props.solution,
 				username : cookie.load('username')				
-			}).then((res)=> {	
-				// console.log(res.data.id);
-				this.props.dispatch(roomDetails(res.data.id))
-				// console.log('id', this.props.roomId);			
-			}).catch(function(err){
-				console.log(err)
+			}).then((err, res)=> {
+				if(err) throw err;
+				// console.log(res);			
 			})
 		}
 	}
@@ -69,37 +63,9 @@ export default class GameLobby extends React.Component {
 		browserHistory.push('/playGame');
 	}	
 
-	joinGameRoom( evt ) {
-		let self = this;
-		let id = evt.target.value;
-		this.props.dispatch(joinRoomId(id));
-		axios.put('/api/game/'+ id +'/join', {player: (cookie.load('username'))})
-		.then(function(res){
-			const status = res.data;
-			if(res.data.status === "ok") {
-				self.getOpponentBoard(id)
-				browserHistory.push('/playGame');
-			} else {
-				console.log('room is not available');
-			}
-		}).catch((err) => {
-			if(err)throw err;
-		})		
-	}
-
-	getOpponentBoard(id) {
-		let self = this;
-		axios.get('/api/game/' + id)
-		.then(function(response) {
-			const data = response.data
-			data.players.forEach((ele) => {
-				if(ele.playerName === cookie.load('username')){
-					self.props.dispatch(opponentsGameBoard( ele.gameBoard))
-				}
-			})
-		}).catch((err)=>{
-			if(err)throw err;
-		})
+	joinGameRoom() {
+		browserHistory.push('/playGame');
+		
 	}
 
 
@@ -118,12 +84,12 @@ export default class GameLobby extends React.Component {
 					<div>Here is a list of open rooms to join!</div>
 					{/*the button should ONLY create rooms, when you go to game lobby, all the open rooms are already provided...*/}
 				{!this.props.createRoom ?
-				<button className="btn btn-default" onClick={this.handleClick.bind(this)}>Create Game</button>
+				<button onClick={this.handleClick.bind(this)}>Create Game</button>
 				:
 				<div>
 					<form onSubmit={this.getRoomName.bind(this)} >
 						<input id="roomName" type="text" placeholder="enter your room name" required/>
-						<button  className="btn btn-default">Create Room</button>
+						<button>Create Room</button>
 					</form>
 				</div>
 				}
@@ -140,9 +106,9 @@ export default class GameLobby extends React.Component {
 										<img className="card-img-top" src="./images/table.svg" alt="Card image cap" />
 										<p className="card-text">{ele.players} player is waiting</p>
 										{ ele.players === 2 ?
-											<p>Room is Full</p>
+										<p>Room is full</p>
 										:
-											<button onClick={this.joinGameRoom.bind(this)} value={ele.id} className="joinRoom">Join</button>
+										<button onClick={this.joinGameRoom.bind(this)} className="joinRoom" id={ele.id}>Join</button>
 										}
 
 									</div>

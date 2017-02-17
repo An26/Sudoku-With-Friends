@@ -56,7 +56,6 @@ export default class Main extends React.Component {
 						 <br />
 						<Link to="/game">Play Sudoku</Link>
 					</div>;
-
 		}
 
 

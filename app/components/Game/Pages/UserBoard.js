@@ -28,12 +28,21 @@ export default class UserBoard extends React.Component {
 			border: '3px #282828 solid',
 			padding: '15px',
 			backgroundColor: '#fff'
-		}
+		};
+
+		const username = cookie.load('username');
+		console.log(username);
+
+		// if (username) {
+		// 	name = <p>{cookie.load('username')}</p>
+		// } else { 
+		// 	name = <p>{this.state.userData.username}</p>
+		// }
+
 		return (
 			<div className="userContent" style={userStyle}>
 			{/*{console.log('newdata',data)}*/}
-				<div>UserName: {this.state.userData.username} John Wick</div>
-				<div>ID Numer: {this.state.userData._id} 3457zt7b</div>
+				<div>User: {username ? cookie.load('username') : this.state.userData.username} </div>
 				<div className="panel panel-default">
 					<div className="panel-heading">
 						<h3 className="panel-title">Your Best Times</h3>

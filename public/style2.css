@@ -19,11 +19,12 @@ body {
     background-color: #282828;
     overflow-x: hidden;
     transition: 0.3s;
-    padding-top: 60px;
+    /*padding-top: 3%;*/
+    /*color: green;*/
 }
 
 .mySidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 5% 5% 0% 5%;
     /*text-decoration: none;*/
     font-size: 25px;
     color: #818181;
@@ -93,11 +94,11 @@ body {
         background-color: #282828;
         overflow-x: hidden;
         transition: 0.3s;
-        padding-top: 60px;
+        /*padding-top: 60px;*/
     }
 
     .mySidenav a {
-        padding: 8px 8px 8px 32px;
+        padding: 5% 5% 0% 5%;
         /*text-decoration: none;*/
         font-size: 25px;
         color: #818181;
@@ -127,7 +128,7 @@ body {
     background-color: #CF9E00;
     /*overflow-x: hidden;*/
     /*transition: 0.5s;*/
-    padding-top: 60px;
+    padding-top: 5%;
 }
 
 }

@@ -22,7 +22,7 @@ export default class Login extends React.Component {
 					<div className="row">
 						<div className="col-md-6">
 						<h1 style={loginOp}>Login to play with a friend</h1>
-						<form action="" method="POST">
+						<form action="/login" method="POST">
 								<div className="" style={loginOp}>
 									<input type="email" name='email' className='form-control' placeholder="email@someplace.com" />
 								</div>
