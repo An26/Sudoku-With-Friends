@@ -55,7 +55,7 @@ export default function reducer(state={
             }
         case 'PLAYERS_GAME_BOARD':
             // console.log('playersdata', action.payload.players);
-            return {...state, playersGameBoard: action.payload.players, solutionGameBoard: action.payload.solution}
+            return {...state, playersGameBoard: action.payload.players, solution: action.payload.solution}
         default:
             return state;
     }
