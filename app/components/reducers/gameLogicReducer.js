@@ -3,9 +3,10 @@ import gameGen from '../Game/Js/gameGenerator';
 export default function reducer(state={
     playerBoard: gameGen.printboard(gameGen.puzzle),
     opponentBoard: [],
-    solution: gameGen.printboard(gameGen.solution),
+    solution: [],
     selectedCell:'',
-    wrongGuesses: 0
+    wrongGuesses: 0,
+    playersGameBoard: [],
 }, action) {
     switch(action.type) {
         case 'PLAYER_BOARD':
@@ -52,6 +53,9 @@ export default function reducer(state={
                 solution:gameGen.printboard(gameGen.solution),
                 wrongGuesses: 0
             }
+        case 'PLAYERS_GAME_BOARD':
+            // console.log('playersdata', action.payload.players);
+            return {...state, playersGameBoard: action.payload.players, solution: action.payload.solution}
         default:
             return state;
     }

@@ -5,7 +5,7 @@ import GameLogic from './../Features/GameLogic';
 import { connect } from 'react-redux';
 import cookie from 'react-cookie';
 import { gameRunning, gameStop } from '../../actions/timeCountActions';
-import { playersGameBoard } from '../../actions/multiplayerGameActions';
+import { playersGameBoard } from '../../actions/gameLogicActions';
 import { opponentBoard } from '../../actions/gameLogicActions.js';
 import GameInputBtn from './../Features/GameInputBtn';
 import { roomDetails } from '../../actions/multiplayerGameActions';
@@ -34,11 +34,11 @@ export default class PlayGame extends React.Component {
 		axios.get('/api/game/' + this.props.params.id)
 		.then(function(response) {
 			self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			
-			self.getPlayerBoard(response);
+			self.setPlayerBoard(response);
 		})
 	}	
 
-	getPlayerBoard(response) {
+	setPlayerBoard(response) {
 				const data = response.data
 				this.props.dispatch(playersGameBoard(data));
 				this.getBoard();

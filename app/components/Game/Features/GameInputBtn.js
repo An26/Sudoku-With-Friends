@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { playerBoardUpdate, selectedCell } from '../../actions/gameLogicActions.js';
+import { playerBoardUpdate, selectedCell, opponentBoard } from '../../actions/gameLogicActions.js';
 
 @connect((store)=>{
 	return {
-     playerBoardUpdate: store.gameLogic.playerBoardUpdate,
-	//  solution: store.gameLogic.solution,
-     selectedCell: store.gameLogic.selectedCell
+		playerBoardUpdate: store.gameLogic.playerBoardUpdate,
+		roomId: store.multiplayer.roomDetails,
+		playerBoard: store.gameLogic.playerBoard,
+		solution: store.gameLogic.solution,
+		selectedCell: store.gameLogic.selectedCell,
+		joinRoomId: store.multiplayer.joinRoomId,
    };
 })
 
@@ -21,6 +24,16 @@ export default class GameInputBtn extends React.Component {
 			cell: this.props.selectedCell,
 			value: newValue
 		}))
+			if (this.props.playerBoard[this.props.selectedCell] === this.props.solution[this.props.selectedCell]) {
+				var gameId = this.props.roomId || this.props.joinRoomId;
+				axios.put(`/api/game/${gameId}`, {
+					'player': cookie.load('username'),
+					'cell': this.props.selectedCell,
+					'value': this.props.solution[this.props.selectedCell]
+				}).then((response) => {
+					this.props.dispatch(opponentsBoard(response.opponentBoard));
+				})
+			}
 		// this.props.dispatch(playerBoard({
 			// cell: this.props.selectedCell,
 			// value: newValue

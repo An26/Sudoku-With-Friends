@@ -34,7 +34,7 @@ export default class GameLogic extends React.Component {
         let userName = cookie.load('username').toLowerCase();
         this.props.playersGameBoard.forEach((ele)=>{
              if(ele.playerName === userName) {
-                this.props.dispatch(playerBoard(ele.gameBoard))
+                this.props.dispatch(playerBoard({playerBoard: ele.gameBoard, solution: this.props.playersGameBoard.solution}))
             }
         })
     }

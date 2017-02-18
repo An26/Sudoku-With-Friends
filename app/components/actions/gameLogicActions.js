@@ -31,3 +31,10 @@ export function opponentBoard(puzzle) {
         payload: puzzle
     }
 }
+
+export function playersGameBoard(gameBoard) {
+    return {
+        type: 'PLAYERS_GAME_BOARD',
+        payload: gameBoard
+    }
+}
