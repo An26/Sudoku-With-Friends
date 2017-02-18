@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 // import gameGen from '../Js/gameGenerator';
-import { createRoom, joinRoom, roomDetails, joinRoomId, opponentsGameBoard } from '../../actions/multiplayerGameActions';
+import { createRoom, setRooms, opponentsGameBoard } from '../../actions/multiplayerGameActions';
 import cookie from 'react-cookie';
 var Promise = require("bluebird");
 import axios from 'axios';
@@ -16,9 +16,7 @@ import { gameType } from '../../actions/gameTypeActions';
 		playerBoard: store.gameLogic.playerBoard,
 	 	solution: store.gameLogic.solution,
 		logIn: store.logInStatus.loggedIn,
-		joinRoom: store.multiplayer.joinRoom,
-		roomDetails: store.multiplayer.roomDetails,
-	 	joinRoomId: store.multiplayer.joinRoomId,
+		availableRooms: store.multiplayer.availableRooms,
 		gameType: store.gameType.gameType
 	}
 })
@@ -49,7 +47,6 @@ export default class GameLobby extends React.Component {
 					self.setState({message: "Room Name Already Exist"});
 					return false;
 				} else {
-					self.props.dispatch(roomDetails({'id': res.data.id, 'roomLength': res.data.roomLength}))		
 					browserHistory.push('/playGame/'+ res.data.id);
 				}
 			}).catch(function(err){
@@ -58,15 +55,22 @@ export default class GameLobby extends React.Component {
 		}
 	}
 
+	handleCreateSubmit(event) {
+		event.preventDefault();
+		var room = this.getRoomName(event);
+		if (room) {
+			this.postGameDetails(room)
+		}
+	}
+
 // getting the input value when user types room name
 	getRoomName(event) {
-		event.preventDefault();
 		let room = document.getElementById('roomName').value;
 		if(room === "") {
 			return false;
-		} 
-		this.postGameDetails(room);
-		
+		} else {
+			return room;
+		}
 	}	
 
 // end of create your own room
@@ -76,7 +80,7 @@ export default class GameLobby extends React.Component {
 	componentDidMount() {
 		var self = this;
 		axios.get('/api/game').then(function(res) {
-			self.props.dispatch(joinRoom(res.data))
+			self.props.dispatch(setRooms(res.data))
 		})
 	}
 	
@@ -84,7 +88,6 @@ export default class GameLobby extends React.Component {
 	joinGameRoom( evt ) {
 		let self = this;
 		let id = evt.target.value;
-		this.props.dispatch(joinRoomId(id));
 		axios.put('/api/game/'+ id +'/join', {player: (cookie.load('username'))})
 		.then(function(res){
 			const status = res.data;
@@ -130,7 +133,7 @@ export default class GameLobby extends React.Component {
 				<div>
 					<h3>Create Your Own Room!</h3>
 					<div>
-						<form onSubmit={this.getRoomName.bind(this)} >
+						<form onSubmit={this.handleCreateSubmit.bind(this)} >
 							{this.state.message !== "" ?
 								<p style={{color: "red"}}>{this.state.message}</p>
 							:
@@ -145,7 +148,7 @@ export default class GameLobby extends React.Component {
 					<hr />
 
 					<h3>Here is a list of open rooms to join!</h3>
-						{this.props.joinRoom.map((ele, i)=>{
+						{this.props.availableRooms.map((ele, i)=>{
 							return (
 								<div key={i}> 
 									{ele.players < 2 ?				

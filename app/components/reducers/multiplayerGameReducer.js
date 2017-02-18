@@ -1,14 +1,14 @@
 export default function reducer(state={
     // createRoom: false,
-    joinRoom: [],
+    availableRooms: [],
     roomDetails: {},
     joinRoomId: '',
-    playersGameBoard: []
+    solutionGameBoard: [],
 }, action) {
     switch(action.type) {
         // case 'CREATE_ROOM':
         //     return {...state, createRoom: action.payload}
-        case 'JOIN_ROOM':
+        case 'SET_ROOMS':
             let roomData = [];
             action.payload.forEach(function(ele) {
                 let data = {
@@ -18,7 +18,7 @@ export default function reducer(state={
                 }
                 roomData.push(data);
             })
-            return {...state, joinRoom: roomData}
+            return {...state, availableRooms: roomData}
          case 'ROOM_DETAILS':
             let details = {
                 id: action.payload.id,
@@ -28,9 +28,6 @@ export default function reducer(state={
             return {...state, roomDetails: details}
         case 'JOIN_ROOM_ID':
             return {...state, joinRoomId: action.payload}
-        case 'PLAYERS_GAME_BOARD':
-            // console.log('playersdata', action.payload.players);
-            return {...state, playersGameBoard: action.payload.players}
         default:
             return state;
     }

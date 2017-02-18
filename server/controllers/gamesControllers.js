@@ -33,7 +33,7 @@ exports.update = (req, res) => {
     // gameId is a roomId
     const gameId = req.params.id;
     const player = req.body.player.toLowerCase();
-    const gameBoard = (req.body.gameBoard).toString();
+    const cell = (req.body.cell).toString();
     const value = (req.body.value).toString();
     console.log(gameId, player, gameBoard, value);
 
@@ -50,18 +50,14 @@ exports.update = (req, res) => {
              return;
          }
 
-        // if( game.players[0].playerName === player ) {
-        //     var cellUpdate = game.players[0].gameBoard;
-            
-        //     game.cellUpdate = value
-        
-        // }
-
+         var opponentBoard;
         // I don't like this but it's quick and dirty
         if( game.players[0].playerName === player ) {
-            game.players[0].gameBoard.gameBoard = value
+            game.players[0].gameBoard[cell] = value
+            opponentBoard = game.players[1].gameBoard;
         } else if ( game.players[1].playerName === player ) {
-            game.players[1].gameBoard.gameBoard = value;
+            game.players[1].gameBoard.cell = value;
+            opponentBoard = game.players[0].gameBoard;
         }  else {
             res.status(404).json({ status: 'error', message: 'player not found' });
             return
@@ -73,7 +69,7 @@ exports.update = (req, res) => {
                 res.status(500).json({ status: 'error', message: 'problem saving gameBoard'});
                 return;
             }
-            res.json({status: 'ok'});
+            res.json({status: 'ok', opponentBoard: opponentBoard});
         });
     });
 };
