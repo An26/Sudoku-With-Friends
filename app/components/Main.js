@@ -61,32 +61,24 @@ export default class Main extends React.Component {
 		if (this.state.isTabOpen) {
 			const moveLeftAndDown = {
 				marginLeft: '310px',
-				// width: 'auto',
-				// height: 'auto',
-				// margin: 'auto',
 				// --------------media query------------
 				'@media (max-width: 650px)':{
 					marginLeft: 'auto',
 					marginTop: '450px',
 					width: '100%',
-					height: 'auto',
-					// margin: 'auto'
+					height: 'auto'
 				}
 			}
 			return moveLeftAndDown;
 		} else {
 			const marginRightAndUp = {
 				marginLeft: '100px',
-				// width: 'auto',
-				// height: 'auto',
-				// margin: 'auto',
 				// --------------media query------------
 				'@media (max-width: 650px)':{
 					marginLeft: 'auto',
 					marginTop:'50px',
 					width: '100%',
-					height: 'auto',
-					// margin: 'auto'
+					height: 'auto'
 				}
 			}
 			return marginRightAndUp;
@@ -96,9 +88,7 @@ export default class Main extends React.Component {
 	render () {
 
 		let tabs;
-		const isLoggedIn = cookie.load('username');
-		// console.log("username: "+ cookie.load('username'));	
-
+		const isLoggedIn = cookie.load('username');	
 		const btnImg = this.state.isTabOpen ? "./images/cross.png" : "./images/menu.svg";
 
 		const openSideBar = {
@@ -118,11 +108,7 @@ export default class Main extends React.Component {
 				// zIndex: '1',
 				top: '0',
 				left: '0',
-				padding: '2.5%',
-				// backgroundColor: 'transparent', 
-				// ':hover': {
-				// 	backgroundColor: '#CF9E00'
-				// 	}
+				padding: '2.5%'
 				}
 		};
 
