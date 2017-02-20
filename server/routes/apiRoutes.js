@@ -10,7 +10,7 @@ module.exports = (app) => {
 
     app.get('/api/game', games.list);
     app.get('/api/game/:id', games.get);
-    app.get('/api/opponent/:id/:username', games.getOpponent);
+    app.get('/api/opponent/:gameId/:userId', games.getOpponent);
     app.post('/api/game', games.create);
     app.put('/api/game/:id/join', games.join);
     app.put('/api/game/:id', games.update);

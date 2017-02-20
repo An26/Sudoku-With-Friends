@@ -11,7 +11,6 @@ import { gameType } from '../../actions/gameTypeActions';
 
 @connect((store)=> {
 	return {
-		// createRoom: store.multiplayer.createRoom,
 		playerBoard: store.gameLogic.playerBoard,
 	 	solution: store.gameLogic.solution,
 		logIn: store.logInStatus.loggedIn,
@@ -39,7 +38,8 @@ export default class GameLobby extends React.Component {
 				roomName: room, 
 				initialBoard: this.props.playerBoard,
 				solution: this.props.solution,
-				username : cookie.load('username')				
+				username : cookie.load('username'),
+				userId : cookie.load('userId')			
 			}).then((res)=> {
 				if(res.data.status === 'failure') {
 					self.setState({message: "Room Name Already Exist"});
@@ -87,7 +87,7 @@ export default class GameLobby extends React.Component {
 	joinGameRoom( evt ) {
 		let self = this;
 		let id = evt.target.value;
-		axios.put('/api/game/'+ id +'/join', {player: (cookie.load('username'))})
+		axios.put('/api/game/'+ id +'/join', {playerName: cookie.load('username'), playerId: cookie.load('userId')})
 		.then(function(res){
 			const status = res.data;
 			if(res.data.status === "ok") {

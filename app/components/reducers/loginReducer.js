@@ -11,7 +11,7 @@ export default function reducer(state={
             return {...state, loggedIn:action.payload }
         case 'USER_LOGIN_DETAILS':
             let username = action.payload.name;
-            let userId = action.payload._id || action.payload.FBId;
+            let userId = action.payload._id;
             let email = action.payload.email 
             cookie.save('username', username);
             cookie.save('userId', userId);

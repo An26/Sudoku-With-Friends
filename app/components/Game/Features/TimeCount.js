@@ -22,10 +22,6 @@ export default class TimeInterval extends React.Component {
 		super(props, context);
     }
 
-    // componentDidMount(){
-    //     console.log(this.props.gameType)
-    // }
-
 	startGame(event) {
         event.preventDefault();
         this.props.dispatch(gameRunning(true));	
@@ -53,14 +49,9 @@ export default class TimeInterval extends React.Component {
             if(this.props.gameType === "single") {
                 this.props.dispatch(newPuzzle());
             }
-            
-            // browserHistory.push('/gameLobby');
-            // return true;
     }
 
-    // pause() {
-        // make an ajax call and store the current state of the game in the database. on resume display that state
-    // }
+
 
 /* @!gameRunning -->
     single player -> display start button,

@@ -42,30 +42,16 @@ export default function reducer(state={
             }
         case 'SET_MULTIPLAYER_GAME':
         // console.log(action.payload)
-            var playerName = cookie.load('username').toLowerCase();
+            var playerId = cookie.load('userId').toLowerCase();
             var player, opponent;
             // since we are checkint by player name and player name can be same, has to do it this way
-            if(action.payload.players[0].playerName === playerName) {
-                player = action.payload.players[0] 
-            } else {
-                player =  action.payload.players[1]
-            }
-            if(player = action.payload.players[0]) {
+            if(action.payload.players[0].playerId === playerId) {
+                player = action.payload.players[0]
                 opponent = action.payload.players[1]
             } else {
+                player =  action.payload.players[1]
                 opponent = action.payload.players[0]
-          }
-
-            // action.payload.players.forEach(function (possiblePlayer) {
-            //     if (possiblePlayer.playerName === playerName) {
-            //         console.log(player)
-            //         player = possiblePlayer;
-            //     } else if(player !== undefined && player.playerName === possiblePlayer.playerName){
-            //         opponent = possiblePlayer;
-            //     }
-            // })
-            // console.log(player)
-            // console.log(opponent)
+            }
             return {...state, 
                 playerBoard: player.gameBoard,
                 opponentBoard: opponent ? opponent.gameBoard : [],

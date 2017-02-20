@@ -30,17 +30,18 @@ exports.get = (req,res) => {
 
 
 exports.getOpponent = (req, res) => {
-    const gameId = req.params.id;
-    var player = req.params.username;
+    const gameId = req.params.gameId;
+    var playerId = req.params.userId;
     var playerBoard;
     var opponentBoard;
     // console.log( 'player', player);
     Game.findOne({_id: gameId}, 'players' ).exec( (err, data) => {
-       if(data.players[0].playerName.toLowerCase() === player.toLowerCase()) {
+
+       if(data.players[0].playerId.toString() === playerId) {
            playerBoard = data.players[0].gameBoard;
            opponentBoard = data.players[1] ? data.players[1].gameBoard : [];
        }
-       else if(data.players[1].playerName.toLowerCase() === player.toLowerCase()){
+       else if(data.players[1].playerId.toString() === playerId){
            playerBoard = data.players[1].gameBoard;
            opponentBoard = data.players[0].gameBoard;
        } else {
@@ -54,13 +55,14 @@ exports.getOpponent = (req, res) => {
 exports.update = (req, res) => {
     // gameId is a roomId
     const gameId = req.params.id;
-    const player = req.body.player.toLowerCase();
+    const playerId = req.body.playerId;
     const cell = req.body.cell.toString();
     const value = req.body.value.toString();
+    let opponentBoard, playerBoard;
     // console.log('iiii', gameId, player, cell, value);
 
     // check for required variables
-    if( !player || !cell ) {
+    if( !playerId || !cell ) {
         res.status(404).json({ status: 'error', message: 'required variable missing' });
         return;
     }
@@ -74,59 +76,20 @@ exports.update = (req, res) => {
          var opponentBoard;
          var playerBoard;
         // I don't like this but it's quick and dirty
-        if( game.players[0].playerName === player ) {
-            // console.log('playerboard')
-            var mainplayer = game.players[0].gameBoard
-                for (var i = 0; i <= mainplayer.length; i++) {
-                    // console.log('cell', cell)
-                    // console.log('i', i, i == cell)
-                    if(i == cell) {
-                        // console.log('truthy')
-                        //  console.log('222', player1[cell] = value)
-                       mainplayer[cell] = value
-                    }
-                }
-                playerboard = game.players[0];
-                playerboard.gameBoard = mainplayer;
-                opponentBoard = game.players[1];
 
-            game.update({$set:{players:[playerboard,opponentBoard]}},function(err,res){
-                if (err) throw err;
-                console.log("updated mainplayer!");
-            })
-          
-            
-            // console.log('gammy1', game);
-        } else if ( game.players[1].playerName === player ) {
-            // console.log('opponentboard')
-            var opponentPlayer = game.players[1].gameBoard
-            for (var i = 0; i <= opponentPlayer.length; i++) {
-                // console.log('333', opponentPlayer[i] === value)
-               if(i == cell) {
-                    //  console.log('222', opponent[cell] = value)
-                //    console.log('gammy2', game);
-                   opponentPlayer[cell] = value
-                 }
-            }
-                playerboard = game.players[1];
-                playerboard.gameBoard = opponentPlayer;
-                opponentBoard = game.players[0];
-
-             game.update({$set:{players:[playerboard,opponentBoard]}},function(err,res){
-                if (err) throw err;
-                console.log("updated opponentplayer!");
-            })
-            // return playerBoard
+        if( game.players[0].playerId.toString() === playerId ) {
+            game.players[0].gameBoard.set(cell, value);
+            playerBoard = game.players[0].gameBoard;
+            opponentBoard = game.players[1].gameBoard;
+        } else if ( game.players[1].playerId.toString() === playerId ) {
+            game.players[1].gameBoard.set(cell, value);
+            playerBoard = game.players[1].gameBoard;
+            opponentBoard = game.players[0].gameBoard;
         }  else {
             res.status(404).json({ status: 'error', message: 'player not found' });
             return
         }
-            //  console.log('truthy', opponentPlayer)
-            // console.log('falsy', playerBoard)
-        // do the save
         game.save( (err, game) => {
-            // console.log('game2', game.players[0].gameBoard)
-            // console.log('game2', game.players[1].gameBoard)
             if( err ) {
                 res.status(500).json({ status: 'error', message: 'problem saving gameBoard'});
                 return;
@@ -141,7 +104,8 @@ exports.create = (req,res) => {
     const room = req.body.roomName.toLowerCase();
     const initialBoard = req.body.initialBoard;
     const solution = req.body.solution;
-    const player = req.body.username;
+    const playerName = req.body.username;
+    const playerId = req.body.userId;
     
     const newGame = new Game({
         initialBoard: initialBoard,
@@ -149,7 +113,7 @@ exports.create = (req,res) => {
         userRoomName: room
     });
 
-    newGame.players.push({ gameBoard: initialBoard, playerName: player });
+    newGame.players.push({ gameBoard: initialBoard, playerName: playerName, playerId: playerId });
     
     Game.find({userRoomName: room}, function(err, response) {
         if(response[0]) {
@@ -174,12 +138,14 @@ exports.create = (req,res) => {
 
 exports.join = (req, res) => {
     const gameId = req.params.id;
-    const player = req.body.player.toLowerCase();
+    const playerName = req.body.playerName;
+    const playerId = req.body.playerId;
+
 // console.log('det', player);
 
     // players is required
-    if( !player ) {
-        res.status(400).json({ status: 'error', message: 'player variable is required' });
+    if( !playerId ) {
+        res.status(400).json({ status: 'error', message: 'playerId variable is required' });
         return;
     }
 
@@ -196,7 +162,7 @@ exports.join = (req, res) => {
              return;
          }
 
-         game.players.push({ gameBoard: game.initialBoard, playerName: player });
+         game.players.push({ gameBoard: game.initialBoard, playerName: playerName, playerId: playerId });
 
          game.save( (err, game) => {
              if( err ) {

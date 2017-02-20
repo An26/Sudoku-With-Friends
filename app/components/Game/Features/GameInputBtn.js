@@ -34,7 +34,7 @@ export default class GameInputBtn extends React.Component {
 
 	componentDidMount(){
 		if(this.props.gameType === 'multi') {
-			opponentBoardInterval = setInterval(this.opponentBoardUpdates.bind(this), 30000)
+			opponentBoardInterval = setInterval(this.opponentBoardUpdates.bind(this), 20000)
 		}
 		
 	}
@@ -42,18 +42,13 @@ export default class GameInputBtn extends React.Component {
 	componentDidUpdate() {
 		console.log(this.props.opponentBoard)
 		var self = this;
-			if (self.props.playerBoard[self.props.selectedCell] === self.props.solution[self.props.selectedCell] 
+			if (self.props.selectedCell && (self.props.playerBoard[self.props.selectedCell] === self.props.solution[self.props.selectedCell]) 
 				&& this.props.gameType === 'multi') {
 					var gameId = self.props.roomDetails.id || self.props.joinRoomId;
 					axios.put(`/api/game/${gameId}`, {
-						'player': cookie.load('username'),
+						'playerId': cookie.load('userId'),
 						'cell': self.props.selectedCell,
 						'value': self.props.solution[self.props.selectedCell]
-					}).then((response) => {
-						if(response.status === "ok") {
-							self.props.dispatch(opponentBoard(response.data.opponentBoard));
-						}
-						
 					})
 				}
 	}
@@ -62,7 +57,7 @@ export default class GameInputBtn extends React.Component {
 		var self = this;
 		var gameId = this.props.roomDetails.id || this.props.joinRoomId || false;
 		if( gameId && this.props.opponentBoard.length) {
-			axios.get(`/api/opponent/${gameId}/${cookie.load('username')}`)
+			axios.get(`/api/opponent/${gameId}/${cookie.load('userId')}`)
 			.then((response) => {
 				if(opponentBoard && response) {
 				self.props.dispatch(opponentBoard(response.data.opponentBoard));
@@ -74,7 +69,6 @@ export default class GameInputBtn extends React.Component {
 	}
 
 	componentWillUnmount() {
-		// clear above interval
 		clearInterval(opponentBoardInterval);
 	}
     

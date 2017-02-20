@@ -43,19 +43,15 @@ componentDidMount() {
     
 }
 
-onLogin(fbData) {
-    // cookie.save('mongoId', fbData._id);
-    // cookie.save('userId', fbData.FBId);
-    // cookie.save('username', fbData.name);
-    this.props.dispatch(logIn(fbData.name));
-    this.props.dispatch(userLoginDetails(fbData));
+onLogin(userData) {
+    this.props.dispatch(logIn(userData.name));
+    this.props.dispatch(userLoginDetails(userData));
     browserHistory.push('/userBoard');
     
   }
 
 onLogout() {
     cookie.remove('userId');
-    cookie.save('mongoId');
     cookie.remove('username');
     this.props.dispatch(logOut());
     browserHistory.push('/');

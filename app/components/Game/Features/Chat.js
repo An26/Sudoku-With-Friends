@@ -7,7 +7,7 @@ export default class Chat extends React.Component {
         this.state = {
             newMessage: {},
             messages: [],
-            socket: window.io('http://localhost:3000'),
+            socket: window.io(),
             user: cookie.load('username')
         }
     }

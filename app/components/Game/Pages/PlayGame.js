@@ -8,16 +8,14 @@ import { connect } from 'react-redux';
 import cookie from 'react-cookie';
 import { gameRunning, gameStop } from '../../actions/timeCountActions';
 import { setMultiplayerGame } from '../../actions/gameLogicActions';
-// import { opponentBoard } from '../../actions/gameLogicActions.js';
 import GameInputBtn from './../Features/GameInputBtn';
 import { roomDetails } from '../../actions/multiplayerGameActions';
 import axios from 'axios';
-// import gameGen from '../Js/gameGenerator';
+var numberOfPlayers;
 
 @connect((store) => {
 	return {
 		gameRunning: store.timeCount.gameRunning,
-		// roomDetails: store.multiplayer.roomDetails,
 		opponentBoard: store.gameLogic.opponentBoard,
 		playerBoard: store.gameLogic.playerBoard,
 	 	solution: store.gameLogic.solution,
@@ -44,14 +42,24 @@ export default class PlayGame extends React.Component {
 		
 
 	}
-	// componentDidUpdate(){
-	// 	// console.log(this.props.roomDetails)
-	// 	console.log(this.props.opponentBoard)
-	// 	console.log(this.props.playerBoard)
-	// 	console.log(this.props.solution)
-	// 	// console.log(this.props.opponent)
+
+	// componentDidUpdate() {
+	// 	numberOfPlayers = setInterval(this.updateRoom.bind(this), 5000);
 	// }
 
+	// updateRoom() {
+	// 	var self = this;
+	// 	axios.get('/api/game/' + this.props.params.id)
+	// 		.then(function(response) {
+	// 			self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			
+	// 			if(response.data.players.length === 2) {
+	// 				clearInterval(numberOfPlayers);
+	// 				return;
+	// 			}
+	// 		}).catch(function(err) {
+	// 			console.log(err);
+	// 		})
+	// }
 
 // its a delete route if user exits the room and if the room has less than 2 players`
 	componentWillUnmount() {
