@@ -86,9 +86,16 @@ exports.update = (req, res) => {
                        mainplayer[cell] = value
                     }
                 }
+                playerboard = game.players[0];
+                playerboard.gameBoard = mainplayer;
+                opponentBoard = game.players[1];
 
-            playerBoard = game.players[0].gameBoard;
-            opponentBoard = game.players[1].gameBoard;
+            game.update({$set:{players:[playerboard,opponentBoard]}},function(err,res){
+                if (err) throw err;
+                console.log("updated mainplayer!");
+            })
+          
+            
             // console.log('gammy1', game);
         } else if ( game.players[1].playerName === player ) {
             // console.log('opponentboard')
@@ -101,8 +108,14 @@ exports.update = (req, res) => {
                    opponentPlayer[cell] = value
                  }
             }
-            playerBoard = game.players[1].gameBoard;
-            opponentBoard = game.players[0].gameBoard;
+                playerboard = game.players[1];
+                playerboard.gameBoard = opponentPlayer;
+                opponentBoard = game.players[0];
+
+             game.update({$set:{players:[playerboard,opponentBoard]}},function(err,res){
+                if (err) throw err;
+                console.log("updated opponentplayer!");
+            })
             // return playerBoard
         }  else {
             res.status(404).json({ status: 'error', message: 'player not found' });
