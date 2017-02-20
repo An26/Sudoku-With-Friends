@@ -190,3 +190,14 @@ button {
         background: #3B5998;
 }
 
+.wrong-answer {
+    color: red;
+}
+
+.correct-answer {
+    background: #D6EB99;
+}
+
+/*.blue {
+    background: blue;
+}*/

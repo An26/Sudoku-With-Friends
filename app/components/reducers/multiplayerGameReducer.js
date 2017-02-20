@@ -20,6 +20,7 @@ export default function reducer(state={
             })
             return {...state, availableRooms: roomData}
          case 'ROOM_DETAILS':
+         console.log('reducerid', action.payload.id)
             let details = {
                 id: action.payload.id,
                 roomLength: action.payload.roomLength

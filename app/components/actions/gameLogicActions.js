@@ -19,9 +19,9 @@ export function selectedCell(selectedCell) {
     }
 }
 
-export function newPuzzle(selectedCell) {
+export function newPuzzle() {
     return{
-        type: 'NEW_PUZZLE'
+        type: 'NEW_PUZZLE',
     }
 }
 
@@ -32,9 +32,9 @@ export function opponentBoard(puzzle) {
     }
 }
 
-export function playersGameBoard(gameBoard) {
+export function setMultiplayerGame(game) {
     return {
-        type: 'PLAYERS_GAME_BOARD',
-        payload: gameBoard
+        type: 'SET_MULTIPLAYER_GAME',
+        payload: game
     }
 }

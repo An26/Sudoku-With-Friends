@@ -34,7 +34,6 @@ export default class GameLobby extends React.Component {
 // redirected to the new page
 	postGameDetails(room) {	
 		let self = this;
-
 		if(this.props.logIn) {		
 			axios.post('/api/game', 
 			{
@@ -82,6 +81,7 @@ export default class GameLobby extends React.Component {
 		axios.get('/api/game').then(function(res) {
 			self.props.dispatch(setRooms(res.data))
 		})
+		console.log(this.props.gameType)
 	}
 	
 // getting the join room id which is attached with join room button for each room
@@ -105,6 +105,7 @@ export default class GameLobby extends React.Component {
 //then display rooms available and the option to create your own room. else display start button to start 
 //the game
 	isMultiPlayer(event) {
+		// console.log(event.target.value)
 		this.props.dispatch(gameType(event.target.value))
 	}
 

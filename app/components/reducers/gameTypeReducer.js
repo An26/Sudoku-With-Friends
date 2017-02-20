@@ -1,5 +1,5 @@
 export default function reducer(state={
-    gameType: 'single'
+    gameType: 'multi'
 }, action) {
     switch(action.type) {
         case 'GAME_TYPE':           

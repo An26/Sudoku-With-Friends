@@ -5,6 +5,7 @@ import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
+import { userLoginDetails } from '../actions/loginActions'
 
 // import connect
 @connect((store) => {
@@ -21,12 +22,16 @@ export default class Login extends React.Component {
 }
 
 responseFacebook (response) {  
-        this.onLogin(response);
+  var self = this;
+        // this.onLogin(response);
        // post the res to database
         if(response) {
-          axios.post('/user',response).then(function(err,res){
-          if(err) throw err;
-          // console.log('login info put in database!');  
+          axios.post('/user',response).then(function(res){
+            if(res.data.status == "ok") {
+              self.onLogin(res.data.user);
+            }
+          }).catch((err) => {
+            console.log(err);
           })
         } else {
           // console.log('not logged in!');
@@ -39,15 +44,18 @@ componentDidMount() {
 }
 
 onLogin(fbData) {
-    cookie.save('userId', fbData.id);
-    cookie.save('username', fbData.first_name);
-    this.props.dispatch(logIn(cookie.load('username')));
+    // cookie.save('mongoId', fbData._id);
+    // cookie.save('userId', fbData.FBId);
+    // cookie.save('username', fbData.name);
+    this.props.dispatch(logIn(fbData.name));
+    this.props.dispatch(userLoginDetails(fbData));
     browserHistory.push('/userBoard');
     
   }
 
 onLogout() {
     cookie.remove('userId');
+    cookie.save('mongoId');
     cookie.remove('username');
     this.props.dispatch(logOut());
     browserHistory.push('/');

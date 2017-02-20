@@ -11,6 +11,7 @@ var interval;
    return {
      gameRunning: store.timeCount.gameRunning,
 	 timeInterval: store.timeCount.timeInterval,
+    //  roomLength: store.gameLogic.roomLength,
      roomDetails: store.multiplayer.roomDetails,
      gameType: store.gameType.gameType
    };
@@ -20,6 +21,10 @@ export default class TimeInterval extends React.Component {
     constructor(props, context) {
 		super(props, context);
     }
+
+    // componentDidMount(){
+    //     console.log(this.props.gameType)
+    // }
 
 	startGame(event) {
         event.preventDefault();
@@ -45,7 +50,10 @@ export default class TimeInterval extends React.Component {
             this.props.dispatch(gameRunning(false));
 		    clearInterval(interval);
             this.props.dispatch(stopTimeInterval()) 
-            this.props.dispatch(newPuzzle());
+            if(this.props.gameType === "single") {
+                this.props.dispatch(newPuzzle());
+            }
+            
             // browserHistory.push('/gameLobby');
             // return true;
     }
@@ -64,35 +72,51 @@ export default class TimeInterval extends React.Component {
 */
     render() {
         return(
-            <div>
-            {!this.props.gameRunning ?
-            <div>       
-                    {this.props.gameType === "single" 
-                    || this.props.gameType === 'multi' && this.props.roomDetails.roomLength === 2 ?
+                
+                <div>       
+                    {this.props.gameType === "single" && !this.props.gameRunning ?
                         <div>
+                            {console.log(this.props.gameType)}
+                            <h1>Press start to start the game</h1>
+                            <button  className="btn btn-default" id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
+                        </div>
+                    :
+                    this.props.gameType === "single" && this.props.gameRunning ?
+                        <div>
+                            
+                            Time: {this.props.timeInterval}
+                            <br />
+                            <button  className="btn btn-default" id="stopGame" onClick={this.stopGame.bind(this)}>Stop Game</button>
+                        </div>
+                    :
+                    null
+                    }
+
+
+
+                    {this.props.gameType === 'multi' && this.props.roomDetails.roomLength === 2 && !this.props.gameRunning ?
+                        <div>
+                            {console.log(this.props.gameType)}
                             <h1>Press start to start the game</h1>
                             <button  className="btn btn-default" id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
                         </div>
                     : this.props.gameType === 'multi' && this.props.roomDetails.roomLength < 2 ?
+                        <div>
                         <h4 style={{color: "red"}}>Waiting for Second Opponent</h4>   
+                        </div>
+                    :
+                    this.props.gameType === 'multi' && this.props.roomDetails.roomLength === 2 && this.props.gameRunning ?
+                     <div>
+                        Time: {this.props.timeInterval}
+                        <br />
+                        {/*<button className="btn btn-default" onClick={this.pause.bind(this)}>Pause? : resume</button>*/}
+                        <button  className="btn btn-default" id="stopGame" onClick={this.stopGame.bind(this)}>Stop Game</button>
+                    </div>
                     :
                     null
                     }
                 </div>
-                :
-                null
-                }
-            {this.props.gameRunning ?
-                <div>
-                    Time: {this.props.timeInterval}
-                    <br />
-                    {/*<button className="btn btn-default" onClick={this.pause.bind(this)}>Pause? : resume</button>*/}
-                    <button  className="btn btn-default" id="stopGame" onClick={this.stopGame.bind(this)}>Stop Game</button>
-                </div>
-            :
-            null     
-            }
-            </div>
+            
         )
     }
 
