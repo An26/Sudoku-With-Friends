@@ -52,7 +52,7 @@ export default class GameLogic extends React.Component {
 	isGuessRight(cell) {
 		// console.log(this.props.playerBoard[this.props.selectedCell] === this.props.solution[cell])
 		// console.log( this.props.playerBoard );
-		console.log('cell', cell, 'board',this.props.playerBoard[cell], 'solution', this.props.solution[cell] );
+		// console.log('cell', cell, 'board',this.props.playerBoard[cell], 'solution', this.props.solution[cell] );
 		return (this.props.playerBoard[cell] === this.props.solution[cell])
 	}
 

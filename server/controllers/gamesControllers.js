@@ -34,7 +34,7 @@ exports.getOpponent = (req, res) => {
     var player = req.params.username;
     var playerBoard;
     var opponentBoard;
-    console.log( 'player', player);
+    // console.log( 'player', player);
     Game.findOne({_id: gameId}, 'players' ).exec( (err, data) => {
        if(data.players[0].playerName.toLowerCase() === player.toLowerCase()) {
            playerBoard = data.players[0].gameBoard;

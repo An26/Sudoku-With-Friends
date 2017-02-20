@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Control, Form } from 'react-redux-form';
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { logIn, logOut, userLoginDetails } from '../actions/loginActions';
 
 @connect((store) => {
@@ -15,11 +16,9 @@ import { logIn, logOut, userLoginDetails } from '../actions/loginActions';
 export default class SignUp extends React.Component {
 	constructor(context, props) {
 		super(context,props);
-	}
-
-	componentDidMount() {
-		console.log('mounted');
-	
+		this.state = {
+			message: ''
+		}
 	}
 
 	handleSubmit(event) {
@@ -36,7 +35,7 @@ export default class SignUp extends React.Component {
 		var self = this;
 		axios.post('/user', userLogin).then(function(res) {
 			if(res.data.status === "existingUser") {
-				browserHistory.push('/')
+				self.setState({message: 'User already exist, please signin'})
 			} else if(res.data.status === "ok"){
 				self.props.dispatch(userLoginDetails(res.data.user));
 				self.props.dispatch(logIn());
@@ -47,10 +46,16 @@ export default class SignUp extends React.Component {
 			})
 	}
 
+	// goToLogin(event) {
+	// 	event.preventDefault();
+	// 	browserHistory.push('/');
+	// }
+
 	render() {
 		return (
 			<div>
 				<h1>Sign Up to play with all your friends!</h1>
+				<h4 style={{'color': 'red'}}>{this.state.message}</h4>
 				<form onSubmit={this.handleSubmit.bind(this)} action="" method="POST">
 					<div className="row">
 						<div>
@@ -63,6 +68,11 @@ export default class SignUp extends React.Component {
 							Password: <input id="pass" type="password" name='pass' className='form-control' placeholder="Password" />
 						</div>
 						<button>Sign Up</button>
+						{ this.state.message !== '' ?
+							<Link to= "/"> Signin</Link>
+						:
+						null
+						}
 					</div>
 				</form>
 			</div>
