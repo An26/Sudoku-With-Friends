@@ -39,7 +39,7 @@ export default function reducer(state={
             // since we are checkint by player name and player name can be same, has to do it this way
             if(action.payload.players[0].playerId === playerId) {
                 player = action.payload.players[0]
-                opponent = action.payload.players[1]
+                opponent = action.payload.players[1] || []
             } else {
                 player =  action.payload.players[1]
                 opponent = action.payload.players[0]
