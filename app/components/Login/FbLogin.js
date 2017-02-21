@@ -9,7 +9,6 @@ import { userLoginDetails } from '../actions/loginActions'
 
 // import connect
 @connect((store) => {
-  // console.log(store);
    return {
      logIn: store.logInStatus.loggedIn
    }; 
@@ -23,7 +22,6 @@ export default class Login extends React.Component {
 
 responseFacebook (response) {  
   var self = this;
-        // this.onLogin(response);
        // post the res to database
         if(response) {
           axios.post('/user',response).then(function(res){
@@ -50,13 +48,6 @@ onLogin(userData) {
     
   }
 
-onLogout() {
-    cookie.remove('userId');
-    cookie.remove('username');
-    this.props.dispatch(logOut());
-    browserHistory.push('/');
-  }
-
   render () {
     const fbBtn = {
       borderRadius:'15px',
@@ -77,10 +68,11 @@ onLogout() {
                 buttonText="Login With Facebook"
             /> 
             :
-            <button onClick={this.onLogout.bind(this)} type="button">logout</button>
+            null
             }
       </div>
     );
   }
  
 }
+

@@ -15,7 +15,6 @@ export default class Main extends React.Component {
 	}
 	
 	toggleBtn() {
-		// console.log("state: " + this.state.isTabOpen)
 		this.setState({isTabOpen: !this.state.isTabOpen})
 	}
 

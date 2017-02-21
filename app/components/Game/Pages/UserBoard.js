@@ -9,18 +9,7 @@ export default class UserBoard extends React.Component {
 		super();
 		this.state = {userData:{}};
 	}
-	// componentDidMount() {
-	// 	var userId = cookie.load('userId');
-	// 	var self = this;
-	// 	axios.get('/user/'+userId).then(function(res){
-	// 		console.log('resssss', res.data.userData);
-	// 		var data = res.data.userData[0];
-	// 		console.log('data',data);
-	// 		self.setState({userData:res.data.userData[0]});
-	// 		console.log('state',self.state.userData);
-	// 	})
-	// }
-	
+
 
 
 	render() {
@@ -31,6 +20,7 @@ export default class UserBoard extends React.Component {
 		};
 
 		const username = cookie.load('username');
+
 		// console.log(username);
 
 		// if (username) {
@@ -41,7 +31,6 @@ export default class UserBoard extends React.Component {
 
 		return (
 			<div className="userContent" style={userStyle}>
-			{/*{console.log('newdata',data)}*/}
 				<div>User: {username ? cookie.load('username') : this.state.userData.username} </div>
 				<div className="panel panel-default">
 					<div className="panel-heading">

@@ -15,6 +15,7 @@ var opponentBoardInterval;
 		opponentBoard: store.gameLogic.opponentBoard,
 		joinRoomId: store.multiplayer.joinRoomId,
 		gameType: store.gameType.gameType,
+		logIn: store.logInStatus.loggedIn
    };
 })
 
@@ -34,16 +35,15 @@ export default class GameInputBtn extends React.Component {
 
 	componentDidMount(){
 		if(this.props.gameType === 'multi') {
-			opponentBoardInterval = setInterval(this.opponentBoardUpdates.bind(this), 20000)
+			opponentBoardInterval = setInterval(this.opponentBoardUpdates.bind(this), 3000)
 		}
 		
 	}
 
 	componentDidUpdate() {
-		// console.log(this.props.opponentBoard)
 		var self = this;
 			if (self.props.selectedCell && (self.props.playerBoard[self.props.selectedCell] === self.props.solution[self.props.selectedCell]) 
-				&& this.props.gameType === 'multi') {
+				&& this.props.gameType === 'multi' && this.props.logIn) {
 					var gameId = self.props.roomDetails.id || self.props.joinRoomId;
 					axios.put(`/api/game/${gameId}`, {
 						'playerId': cookie.load('userId'),
@@ -56,11 +56,11 @@ export default class GameInputBtn extends React.Component {
 	opponentBoardUpdates() {
 		var self = this;
 		var gameId = this.props.roomDetails.id || this.props.joinRoomId || false;
-		if( gameId && this.props.opponentBoard.length) {
+		if( gameId && this.props.roomDetails.roomLength === 2) {
 			axios.get(`/api/opponent/${gameId}/${cookie.load('userId')}`)
 			.then((response) => {
-				if(opponentBoard && response) {
-				self.props.dispatch(opponentBoard(response.data.opponentBoard));
+				if(opponentBoard && response && response.status !== 'error') {
+					self.props.dispatch(opponentBoard(response.data.opponentBoard));
 				}
 			}).catch(function(err) {
 				console.log(err);

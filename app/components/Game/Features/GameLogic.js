@@ -26,7 +26,6 @@ export default class GameLogic extends React.Component {
     componentDidUpdate() {
 		if(this.props.playerBoard.indexOf("")===-1 && this.isGuessRight(this.props.selectedCell, this.props.playerBoard)) {
 			if(this.checkResult()) {
-				// console.log('game done')
 				this.props.dispatch(gameRunning(false))
 				this.props.dispatch(stopTimeInterval());
 				window.alert("You won!");
@@ -64,7 +63,7 @@ export default class GameLogic extends React.Component {
 		} 
 	} 
 	
-    generateCells(board,rowNumber, disabled, displayNumbers) {		
+    generateCells(board,rowNumber, disabled, displayNumbers) {	
     	var rows = [];
     	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
 			rows.push(
@@ -94,9 +93,11 @@ export default class GameLogic extends React.Component {
 	generateBoardGame(board, disabled, displayNumbers) {
 		var generatedBoard=[];
     	for (var i = 0; i < 9; i++) {
+			if(board) {
     		generatedBoard.push(<tr key={i}>
     			{this.generateCells(board, i, disabled, displayNumbers)}
     		</tr>);
+			}
     	}
     	return generatedBoard;
 	}
@@ -106,6 +107,7 @@ export default class GameLogic extends React.Component {
         return (
             <div className="mainGame">
 				Wrong Guesses : {this.props.wrongGuesses}
+<<<<<<< HEAD
 				{this.props.gameType === "single" ? 
 					this.generateBoardGame(this.props.playerBoard, false, true)
 				:
@@ -118,6 +120,18 @@ export default class GameLogic extends React.Component {
 							</div>
 					</div>
 				}	
+=======
+					{this.props.gameType === "single" ? 
+						this.generateBoardGame(this.props.playerBoard, false, true)
+					:
+						<div>
+							{this.generateBoardGame(this.props.playerBoard, false, true)}
+							<hr />
+							<h4>opponent Board</h4>
+							{this.generateBoardGame(this.props.opponentBoard, false, false)}
+						</div>
+					}	
+>>>>>>> ea85bdad18c70aae93060b3e0d2da63be0b9b2c6
             </div>	
 		
         )
