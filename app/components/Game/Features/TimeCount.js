@@ -67,7 +67,7 @@ export default class TimeInterval extends React.Component {
                 <div>       
                     {this.props.gameType === "single" && !this.props.gameRunning ?
                         <div>
-                            {console.log(this.props.gameType)}
+                            {/*{console.log(this.props.gameType)}*/}
                             <h1>Press start to start the game</h1>
                             <button  className="btn btn-default" id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
                         </div>
@@ -87,7 +87,7 @@ export default class TimeInterval extends React.Component {
 
                     {this.props.gameType === 'multi' && this.props.roomDetails.roomLength === 2 && !this.props.gameRunning ?
                         <div>
-                            {console.log(this.props.gameType)}
+                            {/*{console.log(this.props.gameType)}*/}
                             <h1>Press start to start the game</h1>
                             <button  className="btn btn-default" id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
                         </div>

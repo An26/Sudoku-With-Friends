@@ -6,8 +6,6 @@ import {StyleRoot} from 'radium';
 
 @Radium
 export default class Header extends React.Component {
-
-
     render() {
 		const isLoggedIn = cookie.load('username');
         return (
@@ -17,9 +15,8 @@ export default class Header extends React.Component {
                     <div className="welcomeHeader">Sudoku with Friends</div>
                     <div>
                         {isLoggedIn ? (
-                            <h1  className="welcomeUser">Welcome {cookie.load('username')}! </h1> 
-                            ) : (
-                            <h1>Welcome!</h1>)
+                            <h1  className="welcomeUser">Welcome {cookie.load('username')}!</h1> 
+                            ) : (<h1>Welcome!</h1>)
                         }
                     </div>
                 </div>

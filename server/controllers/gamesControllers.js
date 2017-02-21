@@ -1,3 +1,4 @@
+"use strict"
 const mongoose = require('mongoose');
 const User = require('./../models/UsersModel');
 const Game = require('./../models/GamesModel');

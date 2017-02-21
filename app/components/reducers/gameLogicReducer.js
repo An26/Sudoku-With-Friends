@@ -14,7 +14,7 @@ export default function reducer(state={
         // case 'PLAYER_BOARD':
             // return {...state, playerBoard: action.payload}
         case 'OPPONENT_BOARD':
-        console.log('pay', action.payload)
+        // console.log('pay', action.payload)
             return {...state, opponentBoard: action.payload}
         case 'SELECTED_CELL':
             return {...state, selectedCell: action.payload}

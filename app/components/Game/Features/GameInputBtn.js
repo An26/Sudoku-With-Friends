@@ -40,7 +40,7 @@ export default class GameInputBtn extends React.Component {
 	}
 
 	componentDidUpdate() {
-		console.log(this.props.opponentBoard)
+		// console.log(this.props.opponentBoard)
 		var self = this;
 			if (self.props.selectedCell && (self.props.playerBoard[self.props.selectedCell] === self.props.solution[self.props.selectedCell]) 
 				&& this.props.gameType === 'multi') {

@@ -26,7 +26,7 @@ export default class GameLogic extends React.Component {
     componentDidUpdate() {
 		if(this.props.playerBoard.indexOf("")===-1 && this.isGuessRight(this.props.selectedCell, this.props.playerBoard)) {
 			if(this.checkResult()) {
-				console.log('game done')
+				// console.log('game done')
 				this.props.dispatch(gameRunning(false))
 				this.props.dispatch(stopTimeInterval());
 				window.alert("You won!");
@@ -113,7 +113,9 @@ export default class GameLogic extends React.Component {
 						{this.generateBoardGame(this.props.playerBoard, false, true)}
 						<hr />
 						<h4>opponent Board</h4>
-						{this.generateBoardGame(this.props.opponentBoard, false, false)}
+							<div className="opponentBoard">
+								{this.generateBoardGame(this.props.opponentBoard, false, false)}
+							</div>
 					</div>
 				}	
             </div>	

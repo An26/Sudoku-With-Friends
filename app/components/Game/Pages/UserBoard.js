@@ -31,7 +31,7 @@ export default class UserBoard extends React.Component {
 		};
 
 		const username = cookie.load('username');
-		console.log(username);
+		// console.log(username);
 
 		// if (username) {
 		// 	name = <p>{cookie.load('username')}</p>

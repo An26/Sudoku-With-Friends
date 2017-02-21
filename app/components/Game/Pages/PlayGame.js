@@ -39,9 +39,6 @@ export default class PlayGame extends React.Component {
 				self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			
 				self.props.dispatch(setMultiplayerGame(response.data));
 			})
-		// }.bind(this), 1000);
-
-
 	}
 
 	// componentDidUpdate() {
@@ -104,7 +101,6 @@ export default class PlayGame extends React.Component {
 							</div>
 							:
 							null
-
 						}									
 					<aside className="chatBox" style={divStyle}>
 						<h3>Chat with Friends</h3>
