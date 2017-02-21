@@ -128,6 +128,10 @@ export default class GameLobby extends React.Component {
 			margin: '10px',
 			display: 'inline-block',
 		}
+		const gameTypeBox = {
+			marginRight: '10px'
+		}
+
 		return (
 			<div>
 
@@ -135,8 +139,8 @@ export default class GameLobby extends React.Component {
 				
 				<h2>Select Single Player or Multiplayer</h2>
 					<form>
-						<input type="radio" name="chooseone" value ="single" onChange={this.isMultiPlayer.bind(this)} checked={this.props.gameType==="single"} />Single Player
-						<input type="radio" name="chooseone" value ="multi" onChange={this.isMultiPlayer.bind(this)} checked={this.props.gameType==="multi"} />Multi-Player
+						<div style={gameTypeBox}><input className="single" type="radio" name="chooseone" value ="single" onChange={this.isMultiPlayer.bind(this)} checked={this.props.gameType==="single"} />Single Player</div>
+						<input className="munti" type="radio" name="chooseone" value ="multi" onChange={this.isMultiPlayer.bind(this)} checked={this.props.gameType==="multi"} />Multi-Player
 					</form>
 				<hr />
 				{this.props.gameType === "single" ?
@@ -152,7 +156,7 @@ export default class GameLobby extends React.Component {
 							null
 							}
 							<div>
-								<input id="roomName" type="text" placeholder="enter your room name" required/>
+								<input style={gameTypeBox} id="roomName" type="text" placeholder="enter your room name" required/>
 								<button  className="btn btn-default">Create Room</button>
 							</div>
 						</form>
