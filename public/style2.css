@@ -2,7 +2,7 @@ body {
     /*font-family: 'Raleway', sans-serif;*/
     font-family: 'Quicksand', sans-serif;
     /*font-family: 'Bungee Shade', cursive;*/
-    background-image: url(./../images/geometry2.png);
+    background-image: url(./../public/images/geometry2.png);
     -webkit-background-size: repeat;
     -moz-background-size: repeat;
     -o-background-size: repeat;
