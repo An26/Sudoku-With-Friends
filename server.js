@@ -24,7 +24,7 @@ passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
 // Express Routes
-app.use(express.static('public'));
+app.use('/public',express.static('public'));
 require('./server/routes/apiRoutes.js')(app);
 const authRoutes = require('./server/routes/auth.js');
 app.use('/auth', authRoutes);

@@ -104,7 +104,7 @@ export default class Login extends React.Component {
 						}
 						<hr/>
 						<div className="col-md-6">
-							<img src="./images/sudoku.gif" alt="sudoku image" style={imgStyle} />
+							<img src="/public/images/sudoku.gif" alt="sudoku image" style={imgStyle} />
 						</div>
 					</div>
 				</div>

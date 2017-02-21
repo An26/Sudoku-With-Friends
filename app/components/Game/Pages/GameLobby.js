@@ -168,7 +168,7 @@ export default class GameLobby extends React.Component {
 										<div className="holdRooms roomCard card-block" style={cardStyle}>	
 											<h4 className="card-title"> {ele.roomName} Room</h4>
 											{/*<h4>Difficulty Level: {gameGen.difficulty}</h4>*/}
-											<img className="card-img-top" src="./images/table.svg" alt="Card image cap" />
+											<img className="card-img-top" src="./public/images/table.svg" alt="Card image cap" />
 											<p className="card-text">{ele.players} player is waiting</p>
 											<button onClick={this.joinGameRoom.bind(this)} value={ele.id} className="joinRoom">Join</button>	
 										</div>

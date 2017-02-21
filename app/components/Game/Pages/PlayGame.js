@@ -19,7 +19,8 @@ var numberOfPlayers;
 		opponentBoard: store.gameLogic.opponentBoard,
 		playerBoard: store.gameLogic.playerBoard,
 	 	solution: store.gameLogic.solution,
-		opponent: store.gameLogic.opponent
+		opponent: store.gameLogic.opponent,
+		roomDetails: store.multiplayer.roomDetails,
 	}
 })
 
@@ -41,9 +42,11 @@ export default class PlayGame extends React.Component {
 		var self = this;
 		axios.get('/api/game/' + this.props.params.id)
 			.then(function(response) {
+				console.log('response', response);
 				self.props.dispatch(setMultiplayerGame(response.data));
 				self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			
-				if(response.data.players.length === 2) {
+				console.log('length', self.props.roomDetails.roomLength)
+				if(self.props.roomDetails.roomLength === 2) {
 					clearInterval(numberOfPlayers);
 				}
 
@@ -58,7 +61,11 @@ export default class PlayGame extends React.Component {
 		let self = this;
 		
 		if(confirm('Do you wish to leave the room')) {
-			axios.delete('/api/game/'+ this.props.params.id + '/delete', {playerId: cookie.load('userId')})
+			if(numberOfPlayers) {
+				clearInterval(numberOfPlayers);
+			}
+			debugger;
+			axios.delete('/api/game/'+ this.props.params.id + '/' + cookie.load('userId'))
 			.then((response) => {
 				if(response) {
 					self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			

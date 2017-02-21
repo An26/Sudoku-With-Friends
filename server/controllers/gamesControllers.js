@@ -73,12 +73,11 @@ exports.update = (req, res) => {
          var opponentBoard;
          var playerBoard;
         // I don't like this but it's quick and dirty
-
         if( game.players[0].playerId.toString() === playerId ) {
             game.players[0].gameBoard.set(cell, value);
             playerBoard = game.players[0].gameBoard;
-            opponentBoard = game.players[1].gameBoard;
-        } else if ( game.players[1].playerId.toString() === playerId ) {
+            opponentBoard = game.players.length === 2 ? game.players[1].gameBoard : [];
+        } else if ( game.players.length === 2 && game.players[1].playerId.toString() === playerId ) {
             game.players[1].gameBoard.set(cell, value);
             playerBoard = game.players[1].gameBoard;
             opponentBoard = game.players[0].gameBoard;
@@ -172,10 +171,13 @@ exports.join = (req, res) => {
 
 exports.delete = (req, res) => {
     const roomId = req.params.id;
-    const playerId = req.body.playerId;
+    const playerId = req.params.playerId;
+    console.log('edddd', playerId);
 
     Game.findById(roomId, (err, room) =>{
-        room.players.splice({playerId:playerId}, 1)
+        room.players = room.players.filter( function ( player ) {
+            return player.playerId.toString() !== playerId;
+        } );
         room.save((err, room) => {
             if(err) {
             console.log(err);
