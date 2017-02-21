@@ -33,7 +33,6 @@ export default class Login extends React.Component {
 	getUser(loginDetails) {
 		var self = this;
 		axios.get(`/user/${loginDetails.email}/${loginDetails.password}/`).then(function(response) {
-			console.log('res', response)
 			if(response.data.status == 'wrongPass') {
 				self.setState({message: 'Incorrect Password'})
 			} else if (response.data.status == 'ok') {

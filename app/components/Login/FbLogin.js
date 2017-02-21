@@ -9,7 +9,6 @@ import { userLoginDetails } from '../actions/loginActions'
 
 // import connect
 @connect((store) => {
-  // console.log(store);
    return {
      logIn: store.logInStatus.loggedIn
    }; 

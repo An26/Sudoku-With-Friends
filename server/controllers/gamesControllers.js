@@ -20,7 +20,6 @@ exports.get = (req,res) => {
 
     Game.findOne({_id: gameId}).exec( (err, data) => {
         if(data) {
-            // console.log(data);
             res.send(data);
         } else {
             res.status(404).json({message: 'not found'});
@@ -34,18 +33,16 @@ exports.getOpponent = (req, res) => {
     var playerId = req.params.userId;
     var playerBoard;
     var opponentBoard;
-    // console.log( 'player', player);
     Game.findOne({_id: gameId}, 'players' ).exec( (err, data) => {
-
        if(data.players[0].playerId.toString() === playerId) {
            playerBoard = data.players[0].gameBoard;
            opponentBoard = data.players[1] ? data.players[1].gameBoard : [];
        }
-       else if(data.players[1].playerId.toString() === playerId){
+       else if(data.players.length === 2 && data.players[1].playerId.toString() === playerId){
            playerBoard = data.players[1].gameBoard;
            opponentBoard = data.players[0].gameBoard;
        } else {
-           res.status(404).json({ status: 'error', message: 'player not found' });
+           res.json({ status: 'error', message: 'player not found' });
             return
        }
        res.json({playerBoard: playerBoard, opponentBoard: opponentBoard})
@@ -59,7 +56,6 @@ exports.update = (req, res) => {
     const cell = req.body.cell.toString();
     const value = req.body.value.toString();
     let opponentBoard, playerBoard;
-    // console.log('iiii', gameId, player, cell, value);
 
     // check for required variables
     if( !playerId || !cell ) {
@@ -141,8 +137,6 @@ exports.join = (req, res) => {
     const playerName = req.body.playerName;
     const playerId = req.body.playerId;
 
-// console.log('det', player);
-
     // players is required
     if( !playerId ) {
         res.status(400).json({ status: 'error', message: 'playerId variable is required' });
@@ -177,10 +171,10 @@ exports.join = (req, res) => {
 
 exports.delete = (req, res) => {
     const roomId = req.params.id;
-    const player = req.body.player;
+    const playerId = req.body.playerId;
 
     Game.findById(roomId, (err, room) =>{
-        room.players.splice({playerName:player}, 1)
+        room.players.splice({playerId:playerId}, 1)
         room.save((err, room) => {
             if(err) {
             console.log(err);

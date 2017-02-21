@@ -18,7 +18,7 @@ import { newPuzzle } from '../actions/gameLogicActions';
 		playerBoard: store.gameLogic.playerBoard,
 	 	solution: store.gameLogic.solution,
 		opponentBoard: store.gameLogic.opponentBoard,
-		newPuzzle: store.gameLogic.newPuzzle
+		newPuzzle: store.gameLogic.newPuzzle,
 	}
 })
 
@@ -31,7 +31,6 @@ export default class Game extends React.Component {
 		return (
 		<div>
 			<TimeInterval />
-			{console.log(this.props.gameRunning)}
 			{this.props.gameRunning ?
 				<div>
 					<GameLogic playerBoard = {this.props.playerBoard} solution={this.props.solution} />
