@@ -61,8 +61,10 @@ export default class Login extends React.Component {
 					<div className="row">
 						<div className="col-md-6">
 						<h1 style={loginOp}>Login to play with a friend</h1>
+
 						<h4 style={{'color': 'red'}}>{this.state.message}</h4>
 						<form onSubmit={this.handleSubmit.bind(this)} action="" method="POST">
+
 								<div className="" style={loginOp}>
 									<input id="email" type="email" name='email' className='form-control' placeholder="email@someplace.com" />
 								</div>
@@ -83,7 +85,7 @@ export default class Login extends React.Component {
 							</div>
 							</div>
 							<div className="col-md-6">
-								{/*<img src="./images/sudoku.gif" alt="sudoku image" style={imgStyle} />*/}
+								<img src="./images/sudoku.gif" alt="sudoku image" style={imgStyle} />
 							</div>
 					</div>
 				</div>

@@ -28,6 +28,7 @@ export default class PlayGame extends React.Component {
 			super(context, props);
 		}
 
+
 // when play game page gets mounted on the page then we make an ajax call to know how many people are there 
 // in the room
 	componentDidMount() {
@@ -39,7 +40,7 @@ export default class PlayGame extends React.Component {
 				self.props.dispatch(setMultiplayerGame(response.data));
 			})
 		// }.bind(this), 1000);
-		
+
 
 	}
 
@@ -103,11 +104,13 @@ export default class PlayGame extends React.Component {
 							</div>
 							:
 							null
+
 						}									
 					<aside className="chatBox" style={divStyle}>
 						<h3>Chat with Friends</h3>
 						<Chat />
 					</aside>
+
 				</div>
 			</div>	
 		)

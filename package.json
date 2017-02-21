@@ -5,7 +5,8 @@
   "main": "./public/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack",
+    "build": "node node_modules/webpack/bin/webpack.js",
+    "start": "node server",
     "dev": "webpack -w && nodemon server.js"
   },
   "author": "",
@@ -32,6 +33,7 @@
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "radium": "^0.18.1",
     "react": "^15.4.1",
     "react-cookie": "^1.0.4",
     "react-dom": "^15.4.1",

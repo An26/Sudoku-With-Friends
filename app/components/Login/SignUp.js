@@ -55,8 +55,10 @@ export default class SignUp extends React.Component {
 		return (
 			<div>
 				<h1>Sign Up to play with all your friends!</h1>
+
 				<h4 style={{'color': 'red'}}>{this.state.message}</h4>
 				<form onSubmit={this.handleSubmit.bind(this)} action="" method="POST">
+
 					<div className="row">
 						<div>
 							name: <input id="name" type="name" name='name' className='form-control' placeholder="Enter your Name" required />

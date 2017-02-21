@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+
 // import gameGen from '../Js/gameGenerator';
 import { createRoom, setRooms, opponentsGameBoard } from '../../actions/multiplayerGameActions';
+
 import cookie from 'react-cookie';
-var Promise = require("bluebird");
 import axios from 'axios';
 import Game from '../Game';
 import { gameType } from '../../actions/gameTypeActions';
@@ -14,8 +15,10 @@ import { gameType } from '../../actions/gameTypeActions';
 		playerBoard: store.gameLogic.playerBoard,
 	 	solution: store.gameLogic.solution,
 		logIn: store.logInStatus.loggedIn,
+
 		availableRooms: store.multiplayer.availableRooms,
 		gameType: store.gameType.gameType
+
 	}
 })
 export default class GameLobby extends React.Component {
@@ -38,6 +41,7 @@ export default class GameLobby extends React.Component {
 				roomName: room, 
 				initialBoard: this.props.playerBoard,
 				solution: this.props.solution,
+
 				username : cookie.load('username'),
 				userId : cookie.load('userId')			
 			}).then((res)=> {
@@ -49,6 +53,7 @@ export default class GameLobby extends React.Component {
 				}
 			}).catch(function(err){
 				console.log(err)
+
 			})
 		}
 	}
@@ -70,6 +75,7 @@ export default class GameLobby extends React.Component {
 			return room;
 		}
 	}	
+
 
 // end of create your own room
 
@@ -106,6 +112,7 @@ export default class GameLobby extends React.Component {
 	isMultiPlayer(event) {
 		// console.log(event.target.value)
 		this.props.dispatch(gameType(event.target.value))
+
 	}
 
 
@@ -118,7 +125,7 @@ export default class GameLobby extends React.Component {
 		}
 		return (
 			<div>
-				<h1>Game Lobby</h1>
+
 				<hr />
 				
 				<h2>Select Single Player or Multiplayer</h2>
@@ -146,6 +153,7 @@ export default class GameLobby extends React.Component {
 						</form>
 					</div>
 					<hr />
+
 
 					<h3>Here is a list of open rooms to join!</h3>
 						{this.props.availableRooms.map((ele, i)=>{
