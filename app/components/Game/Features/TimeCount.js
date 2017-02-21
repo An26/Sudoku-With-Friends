@@ -12,7 +12,6 @@ var interval;
      gameRunning: store.timeCount.gameRunning,
 	 timeInterval: store.timeCount.timeInterval,
      logIn: store.logInStatus.loggedIn,
-    //  roomLength: store.gameLogic.roomLength,
      roomDetails: store.multiplayer.roomDetails,
      gameType: store.gameType.gameType
    };

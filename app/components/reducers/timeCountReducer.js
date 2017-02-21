@@ -1,3 +1,4 @@
+
 export default function reducer(state={
     gameRunning: false,
     timeInterval: 0
