@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('./../models/UsersModel');
+ const bcrypt = require('bcrypt-nodejs');
 
 exports.self = (req,res) => {
     res.json({status:'ok'});
@@ -18,20 +19,21 @@ exports.login = (req, res) => {
     var password = req.params.password.toLowerCase();
     console.log(email, password);
     User.find({'email': email}, function(err, response) {
+        
         console.log('type', typeof response);
         console.log('rest', response == '')
-        // check with jessica how to bcrypt this password and compare it with the mongoose pass
         if(response == '') {
-            res.json({status: 'noUser'})
-        } else {
-             if(response[0].password.toString() === password) {
-                res.json({status:'ok', user: res})
-            } else if(response[0].password.toString() !== password){
-                res.json({status: 'wrongPass'})
-            } 
-        }
-    })
-}
+                res.json({status: 'noUser'})
+            } else {
+                console.log(bcrypt.compareSync(password, response[0].password))
+                 if(bcrypt.compareSync(password, response[0].password)) {
+                        res.json({status:'ok', user: response})
+                } else if(response[0].password !== password){
+                        res.json({status: 'wrongPass'})
+                    } 
+             }
+        })
+    }
 
 
 exports.update = (req, res) => {

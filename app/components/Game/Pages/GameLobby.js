@@ -8,6 +8,7 @@ var Promise = require("bluebird");
 import axios from 'axios';
 import Game from '../Game';
 import { gameType } from '../../actions/gameTypeActions';
+var updatedRooms;
 
 @connect((store)=> {
 	return {
@@ -76,13 +77,18 @@ export default class GameLobby extends React.Component {
 // join a room starts here
 // getting the data from an ajax call with all the room available and sending it to a reducer`
 	componentDidMount() {
-		var self = this;
-		axios.get('/api/game').then(function(res) {
-			self.props.dispatch(setRooms(res.data))
-		})
-		console.log(this.props.gameType)
+		this.roomInfo();
+		updatedRooms = setInterval(this.roomInfo.bind(this), 3000)
+		
 	}
 	
+	roomInfo() {
+		var self = this;
+		axios.get('/api/game').then(function(res) {
+		self.props.dispatch(setRooms(res.data))
+		})
+	}
+
 // getting the join room id which is attached with join room button for each room
 	joinGameRoom( evt ) {
 		let self = this;
@@ -108,6 +114,10 @@ export default class GameLobby extends React.Component {
 		this.props.dispatch(gameType(event.target.value))
 	}
 
+	componentWillUnmount(){
+		console.log('true')
+		clearInterval(updatedRooms);	
+	}
 
 	render (){
 		const cardStyle = {

@@ -27,15 +27,11 @@ export default class Game extends React.Component {
 		super(context, props)
 	}
 
-	// componentDidUpdate() {
-	// console.log(this.props.playerBoard)
-	// console.log(this.props.solution)
-	// }
-
 	render (){
 		return (
 		<div>
 			<TimeInterval />
+			{console.log(this.props.gameRunning)}
 			{this.props.gameRunning ?
 				<div>
 					<GameLogic playerBoard = {this.props.playerBoard} solution={this.props.solution} />

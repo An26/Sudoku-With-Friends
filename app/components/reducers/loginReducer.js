@@ -10,9 +10,11 @@ export default function reducer(state={
         case 'LOG_OUT':
             return {...state, loggedIn:action.payload }
         case 'USER_LOGIN_DETAILS':
-            let username = action.payload.name;
-            let userId = action.payload._id;
-            let email = action.payload.email 
+        console.log('payload', action.payload);
+            let userObject = action.payload[0] || action.payload;
+            let username = userObject.name;
+            let userId = userObject._id;
+            let email = userObject.email;
             cookie.save('username', username);
             cookie.save('userId', userId);
             cookie.save('email', email);

@@ -34,7 +34,7 @@ export default class GameInputBtn extends React.Component {
 
 	componentDidMount(){
 		if(this.props.gameType === 'multi') {
-			opponentBoardInterval = setInterval(this.opponentBoardUpdates.bind(this), 20000)
+			opponentBoardInterval = setInterval(this.opponentBoardUpdates.bind(this), 4000)
 		}
 		
 	}
