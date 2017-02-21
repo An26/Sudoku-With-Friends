@@ -6,20 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node node_modules/webpack/bin/webpack.js",
-    "postinstall": "webpack",
+    "postinstall": "npm run build",
     "start": "node server",
     "dev": "webpack -w && nodemon server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.3.13",
-    "babel-loader": "^6.2.0",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-react": "^6.3.13",
-    "babel-preset-stage-0": "^6.16.0",
-    "webpack": "^1.13.1"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -52,6 +45,13 @@
     "redux-thunk": "^2.1.0",
     "socket.io": "^1.7.2",
     "sudoku": "=0.0.2",
-    "validator": "^6.2.1"
+    "validator": "^6.2.1",
+    "webpack": "^1.13.1",
+    "babel-core": "^6.3.13",
+    "babel-loader": "^6.2.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.16.0"
   }
 }
