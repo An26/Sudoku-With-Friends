@@ -114,9 +114,7 @@ export default class Main extends React.Component {
 
 		if (isLoggedIn) {
 			tabs = 	<div>
-						<Link to="/userBoard">User Board/Stats</Link>
-						<br />
-						<Link to="/game">Play Sudoku</Link>
+						{/*<Link to="/userBoard">User Board/Stats</Link>*/}
 						<br />
 						<Link to="/gameLobby">Game Lobby: Play w/ Friends</Link>
 						<br />
