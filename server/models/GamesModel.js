@@ -26,6 +26,7 @@ const GamesSchema = new Schema({
     userRoomName: {
         type: String,
         required: true,
+        unique:true
     },
     players: [Player]
     

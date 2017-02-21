@@ -1,14 +1,14 @@
-export function createRoom() {
-    return {
-        type: 'CREATE_ROOM',
-        payload: true
-    }
-}
+// export function createRoom() {
+//     return {
+//         type: 'CREATE_ROOM',
+//         payload: true
+//     }
+// }
 
-export function joinRoom(roomData) {
+export function setRooms(availableRooms) {
     return {
-        type: 'JOIN_ROOM',
-        payload: roomData
+        type: 'SET_ROOMS',
+        payload: availableRooms
     }
 }
 
@@ -23,12 +23,5 @@ export function joinRoomId(id) {
     return {
         type: 'JOIN_ROOM_ID',
         payload: id
-    }
-}
-
-export function opponentsGameBoard(gameBoard) {
-    return {
-        type: 'OPPONENTS_GAME_BOARD',
-        payload: gameBoard
     }
 }

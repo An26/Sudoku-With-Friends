@@ -5,6 +5,7 @@ import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
+import { userLoginDetails } from '../actions/loginActions'
 
 // import connect
 @connect((store) => {
@@ -21,12 +22,16 @@ export default class Login extends React.Component {
 }
 
 responseFacebook (response) {  
-        this.onLogin(response);
+  var self = this;
+        // this.onLogin(response);
        // post the res to database
         if(response) {
-          axios.post('/user',response).then(function(err,res){
-          if(err) throw err;
-          // console.log('login info put in database!');  
+          axios.post('/user',response).then(function(res){
+            if(res.data.status == "ok") {
+              self.onLogin(res.data.user);
+            }
+          }).catch((err) => {
+            console.log(err);
           })
         } else {
           // console.log('not logged in!');
@@ -38,10 +43,9 @@ componentDidMount() {
     
 }
 
-onLogin(fbData) {
-    cookie.save('userId', fbData.id);
-    cookie.save('username', fbData.first_name);
-    this.props.dispatch(logIn(cookie.load('username')));
+onLogin(userData) {
+    this.props.dispatch(logIn(userData.name));
+    this.props.dispatch(userLoginDetails(userData));
     browserHistory.push('/userBoard');
     
   }

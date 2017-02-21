@@ -1,18 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { initialPuzzle, selectedCell } from '../../actions/gameLogicActions.js';
+import { playerBoard, selectedCell } from '../../actions/gameLogicActions.js';
+import { stopTimeInterval, gameRunning } from '../../actions/timeCountActions';
 import gameGen from '../Js/gameGenerator';
 import cookie from 'react-cookie';
 import axios from 'axios';
+var opponentBoard;
 
 @connect((store) => {
    return {
-     initialPuzzle: store.gameLogic.initialPuzzle,
-	 solution: store.gameLogic.solution,
      selectedCell: store.gameLogic.selectedCell,
 	 wrongGuesses: store.gameLogic.wrongGuesses,
 	 gameRunning: store.timeCount.gameRunning,
-	 roomId: store.multiplayer.roomDetails,
+	 gameType: store.gameType.gameType,
 	 joinRoomId: store.multiplayer.joinRoomId
    };
 })
@@ -20,12 +20,15 @@ import axios from 'axios';
 export default class GameLogic extends React.Component {
        constructor(props, context) {
 		super(props, context);
-        this.getCellColor = this.getCellColor.bind(this);
     }
 
+
     componentDidUpdate() {
-		if(this.props.initialPuzzle.indexOf("")===-1) {
+		if(this.props.playerBoard.indexOf("")===-1 && this.isGuessRight(this.props.selectedCell, this.props.playerBoard)) {
 			if(this.checkResult()) {
+				console.log('game done')
+				this.props.dispatch(gameRunning(false))
+				this.props.dispatch(stopTimeInterval());
 				window.alert("You won!");
 			} else {
 				// window.alert("Check again...");
@@ -44,90 +47,77 @@ export default class GameLogic extends React.Component {
 	    this.props.dispatch(selectedCell(event.target.id));	
 	}
 
-	isGuessRight(cell) {
-		let currentRoomId = this.props.roomId || this.props.joinRoomId
-		if(this.props.initialPuzzle[cell] === this.props.solution[cell]) {
-			// console.log('value',this.props.initialPuzzle[cell]);
-			axios.put('/api/game/'+ currentRoomId +'/update', 
-			{
-				'player': cookie.load('username'), 
-				'gameBoard': cell,
-				 'value': this.props.solution[cell]
-			});
-			return true;
-		} else {
-			return false;
-		}
-	
-		// return this.props.initialPuzzle[cell] === this.props.solution[cell]
+	isGuessRight(cell, board) {
+		return (board[cell] === this.props.solution[cell])
 	}
 
-    getCellColor(i) {
-		if( this.props.initialPuzzle[i] === "" || this.props.initialPuzzle[i] === null ) {
-			return "gray";
-		}
-		else if( this.props.gameRunning ) {
-			if(this.isGuessRight(i)) {
-				return '#D6EB99';
+    getCellColor(cell, board) {
+		if ( this.props.gameRunning ) {
+			if( board[cell] === "" || board[cell] === null) {
+				return "not-answered";
+			}
+			else if(this.isGuessRight(cell, board)) {
+				return 'correct-answer';
 			} else {
-				return 'white';
+				return "wrong-answer";
 			}
 		} 
-	}
-
-    generateCells(rowNumber) {		
+	} 
+	
+    generateCells(board,rowNumber, disabled, displayNumbers) {		
     	var rows = [];
     	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
-    		if(gameGen.printboard(gameGen.puzzle)[i]==="" || gameGen.puzzle[i] === null) {
-    			rows.push(
-					<td key={i}>
-					<input id={i}
-						onClick = {this.handleClick.bind(this)}
-						value={this.props.initialPuzzle[i] || ""} 
-						style={{background: this.getCellColor(i)}}
-						className="cell"
-						type="integer" 
-						maxLength="1" 
-						min="1" 
-						max="9"/>
-					</td>)
-    		} else {
-    		rows.push(<td key={i} id={i}>{this.props.initialPuzzle[i]}</td>)
-    		}
+			rows.push(
+				<td key={i}>
+				<input id={i}
+					onClick = {disabled? null: this.handleClick.bind(this)}
+					value={displayNumbers ? (board[i] || "") : "" } 
+					className={disabled ? 'cell' :`cell  ${this.getCellColor(i, board)}`}
+					type="integer" 
+					maxLength="1" 
+					min="1" 
+					max="9"/>
+				</td>)
     	}
     	return rows;
     }
 
-	generateGame() {
-		
-    	var board=[];
-    	for (var i = 0; i < 9; i++) {
-    		board.push(<tr key={i}>
-    			{this.generateCells(i)}
-    		</tr>);
-    		gameGen.copyBoard.push(<tr key={i}>
-    			{this.generateCells(i)}
-    		</tr>);
-    	}
-    	return board;
-    }
-
     checkResult() {
-    	for (var i = 0; i < this.props.initialPuzzle.length; i++) {
-				if(this.props.initialPuzzle[i]!= this.props.solution[i]) {
+    	for (var i = 0; i < this.props.playerBoard.length; i++) {
+				if(this.props.playerBoard[i]!= this.props.solution[i]) {
 						return false;
 				}
     	}
     	return true;
 	}
 
+	generateBoardGame(board, disabled, displayNumbers) {
+		var generatedBoard=[];
+    	for (var i = 0; i < 9; i++) {
+    		generatedBoard.push(<tr key={i}>
+    			{this.generateCells(board, i, disabled, displayNumbers)}
+    		</tr>);
+    	}
+    	return generatedBoard;
+	}
+
+
     render() {
-		
         return (
             <div className="mainGame">
-                {this.generateGame()}
 				Wrong Guesses : {this.props.wrongGuesses}
-            </div>
+				{this.props.gameType === "single" ? 
+					this.generateBoardGame(this.props.playerBoard, false, true)
+				:
+					<div>
+						{this.generateBoardGame(this.props.playerBoard, false, true)}
+						<hr />
+						<h4>opponent Board</h4>
+						{this.generateBoardGame(this.props.opponentBoard, false, false)}
+					</div>
+				}	
+            </div>	
+		
         )
     }
 }

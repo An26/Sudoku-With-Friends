@@ -5,9 +5,9 @@ export default class Chat extends React.Component {
     constructor() {
         super();
         this.state = {
-            newMessage: '',
+            newMessage: {},
             messages: [],
-            socket: window.io('http://localhost:3000'),
+            socket: window.io(),
             user: cookie.load('username')
         }
     }
@@ -33,7 +33,7 @@ export default class Chat extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         this.state.socket.emit("new-message", this.state.newMessage);
-
+        this.input.value = ""
     }
 
     render() {
@@ -44,7 +44,7 @@ export default class Chat extends React.Component {
                 </ul>
                 
                 <form onSubmit = {this.handleSubmit.bind(this)} action="">
-                    <input onChange={this.handleChange.bind(this)} id="m" autoComplete="off" placeholder="type a message" />
+                    <input ref={(input) => this.input = input} onChange={this.handleChange.bind(this)} id="m" autoComplete="off" placeholder="type a message" />
                     <button  className="btn btn-default">Send</button>
                 </form>
             </div>

@@ -18,3 +18,10 @@ export function logOut() {
         payload: false
     }
 }
+
+export function userLoginDetails(userLoginDetails) {
+    return{
+        type: 'USER_LOGIN_DETAILS',
+        payload: userLoginDetails
+    }
+}
