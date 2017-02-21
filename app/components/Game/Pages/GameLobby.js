@@ -1,21 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
-
 // import gameGen from '../Js/gameGenerator';
 import { createRoom, setRooms, opponentsGameBoard } from '../../actions/multiplayerGameActions';
-
 import cookie from 'react-cookie';
 import axios from 'axios';
 import Game from '../Game';
 import { gameType } from '../../actions/gameTypeActions';
+var updatedRooms;
 
 @connect((store)=> {
 	return {
 		playerBoard: store.gameLogic.playerBoard,
 	 	solution: store.gameLogic.solution,
 		logIn: store.logInStatus.loggedIn,
-
 		availableRooms: store.multiplayer.availableRooms,
 		gameType: store.gameType.gameType
 
@@ -82,13 +80,18 @@ export default class GameLobby extends React.Component {
 // join a room starts here
 // getting the data from an ajax call with all the room available and sending it to a reducer`
 	componentDidMount() {
-		var self = this;
-		axios.get('/api/game').then(function(res) {
-			self.props.dispatch(setRooms(res.data))
-		})
-		console.log(this.props.gameType)
+		this.roomInfo();
+		updatedRooms = setInterval(this.roomInfo.bind(this), 3000)
+		
 	}
 	
+	roomInfo() {
+		var self = this;
+		axios.get('/api/game').then(function(res) {
+		self.props.dispatch(setRooms(res.data))
+		})
+	}
+
 // getting the join room id which is attached with join room button for each room
 	joinGameRoom( evt ) {
 		let self = this;
@@ -110,11 +113,13 @@ export default class GameLobby extends React.Component {
 //then display rooms available and the option to create your own room. else display start button to start 
 //the game
 	isMultiPlayer(event) {
-		// console.log(event.target.value)
 		this.props.dispatch(gameType(event.target.value))
 
 	}
 
+	componentWillUnmount(){
+		clearInterval(updatedRooms);	
+	}
 
 	render (){
 		const cardStyle = {

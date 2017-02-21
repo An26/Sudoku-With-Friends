@@ -6,11 +6,8 @@ const passport = require('passport');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-// const playerId = 0;
-// const players = {};
 
 const config = require('./server/config/config.js')
-
 
 // Express
 app.use(bodyParser.json());
@@ -25,12 +22,6 @@ const localSignupStrategy = require('./server/passport/local-signup');
 const localLoginStrategy = require('./server/passport/local-login');
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
-
-
-// pass the authorization checker middleware
-//const authCheckMiddleware = require('./server/middleware/auth-check');
-//app.use('/api', authCheckMiddleware);
-
 
 // Express Routes
 app.use(express.static('public'));
@@ -57,12 +48,7 @@ db.once("open", function() {
 
 // socket.io for chat
 io.on('connection', function(socket){
-    // socket.on('new-player', function(player) {
-    //   console.log(player);
-    // });
-  // console.log('a user connected');
   socket.on('new-message', function(msg){
-    // console.log(msg);
     io.emit('receive-message', msg);
   })
 });

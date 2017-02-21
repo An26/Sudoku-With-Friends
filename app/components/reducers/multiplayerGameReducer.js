@@ -6,8 +6,6 @@ export default function reducer(state={
     solutionGameBoard: [],
 }, action) {
     switch(action.type) {
-        // case 'CREATE_ROOM':
-        //     return {...state, createRoom: action.payload}
         case 'SET_ROOMS':
             let roomData = [];
             action.payload.forEach(function(ele) {
@@ -20,12 +18,10 @@ export default function reducer(state={
             })
             return {...state, availableRooms: roomData}
          case 'ROOM_DETAILS':
-         console.log('reducerid', action.payload.id)
             let details = {
                 id: action.payload.id,
                 roomLength: action.payload.roomLength
             }
-            // console.log(details);
             return {...state, roomDetails: details}
         case 'JOIN_ROOM_ID':
             return {...state, joinRoomId: action.payload}

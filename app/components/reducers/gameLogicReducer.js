@@ -8,13 +8,9 @@ export default function reducer(state={
     selectedCell:'',
     wrongGuesses: 0,
     opponent: ''
-    // playersGameBoard: [],
 }, action) {
     switch(action.type) {
-        // case 'PLAYER_BOARD':
-            // return {...state, playerBoard: action.payload}
         case 'OPPONENT_BOARD':
-        console.log('pay', action.payload)
             return {...state, opponentBoard: action.payload}
         case 'SELECTED_CELL':
             return {...state, selectedCell: action.payload}
@@ -32,16 +28,12 @@ export default function reducer(state={
             });
             return newState;
         case 'NEW_PUZZLE':
-            // console.log(gameGen.printboard(gameGen.newBoard()));
-            // console.log(gameGen.printboard(gameGen.solution));
-            // console.log(gameGen.printboard(gameGen.puzzle))
             return {...state, 
                 playerBoard: gameGen.printboard(gameGen.newBoard()), 
                 solution:gameGen.printboard(gameGen.solution),
                 wrongGuesses: 0
             }
         case 'SET_MULTIPLAYER_GAME':
-        // console.log(action.payload)
             var playerId = cookie.load('userId').toLowerCase();
             var player, opponent;
             // since we are checkint by player name and player name can be same, has to do it this way

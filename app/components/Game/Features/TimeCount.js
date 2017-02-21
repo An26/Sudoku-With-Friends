@@ -11,6 +11,7 @@ var interval;
    return {
      gameRunning: store.timeCount.gameRunning,
 	 timeInterval: store.timeCount.timeInterval,
+     logIn: store.logInStatus.loggedIn,
     //  roomLength: store.gameLogic.roomLength,
      roomDetails: store.multiplayer.roomDetails,
      gameType: store.gameType.gameType
@@ -63,31 +64,47 @@ export default class TimeInterval extends React.Component {
 */
     render() {
         return(
-                
-                <div>       
-                    {this.props.gameType === "single" && !this.props.gameRunning ?
-                        <div>
-                            {console.log(this.props.gameType)}
-                            <h1>Press start to start the game</h1>
-                            <button  className="btn btn-default" id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
-                        </div>
-                    :
-                    this.props.gameType === "single" && this.props.gameRunning ?
-                        <div>
-                            
-                            Time: {this.props.timeInterval}
-                            <br />
-                            <button  className="btn btn-default" id="stopGame" onClick={this.stopGame.bind(this)}>Stop Game</button>
-                        </div>
-                    :
-                    null
-                    }
-
+                <div>    
+                    {this.props.logIn ?   
+                    <div>
+                        {this.props.gameType === "single" && !this.props.gameRunning ?
+                            <div>
+                                <h1>Press start to start the game</h1>
+                                <button  className="btn btn-default" id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
+                            </div>
+                        :
+                        this.props.gameType === "single" && this.props.gameRunning ?
+                            <div>
+                                
+                                Time: {this.props.timeInterval}
+                                <br />
+                                <button  className="btn btn-default" id="stopGame" onClick={this.stopGame.bind(this)}>Stop Game</button>
+                            </div>
+                        :
+                        null
+                        }
+                    </div>
+                :
+                !this.props.logIn && !this.props.gameRunning ?
+                    <div>
+                        <h1>Press start to start the game</h1>
+                        <button  className="btn btn-default" id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
+                    </div>
+                :
+                !this.props.logIn && this.props.gameRunning ?
+                    <div>
+                        
+                       Time: {this.props.timeInterval}
+                        <br />
+                        <button  className="btn btn-default" id="stopGame" onClick={this.stopGame.bind(this)}>Stop Game</button>
+                    </div>
+                :
+                null
+                }
 
 
                     {this.props.gameType === 'multi' && this.props.roomDetails.roomLength === 2 && !this.props.gameRunning ?
                         <div>
-                            {console.log(this.props.gameType)}
                             <h1>Press start to start the game</h1>
                             <button  className="btn btn-default" id="startGame" onClick={this.startGame.bind(this)}>Start Game</button>
                         </div>
@@ -104,7 +121,7 @@ export default class TimeInterval extends React.Component {
                         <button  className="btn btn-default" id="stopGame" onClick={this.stopGame.bind(this)}>Stop Game</button>
                     </div>
                     :
-                    null
+                     null
                     }
                 </div>
             

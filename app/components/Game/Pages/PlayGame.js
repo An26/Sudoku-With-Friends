@@ -32,48 +32,36 @@ export default class PlayGame extends React.Component {
 // when play game page gets mounted on the page then we make an ajax call to know how many people are there 
 // in the room
 	componentDidMount() {
-		var self = this;
-		// setInterval(function() { 
-			axios.get('/api/game/' + this.props.params.id)
-			.then(function(response) {
-				self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			
-				self.props.dispatch(setMultiplayerGame(response.data));
-			})
-		// }.bind(this), 1000);
-
-
+		this.updateRoom();
+		numberOfPlayers = setInterval(this.updateRoom.bind(this), 3000);
+		this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave.bind(this))
 	}
 
-	// componentDidUpdate() {
-	// 	numberOfPlayers = setInterval(this.updateRoom.bind(this), 5000);
-	// }
+	updateRoom() {
+		var self = this;
+		axios.get('/api/game/' + this.props.params.id)
+			.then(function(response) {
+				self.props.dispatch(setMultiplayerGame(response.data));
+				self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			
+				if(response.data.players.length === 2) {
+					clearInterval(numberOfPlayers);
+				}
 
-	// updateRoom() {
-	// 	var self = this;
-	// 	axios.get('/api/game/' + this.props.params.id)
-	// 		.then(function(response) {
-	// 			self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			
-	// 			if(response.data.players.length === 2) {
-	// 				clearInterval(numberOfPlayers);
-	// 				return;
-	// 			}
-	// 		}).catch(function(err) {
-	// 			console.log(err);
-	// 		})
-	// }
+				return;
+			}).catch(function(err) {
+				console.log(err);
+			})
+	}
 
 // its a delete route if user exits the room and if the room has less than 2 players`
-	componentWillUnmount() {
+	routerWillLeave() {
 		let self = this;
 		
 		if(confirm('Do you wish to leave the room')) {
-			axios.delete('/api/game/'+ this.props.params.id + '/delete', {player: cookie.load('username')})
+			axios.delete('/api/game/'+ this.props.params.id + '/delete', {playerId: cookie.load('userId')})
 			.then((response) => {
 				if(response) {
-					// console.log('delres', response);
-					// self.props.dispatch(setMultiplayerGame(response.data));
 					self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			
-					// console.log('details', this.props.roomDetails)
 				}	
 			}).catch((err) => {
 				if(err) throw err;

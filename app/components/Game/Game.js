@@ -18,7 +18,7 @@ import { newPuzzle } from '../actions/gameLogicActions';
 		playerBoard: store.gameLogic.playerBoard,
 	 	solution: store.gameLogic.solution,
 		opponentBoard: store.gameLogic.opponentBoard,
-		newPuzzle: store.gameLogic.newPuzzle
+		newPuzzle: store.gameLogic.newPuzzle,
 	}
 })
 
@@ -26,11 +26,6 @@ export default class Game extends React.Component {
 	constructor(context, props) {
 		super(context, props)
 	}
-
-	// componentDidUpdate() {
-	// console.log(this.props.playerBoard)
-	// console.log(this.props.solution)
-	// }
 
 	render (){
 		return (
