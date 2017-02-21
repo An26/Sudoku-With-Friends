@@ -107,20 +107,6 @@ export default class GameLogic extends React.Component {
         return (
             <div className="mainGame">
 				Wrong Guesses : {this.props.wrongGuesses}
-<<<<<<< HEAD
-				{this.props.gameType === "single" ? 
-					this.generateBoardGame(this.props.playerBoard, false, true)
-				:
-					<div>
-						{this.generateBoardGame(this.props.playerBoard, false, true)}
-						<hr />
-						<h4>opponent Board</h4>
-							<div className="opponentBoard">
-								{this.generateBoardGame(this.props.opponentBoard, false, false)}
-							</div>
-					</div>
-				}	
-=======
 					{this.props.gameType === "single" ? 
 						this.generateBoardGame(this.props.playerBoard, false, true)
 					:
@@ -131,7 +117,6 @@ export default class GameLogic extends React.Component {
 							{this.generateBoardGame(this.props.opponentBoard, false, false)}
 						</div>
 					}	
->>>>>>> ea85bdad18c70aae93060b3e0d2da63be0b9b2c6
             </div>	
 		
         )

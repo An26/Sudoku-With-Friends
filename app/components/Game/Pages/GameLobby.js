@@ -51,6 +51,7 @@ export default class GameLobby extends React.Component {
 				}
 			}).catch(function(err){
 				console.log(err)
+
 			})
 		}
 	}
@@ -89,6 +90,7 @@ export default class GameLobby extends React.Component {
 		axios.get('/api/game').then(function(res) {
 		self.props.dispatch(setRooms(res.data))
 		})
+	}
 
 // getting the join room id which is attached with join room button for each room
 	joinGameRoom( evt ) {

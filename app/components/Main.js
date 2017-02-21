@@ -115,9 +115,9 @@ export default class Main extends React.Component {
 			tabs = 	<div>
 						{/*<Link to="/userBoard">User Board/Stats</Link>*/}
 						<br />
-						<Link to="/gameLobby">Game Lobby: Play w/ Friends</Link>
+						<Link to="/gameLobby">Game Lobby: Find Friends</Link>
 						<br />
-						<Link to="/">Logout</Link>
+						<Link to="/">Exit Here</Link>
 					</div>;
 
 								
