@@ -1,7 +1,5 @@
 body {
-    /*font-family: 'Raleway', sans-serif;*/
     font-family: 'Quicksand', sans-serif;
-    /*font-family: 'Bungee Shade', cursive;*/
     background-image: url(./../public/images/geometry2.png);
     -webkit-background-size: repeat;
     -moz-background-size: repeat;
@@ -9,7 +7,6 @@ body {
     width: 100%;
     margin: auto;
 }
-
 
 .mySidenav {
     height: 100%;
@@ -21,8 +18,6 @@ body {
     background-color: #282828;
     overflow-x: hidden;
     transition: 0.3s;
-    /*padding-top: 3%;*/
-    /*color: green;*/
 }
 
 .mySidenav a {
@@ -62,6 +57,11 @@ body {
     font-size: 25px;
 }
 
+.main-content {
+    margin-top: 10%;
+    vertical-align: middle;
+}
+
 .mainHeaderDiv {
     width: 100%;
 }
@@ -76,8 +76,99 @@ body {
     padding: 16px;
     max-width: 100%;
     max-height: auto;
+    text-align: center;
     /*background: red;*/
 }
+
+.holdRooms {
+    max-width: 100%;
+    max-height: 500px;
+    /*background: red;*/
+}
+
+.roomCard {
+    border-radius: 15px;
+    padding: 10px;
+    float: left;
+    text-align: center;
+    background: white;
+
+}
+
+.roomCard .joinRoom, .card-text{
+    display: block;
+    margin:0 auto;
+    text-align: center;
+    padding: 5px;
+}
+
+.roomCard img{
+    max-width: 100%;
+    max-height: 100%;
+    background: #CF9E00;
+    padding: 10px;
+}
+
+.mainGame {
+    /*background: red;*/
+    float: left;
+
+}
+
+.chatBox {
+    position: absolute;
+    bottom: 10px;
+    right: 34px;
+    /*float: left;*/
+    background: white;
+    outline: 3px solid black;
+}
+
+.my-facebook-button-class {
+        /*border-radius: 15px;*/
+        color: white;
+        background: #3B5998;
+}
+
+.wrong-answer {
+    color: red;
+}
+
+.correct-answer {
+    background: #D6EB99;
+}
+
+/*adding dynamic styling for active tabs on Main*/
+#activeSideTab {
+    width: 250px;
+    /*background: red;*/
+}
+
+#notActiveSideTab{
+    width: 0px;
+}
+
+#moveLeft{
+    margin-left: 310px;
+
+}
+
+#moveRight {
+    margin-left: 100px;
+}
+
+.openSideNavBarBtn{
+    height: 100%;
+    width: 50px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    padding-top: 60px;
+    background-color: #CF9E00;
+}
+
+/*end of dynamic styling for active tabs in Main*/
 
 @media screen and (max-height: 450px) {
   .mySidenav {padding-top: 15px;}
@@ -121,57 +212,54 @@ body {
     }
 
 }
+/*media queries for dyanamic side tab*/
+@media only screen and (max-width: 650px) {
+    #activeSideTab {
+        padding: 3%;
+        margin: auto;	
+        height: 350px;
+        width: 100%;
+        /*position: fixed;*/
+        left: 0px;
+        top: 50px;
+        z-index: 1;
+        transition: 0.3s;
+	}
 
+    #notActiveSideTab {
+        margin: auto;	
+        height: 0px;
+        width: 100%;
+        position: fixed;
+        left: 0px;
+        top: 50px;
+        z-index: 2;
+        transition: 0.3s;
+    }
 
-.holdRooms {
-    max-width: 100%;
-    max-height: 500px;
-    /*background: red;*/
+    #moveLeft {
+        margin-left: auto;
+        margin-top: 450px;
+        width: 100%;
+        height: auto;
+    }
+
+    #moveRight {
+        margin-left: auto;
+        margin-top: 50px;
+        width: 100%;
+        height: auto;
+    }
+
+    .openSideNavBarBtn{
+        	height: 50px;
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            padding: 2.5%;
+        
+    }
+
 }
-
-.roomCard {
-    border-radius: 15px;
-    padding: 10px;
-    float: left;
-    text-align: center;
-    background: white;
-
-}
-
-.roomCard .joinRoom, .card-text{
-    display: block;
-    margin:0 auto;
-    text-align: center;
-    padding: 5px;
-}
-
-.roomCard img{
-    max-width: 100%;
-    max-height: 100%;
-    background: #CF9E00;
-    padding: 10px;
-}
-
-.mainGame {
-    /*background: red;*/
-    float: left;
-
-}
-
-.my-facebook-button-class {
-        /*border-radius: 15px;*/
-        color: white;
-        background: #3B5998;
-}
-
-.wrong-answer {
-    color: red;
-}
-
-.correct-answer {
-    background: #D6EB99;
-}
-
-/*.blue {
-    background: blue;
-}*/

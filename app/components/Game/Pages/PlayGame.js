@@ -88,7 +88,7 @@ export default class PlayGame extends React.Component {
 		return(
 			
 			<div className="row">
-				<div className="col-md-8 col-sm-12 activeGame" style={divStyle}>
+				<div className="col-md-12 col-sm-12 activeGame" style={divStyle}>
 					<TimeInterval />
 						{this.props.gameRunning ?
 							<div>
@@ -96,15 +96,16 @@ export default class PlayGame extends React.Component {
 								<GameLogic opponentBoard={this.props.opponentBoard} 
 								playerBoard={this.props.playerBoard} 
 								solution={this.props.solution} />
+								<aside className="chatBox" style={divStyle}>
+									<h3>Chat with Friends</h3>
+									<Chat />
+								</aside>
 							</div>
 							:
 							null
 
 						}									
-					<aside className="chatBox" style={divStyle}>
-						<h3>Chat with Friends</h3>
-						<Chat />
-					</aside>
+
 
 				</div>
 			</div>	

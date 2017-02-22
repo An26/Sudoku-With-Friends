@@ -71,8 +71,10 @@ export default class Login extends React.Component {
 		}
 
 		return (
-			<div className="">
-				<div className="row">
+			<div className="container">
+				<div className="row 1">
+
+					{/*1st col of row 1*/}
 					<div className="col-md-6">	
 						{!this.props.logIn ?
 							<div>
@@ -93,22 +95,28 @@ export default class Login extends React.Component {
 									<div className="col-md-6">
 										<Link to="signUp" className="signupLink">Sign up for an account</Link>
 									</div>
-								</div>
-								<div className="col-md-6">
+									<div className="col-md-6">
 									<FacebookLogin />
+									</div>
 								</div>
+								
 								<hr />
 							</div>
 						:
 						<button onClick={this.onLogout.bind(this)} type="button">logout</button>
 						}
-						<hr/>
-						<div className="col-md-6">
-							<img src="/public/images/sudoku.gif" alt="sudoku image" style={imgStyle} />
-						</div>
+					<hr/>
+					{/*end of 1st col of row 1*/}
 					</div>
+					{/*2nd col of row 1*/}
+					<div className="col-md-4">
+							<img src="/public/images/sudoku.gif" alt="sudoku image" style={imgStyle} />
+					{/*end of 2nd col for row 1*/}
+					</div>
+				{/* end for row 1*/}
 				</div>
-			</div>
+			{/*end for container*/}
+			</div> 
 		)
 	} 
 }

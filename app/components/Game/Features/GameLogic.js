@@ -102,8 +102,41 @@ export default class GameLogic extends React.Component {
     	return generatedBoard;
 	}
 
+// opponent board
+	generateOpponentBoardGame(board, disabled, displayNumbers) {
+		var generatedBoard=[];
+    	for (var i = 0; i < 9; i++) {
+			if(board) {
+    		generatedBoard.push(<tr className="opTr" key={i}>
+    			{this.generateOpponentCells(board, i, disabled, displayNumbers)}
+    		</tr>);
+			}
+    	}
+    	return generatedBoard;
+	}
+
+	generateOpponentCells(board,rowNumber, disabled, displayNumbers) {	
+    	var rows = [];
+    	for (var i = rowNumber*9; i < rowNumber*9+9; i++) {
+			rows.push(
+				<td className="opTd" key={i}>
+				<input id={i}
+					onClick = {disabled? null: this.handleClick.bind(this)}
+					value={displayNumbers ? (board[i] || "") : "" } 
+					className={disabled ? 'cell' :`cell  ${this.getCellColor(i, board)}`}
+					type="integer" 
+					maxLength="1" 
+					min="1" 
+					max="9"/>
+				</td>)
+    	}
+    	return rows;
+    }
 
     render() {
+		const style = {
+			margin:'10px'
+		}
         return (
             <div className="mainGame">
 				Wrong Guesses : {this.props.wrongGuesses}
@@ -111,10 +144,15 @@ export default class GameLogic extends React.Component {
 						this.generateBoardGame(this.props.playerBoard, false, true)
 					:
 						<div>
-							{this.generateBoardGame(this.props.playerBoard, false, true)}
+							<div className="userBoard" style={style}>
+								{this.generateBoardGame(this.props.playerBoard, false, true)}
+							</div>
 							<hr />
+							<div className="opponentBoard" style={style}>
 							<h4>opponent Board</h4>
-							{this.generateBoardGame(this.props.opponentBoard, false, false)}
+							<p>updated in real time</p>
+								{this.generateOpponentBoardGame(this.props.opponentBoard, false, false)}
+							</div>
 						</div>
 					}	
             </div>	
