@@ -168,6 +168,10 @@ body {
     background-color: #CF9E00;
 }
 
+footer {
+    text-align: center;
+}
+
 /*end of dynamic styling for active tabs in Main*/
 
 @media screen and (max-height: 450px) {

@@ -8,12 +8,17 @@ export default class Main extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
-			isTabOpen: 'true'
+			isTabOpen: 'true',
+			showAtts: 'false'
 		}
 	}
 	
 	toggleBtn() {
 		this.setState({isTabOpen: !this.state.isTabOpen})
+	}
+
+	showOther() {
+		this.setState({showAtts: !this.state.showAtts})
 	}
 
 	sideTabStyles() {
@@ -68,6 +73,23 @@ export default class Main extends React.Component {
 							<div className="main" id={this.newLeftMarginForContent()}>
 								{this.props.children}
 							</div>
+							{this.state.isTabOpen ? null 
+							:
+							<footer>
+								<div>
+									<p><span className="glyphicon glyphicon-copyright-mark"></span> <strong>Nishtha Arora</strong> (Game-board Master), <strong>An Huynh</strong> (Front-end Fairy), <strong>Jessica Loch</strong> (Backend Magician), <strong>Stella Wu</strong> (Middle-ware Monster)</p>
+									<a href="#" onClick={this.showOther.bind(this)}>
+										{this.state.showAtts ? 'Other Acknowledgements'
+										:
+										<div>Acknowledgements: 
+											<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> and <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+										</div>
+										}
+									</a>
+								</div>		
+							</footer>
+							}
+
 						</div>
 		
 				</div> 
