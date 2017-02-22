@@ -42,10 +42,8 @@ export default class PlayGame extends React.Component {
 		var self = this;
 		axios.get('/api/game/' + this.props.params.id)
 			.then(function(response) {
-				console.log('response', response);
 				self.props.dispatch(setMultiplayerGame(response.data));
 				self.props.dispatch(roomDetails({'id': self.props.params.id, 'roomLength': response.data.players.length}))			
-				console.log('length', self.props.roomDetails.roomLength)
 				if(self.props.roomDetails.roomLength === 2) {
 					clearInterval(numberOfPlayers);
 				}
@@ -64,7 +62,6 @@ export default class PlayGame extends React.Component {
 			if(numberOfPlayers) {
 				clearInterval(numberOfPlayers);
 			}
-			debugger;
 			axios.delete('/api/game/'+ this.props.params.id + '/' + cookie.load('userId'))
 			.then((response) => {
 				if(response) {
@@ -82,7 +79,6 @@ export default class PlayGame extends React.Component {
 	render() {
 		const divStyle = {
 			padding: '10px',
-			// border: '3px black solid',
 			margin: '10px',
 		}
 		return(
