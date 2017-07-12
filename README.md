@@ -4,20 +4,10 @@
 
 
 ### Synopsis
-Allows you to play Sudoku against one friend. Our app uses a login for specific users to play Sudoku in created "game rooms." Once in a game room, two friends can play the same puzzle timed. Once the time is over, the players are given their score, how many squares they've filled out correctly within the time limit, and then given the opportunity to continue playing or leave the room. The room is them deleted. 
+Allows you to play Sudoku against one friend. You can visit our page to play sudoku agianst the clock without logging in. But if you want to challenge a friend...our app uses a secure login or Facebook login to play Sudoku in "game rooms." Once you and a friend are in a game room, the two friends can play the same puzzle timed. Once one person finishes, the players are given their score/winner. The score or stats consist of how many squares they've filled out correctly within the time limit, and then given the opportunity to continue playing or leave the room. The room is then deleted when there are no members in the room. 
 
 ### Motivation
 Creating an interactive game?! sounds delightful. 
-
-### Installation
-What technologies are we using?
-
-### API Reference
-any apis?
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
-
-### Tests
-Describe and show how to run the tests with code examples.
 
 ## Contributers
 #### An Huynh
